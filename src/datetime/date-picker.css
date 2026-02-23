@@ -1,0 +1,293 @@
+.mer-dtp {
+  --mer-dtp-surface: var(--md-sys-color-surface-container-high, #f1edf6);
+  --mer-dtp-on-surface: var(--md-sys-color-on-surface, #1c1b1f);
+  --mer-dtp-on-surface-variant: var(--md-sys-color-on-surface-variant, #49454f);
+  --mer-dtp-primary: var(--md-sys-color-primary, #6750a4);
+  --mer-dtp-on-primary: var(--md-sys-color-on-primary, #ffffff);
+  --mer-dtp-secondary-container: var(
+    --md-sys-color-secondary-container,
+    #e8def8
+  );
+  --mer-dtp-on-secondary-container: var(
+    --md-sys-color-on-secondary-container,
+    #1d192b
+  );
+  --mer-dtp-outline: var(--md-sys-color-outline, #79747e);
+  --mer-dtp-radius: 24px;
+
+  box-sizing: border-box;
+  color: var(--mer-dtp-on-surface);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
+    Helvetica, Arial, sans-serif;
+}
+
+.mer-dtp *,
+.mer-dtp *::before,
+.mer-dtp *::after {
+  box-sizing: inherit;
+}
+
+.mer-dtp__modal-root {
+  inset: 0;
+  position: fixed;
+  display: grid;
+  place-items: center;
+  z-index: 50;
+}
+
+.mer-dtp__scrim {
+  background: rgba(0, 0, 0, 0.38);
+  inset: 0;
+  position: absolute;
+}
+
+.mer-dtp__dialog {
+  background: var(--mer-dtp-surface);
+  border-radius: var(--mer-dtp-radius);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  min-width: min(360px, 92vw);
+  max-width: min(420px, 92vw);
+  max-height: min(720px, 92vh);
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+.mer-dtp__docked {
+  background: var(--mer-dtp-surface);
+  border-radius: var(--mer-dtp-radius);
+  overflow: hidden;
+  width: min(520px, 92vw);
+}
+
+.mer-dtp__top {
+  display: grid;
+  gap: 6px;
+  padding: 20px 20px 12px;
+}
+
+.mer-dtp__title {
+  color: var(--mer-dtp-on-surface-variant);
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.4px;
+  text-transform: none;
+}
+
+.mer-dtp__selection-row {
+  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+}
+
+.mer-dtp__selection {
+  font-size: 28px;
+  line-height: 36px;
+  font-weight: 500;
+}
+
+.mer-dtp__icon-btn {
+  align-items: center;
+  appearance: none;
+  background: transparent;
+  border: 0;
+  border-radius: 9999px;
+  color: var(--mer-dtp-on-surface-variant);
+  cursor: pointer;
+  display: inline-flex;
+  gap: 8px;
+  height: 40px;
+  justify-content: center;
+  padding: 0 10px;
+}
+
+.mer-dtp__icon-btn:focus-visible {
+  outline: 2px solid var(--mer-dtp-primary);
+  outline-offset: 2px;
+}
+
+.mer-dtp__divider {
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.mer-dtp__body {
+  padding: 12px 20px 16px;
+  overflow: auto;
+}
+
+.mer-dtp__monthbar {
+  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  padding: 4px 0 10px;
+}
+
+.mer-dtp__monthbtn {
+  align-items: center;
+  appearance: none;
+  background: transparent;
+  border: 0;
+  color: var(--mer-dtp-on-surface-variant);
+  cursor: pointer;
+  display: inline-flex;
+  gap: 8px;
+  font-size: 14px;
+  line-height: 20px;
+  padding: 6px 8px;
+  border-radius: 9999px;
+}
+
+.mer-dtp__monthbtn:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.mer-dtp__nav {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.mer-dtp__week {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  padding: 4px 0 10px;
+}
+
+.mer-dtp__weekday {
+  color: var(--mer-dtp-on-surface-variant);
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
+}
+
+.mer-dtp__grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.mer-dtp__day {
+  align-items: center;
+  appearance: none;
+  background: transparent;
+  border: 0;
+  border-radius: 9999px;
+  color: var(--mer-dtp-on-surface);
+  cursor: pointer;
+  display: inline-flex;
+  height: 36px;
+  justify-content: center;
+  width: 36px;
+  justify-self: center;
+}
+
+.mer-dtp__day[aria-disabled='true'] {
+  cursor: default;
+  opacity: 0.38;
+  pointer-events: none;
+}
+
+.mer-dtp__day--outside {
+  opacity: 0.38;
+}
+
+.mer-dtp__day--today {
+  outline: 1px solid var(--mer-dtp-primary);
+  outline-offset: -1px;
+  color: var(--mer-dtp-primary);
+}
+
+.mer-dtp__day--selected {
+  background: var(--mer-dtp-primary);
+  color: var(--mer-dtp-on-primary);
+  outline: none;
+}
+
+.mer-dtp__range {
+  background: rgba(103, 80, 164, 0.16);
+}
+
+.mer-dtp__years {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  padding: 12px 0 4px;
+}
+
+.mer-dtp__year {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  border-radius: 9999px;
+  color: var(--mer-dtp-on-surface);
+  cursor: pointer;
+  height: 36px;
+}
+
+.mer-dtp__year--selected {
+  background: var(--mer-dtp-primary);
+  color: var(--mer-dtp-on-primary);
+}
+
+.mer-dtp__inputs {
+  display: grid;
+  gap: 12px;
+  padding-top: 10px;
+}
+
+.mer-dtp__field {
+  display: grid;
+  gap: 6px;
+}
+
+.mer-dtp__label {
+  color: var(--mer-dtp-on-surface-variant);
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.mer-dtp__input {
+  appearance: none;
+  background: transparent;
+  border: 1px solid var(--mer-dtp-outline);
+  border-radius: 12px;
+  color: var(--mer-dtp-on-surface);
+  font-size: 16px;
+  height: 48px;
+  padding: 0 12px;
+}
+
+.mer-dtp__input:focus {
+  outline: 2px solid var(--mer-dtp-primary);
+  outline-offset: 1px;
+  border-color: transparent;
+}
+
+.mer-dtp__actions {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  padding: 10px 16px 14px;
+}
+
+.mer-dtp__textbtn {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  border-radius: 9999px;
+  color: var(--mer-dtp-primary);
+  cursor: pointer;
+  font-size: 14px;
+  height: 36px;
+  padding: 0 12px;
+}
+
+.mer-dtp__textbtn[aria-disabled='true'] {
+  opacity: 0.38;
+  pointer-events: none;
+}

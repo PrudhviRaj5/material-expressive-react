@@ -1,0 +1,290 @@
+.mer-tp {
+  --mer-tp-surface: var(--md-sys-color-surface-container-high, #f1edf6);
+  --mer-tp-on-surface: var(--md-sys-color-on-surface, #1c1b1f);
+  --mer-tp-on-surface-variant: var(--md-sys-color-on-surface-variant, #49454f);
+  --mer-tp-primary: var(--md-sys-color-primary, #6750a4);
+  --mer-tp-on-primary: var(--md-sys-color-on-primary, #ffffff);
+  --mer-tp-outline: var(--md-sys-color-outline, #79747e);
+  --mer-tp-face: var(--md-sys-color-surface-container-highest, #e8e0f0);
+  --mer-tp-radius: 24px;
+
+  box-sizing: border-box;
+  color: var(--mer-tp-on-surface);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
+    Helvetica, Arial, sans-serif;
+}
+
+.mer-tp *,
+.mer-tp *::before,
+.mer-tp *::after {
+  box-sizing: inherit;
+}
+
+.mer-tp__modal-root {
+  inset: 0;
+  position: fixed;
+  display: grid;
+  place-items: center;
+  z-index: 50;
+}
+
+.mer-tp__scrim {
+  background: rgba(0, 0, 0, 0.38);
+  inset: 0;
+  position: absolute;
+}
+
+.mer-tp__dialog {
+  background: var(--mer-tp-surface);
+  border-radius: var(--mer-tp-radius);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-width: min(360px, 92vw);
+  max-width: min(420px, 92vw);
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+.mer-tp__docked {
+  background: var(--mer-tp-surface);
+  border-radius: var(--mer-tp-radius);
+  overflow: hidden;
+  width: min(520px, 92vw);
+}
+
+.mer-tp__top {
+  display: grid;
+  gap: 10px;
+  padding: 20px 20px 12px;
+}
+
+.mer-tp__title {
+  color: var(--mer-tp-on-surface-variant);
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.4px;
+}
+
+.mer-tp__header-row {
+  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+}
+
+.mer-tp__toggle {
+  align-items: center;
+  appearance: none;
+  background: transparent;
+  border: 0;
+  border-radius: 9999px;
+  color: var(--mer-tp-on-surface-variant);
+  cursor: pointer;
+  display: inline-flex;
+  height: 40px;
+  justify-content: center;
+  padding: 0 10px;
+}
+
+.mer-tp__toggle:focus-visible {
+  outline: 2px solid var(--mer-tp-primary);
+  outline-offset: 2px;
+}
+
+.mer-tp__selection {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+}
+
+.mer-tp__chip {
+  align-items: center;
+  appearance: none;
+  background: rgba(0, 0, 0, 0.06);
+  border: 0;
+  border-radius: 12px;
+  color: var(--mer-tp-on-surface);
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 28px;
+  font-weight: 500;
+  height: 44px;
+  justify-content: center;
+  min-width: 64px;
+  padding: 0 12px;
+}
+
+.mer-tp__chip--active {
+  background: rgba(103, 80, 164, 0.18);
+  color: var(--mer-tp-primary);
+}
+
+.mer-tp__sep {
+  color: var(--mer-tp-on-surface-variant);
+  font-size: 28px;
+  line-height: 36px;
+}
+
+.mer-tp__period {
+  display: inline-flex;
+  gap: 6px;
+}
+
+.mer-tp__period-btn {
+  appearance: none;
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.16);
+  border-radius: 9999px;
+  color: var(--mer-tp-on-surface-variant);
+  cursor: pointer;
+  font-size: 12px;
+  height: 28px;
+  padding: 0 10px;
+}
+
+.mer-tp__period-btn--active {
+  background: rgba(103, 80, 164, 0.18);
+  border-color: transparent;
+  color: var(--mer-tp-primary);
+}
+
+.mer-tp__divider {
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.mer-tp__body {
+  padding: 12px 20px 16px;
+  overflow: auto;
+}
+
+.mer-tp__face {
+  background: var(--mer-tp-face);
+  border-radius: 9999px;
+  height: 256px;
+  margin: 0 auto;
+  position: relative;
+  width: 256px;
+}
+
+.mer-tp__hand {
+  inset: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.mer-tp__dial-btn {
+  align-items: center;
+  appearance: none;
+  background: transparent;
+  border: 0;
+  border-radius: 9999px;
+  color: var(--mer-tp-on-surface);
+  cursor: pointer;
+  display: inline-flex;
+  height: 36px;
+  justify-content: center;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 36px;
+}
+
+.mer-tp__dial-btn[aria-disabled='true'] {
+  cursor: default;
+  opacity: 0.38;
+  pointer-events: none;
+}
+
+.mer-tp__dial-btn--selected {
+  background: var(--mer-tp-primary);
+  color: var(--mer-tp-on-primary);
+}
+
+.mer-tp__inputs {
+  display: grid;
+  gap: 12px;
+}
+
+.mer-tp__field {
+  display: grid;
+  gap: 6px;
+}
+
+.mer-tp__label {
+  color: var(--mer-tp-on-surface-variant);
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.mer-tp__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.mer-tp__input {
+  appearance: none;
+  background: transparent;
+  border: 1px solid var(--mer-tp-outline);
+  border-radius: 12px;
+  color: var(--mer-tp-on-surface);
+  font-size: 16px;
+  height: 48px;
+  padding: 0 12px;
+}
+
+.mer-tp__input:focus {
+  outline: 2px solid var(--mer-tp-primary);
+  outline-offset: 1px;
+  border-color: transparent;
+}
+
+.mer-tp__actions {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  padding: 10px 16px 14px;
+}
+
+.mer-tp__textbtn {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  border-radius: 9999px;
+  color: var(--mer-tp-primary);
+  cursor: pointer;
+  font-size: 14px;
+  height: 36px;
+  padding: 0 12px;
+}
+
+.mer-tp__textbtn[aria-disabled='true'] {
+  opacity: 0.38;
+  pointer-events: none;
+}
+
+.mer-tp__range-tabs {
+  display: inline-flex;
+  gap: 6px;
+}
+
+.mer-tp__range-tab {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  border-radius: 9999px;
+  color: var(--mer-tp-on-surface-variant);
+  cursor: pointer;
+  font-size: 12px;
+  height: 28px;
+  padding: 0 10px;
+}
+
+.mer-tp__range-tab--active {
+  background: rgba(103, 80, 164, 0.18);
+  color: var(--mer-tp-primary);
+}
