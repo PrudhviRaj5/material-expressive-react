@@ -1,0 +1,179 @@
+{
+  "name": "material-expressive-react",
+  "version": "0.0.0",
+  "description": "React wrappers for Material 3 Material Web components (@material/web)",
+  "license": "Apache-2.0",
+  "private": false,
+  "type": "module",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./button": {
+      "types": "./dist/button/index.d.ts",
+      "default": "./dist/button/index.js"
+    },
+    "./checkbox": {
+      "types": "./dist/checkbox/index.d.ts",
+      "default": "./dist/checkbox/index.js"
+    },
+    "./chips": {
+      "types": "./dist/chips/index.d.ts",
+      "default": "./dist/chips/index.js"
+    },
+    "./dialog": {
+      "types": "./dist/dialog/index.d.ts",
+      "default": "./dist/dialog/index.js"
+    },
+    "./divider": {
+      "types": "./dist/divider/index.d.ts",
+      "default": "./dist/divider/index.js"
+    },
+    "./elevation": {
+      "types": "./dist/elevation/index.d.ts",
+      "default": "./dist/elevation/index.js"
+    },
+    "./fab": {
+      "types": "./dist/fab/index.d.ts",
+      "default": "./dist/fab/index.js"
+    },
+    "./field": {
+      "types": "./dist/field/index.d.ts",
+      "default": "./dist/field/index.js"
+    },
+    "./focus": {
+      "types": "./dist/focus/index.d.ts",
+      "default": "./dist/focus/index.js"
+    },
+    "./icon": {
+      "types": "./dist/icon/index.d.ts",
+      "default": "./dist/icon/index.js"
+    },
+    "./icon-button": {
+      "types": "./dist/icon-button/index.d.ts",
+      "default": "./dist/icon-button/index.js"
+    },
+    "./list": {
+      "types": "./dist/list/index.d.ts",
+      "default": "./dist/list/index.js"
+    },
+    "./menu": {
+      "types": "./dist/menu/index.d.ts",
+      "default": "./dist/menu/index.js"
+    },
+    "./progress": {
+      "types": "./dist/progress/index.d.ts",
+      "default": "./dist/progress/index.js"
+    },
+    "./radio": {
+      "types": "./dist/radio/index.d.ts",
+      "default": "./dist/radio/index.js"
+    },
+    "./ripple": {
+      "types": "./dist/ripple/index.d.ts",
+      "default": "./dist/ripple/index.js"
+    },
+    "./select": {
+      "types": "./dist/select/index.d.ts",
+      "default": "./dist/select/index.js"
+    },
+    "./slider": {
+      "types": "./dist/slider/index.d.ts",
+      "default": "./dist/slider/index.js"
+    },
+    "./switch": {
+      "types": "./dist/switch/index.d.ts",
+      "default": "./dist/switch/index.js"
+    },
+    "./tabs": {
+      "types": "./dist/tabs/index.d.ts",
+      "default": "./dist/tabs/index.js"
+    },
+    "./textfield": {
+      "types": "./dist/textfield/index.d.ts",
+      "default": "./dist/textfield/index.js"
+    },
+    "./labs": {
+      "types": "./dist/labs/index.d.ts",
+      "default": "./dist/labs/index.js"
+    },
+    "./theme": {
+      "types": "./dist/theme/index.d.ts",
+      "default": "./dist/theme/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "typesVersions": {
+    "*": {
+      "button": ["dist/button/index.d.ts"],
+      "checkbox": ["dist/checkbox/index.d.ts"],
+      "chips": ["dist/chips/index.d.ts"],
+      "dialog": ["dist/dialog/index.d.ts"],
+      "divider": ["dist/divider/index.d.ts"],
+      "elevation": ["dist/elevation/index.d.ts"],
+      "fab": ["dist/fab/index.d.ts"],
+      "field": ["dist/field/index.d.ts"],
+      "focus": ["dist/focus/index.d.ts"],
+      "icon": ["dist/icon/index.d.ts"],
+      "icon-button": ["dist/icon-button/index.d.ts"],
+      "list": ["dist/list/index.d.ts"],
+      "menu": ["dist/menu/index.d.ts"],
+      "progress": ["dist/progress/index.d.ts"],
+      "radio": ["dist/radio/index.d.ts"],
+      "ripple": ["dist/ripple/index.d.ts"],
+      "select": ["dist/select/index.d.ts"],
+      "slider": ["dist/slider/index.d.ts"],
+      "switch": ["dist/switch/index.d.ts"],
+      "tabs": ["dist/tabs/index.d.ts"],
+      "textfield": ["dist/textfield/index.d.ts"],
+      "labs": ["dist/labs/index.d.ts"],
+      "theme": ["dist/theme/index.d.ts"],
+      "*": ["dist/*"]
+    }
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "scripts": {
+    "clean": "rm -rf dist storybook-static",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "generate": "node ./scripts/generate-wrappers.mjs",
+    "build": "npm run clean && vite build && npm run typecheck",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "pack:check": "npm run build && npm pack --silent && node -e \"const fs=require('node:fs'); const pkg=require('./package.json'); const tgz=fs.readdirSync('.').find(f=>f.endsWith('.tgz')); if(!tgz) throw new Error('No .tgz produced'); console.log('Created', tgz);\""
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "dependencies": {
+    "@material/web": "^2.4.1"
+  },
+  "devDependencies": {
+    "@storybook/addon-essentials": "8.6.17",
+    "@storybook/addon-interactions": "8.6.17",
+    "@storybook/addon-links": "8.6.17",
+    "@storybook/react-vite": "8.6.17",
+    "@storybook/test": "8.6.17",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "storybook": "8.6.17",
+    "typescript": "^5.8.2",
+    "vite": "^6.1.0",
+    "vite-plugin-dts": "^4.5.0"
+  }
+}
