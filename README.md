@@ -151,21 +151,6 @@ These components wrap Custom Elements.
 
 If you use Next.js App Router, place these imports in a `"use client"` file.
 
-## Hosting Storybook on GitHub Pages
-
-This repo is set up to deploy Storybook via GitHub Actions.
-
-Files
-- `.github/workflows/storybook-pages.yml`
-- `material-expressive-react/.storybook/main.ts` (supports a configurable base path)
-
-Setup steps
-1) In GitHub: Settings -> Pages -> Source: `GitHub Actions`
-2) Push to `main`
-
-The published docs will be available at:
-`https://<org>.github.io/<repo>/`
-
 ## Roadmap
 
 ToDo
