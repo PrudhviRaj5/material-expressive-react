@@ -20,5 +20,5 @@ export const Default = {
   args: {
     onClick: action('click'),
   },
-  render: (args: any) => React.createElement(FilledCard, args, "Card"),
+  render: (args) => React.createElement(FilledCard, args, "Card"),
 };

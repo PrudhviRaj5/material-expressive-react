@@ -6,20 +6,121 @@ import React from 'react';
 import {action} from '@storybook/addon-actions';
 
 import {FilledSelect} from './FilledSelect';
+import {SelectOption} from './SelectOption';
+import {Icon} from '../icon';
+
+const MENU_ALIGN = ['start', 'end'] as const;
+const MENU_POSITIONING = ['popover', 'absolute', 'fixed'] as const;
 
 const meta = {
   title: 'select/FilledSelect',
   component: FilledSelect,
   tags: ['autodocs'],
-  parameters: {layout: 'centered'},
+  parameters: {
+    layout: 'centered',
+    controls: {
+      include: [
+        'label',
+        'typeaheadDelay',
+        'quick',
+        'required',
+        'noAsterisk',
+        'disabled',
+        'errorText',
+        'supportingText',
+        'menuAlign',
+        'menuPositioning',
+        'clampMenuWidth',
+        'error',
+        'leadingIcon',
+        'trailingIcon',
+      ],
+    },
+  },
+  argTypes: {
+    label: {control: {type: 'text'}},
+    typeaheadDelay: {control: {type: 'number'}},
+    quick: {control: {type: 'boolean'}},
+    required: {control: {type: 'boolean'}},
+    noAsterisk: {control: {type: 'boolean'}},
+    disabled: {control: {type: 'boolean'}},
+    errorText: {control: {type: 'text'}},
+    supportingText: {control: {type: 'text'}},
+    menuAlign: {control: {type: 'select'}, options: MENU_ALIGN},
+    menuPositioning: {control: {type: 'select'}, options: MENU_POSITIONING},
+    clampMenuWidth: {control: {type: 'boolean'}},
+    error: {control: {type: 'boolean'}},
+    leadingIcon: {name: 'slot=leading-icon', control: {type: 'text'}},
+    trailingIcon: {name: 'slot=trailing-icon', control: {type: 'text'}},
+    onChange: {table: {disable: true}},
+    onInput: {table: {disable: true}},
+    onOpening: {table: {disable: true}},
+    onOpened: {table: {disable: true}},
+    onClosing: {table: {disable: true}},
+    onClosed: {table: {disable: true}},
+    children: {table: {disable: true}},
+    style: {table: {disable: true}},
+  },
 };
 
 export default meta;
 
 export const Default = {
   args: {
+    label: 'Fruit',
+    typeaheadDelay: 200,
+    quick: false,
+    required: false,
+    noAsterisk: false,
+    disabled: false,
+    errorText: '',
+    supportingText: '',
+    menuAlign: 'start',
+    menuPositioning: 'popover',
+    clampMenuWidth: false,
+    error: false,
+    leadingIcon: '',
+    trailingIcon: '',
     onChange: action('change'),
     onInput: action('input'),
+    onOpening: action('opening'),
+    onOpened: action('opened'),
+    onClosing: action('closing'),
+    onClosed: action('closed'),
   },
-  render: (args) => React.createElement(FilledSelect, args, "FilledSelect"),
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  render: (args: any) => {
+    const {leadingIcon, trailingIcon, ...selectArgs} = args;
+    return (
+      <FilledSelect {...selectArgs} style={{width: 280}}>
+        {leadingIcon ? <Icon slot="leading-icon">{leadingIcon}</Icon> : null}
+        {trailingIcon ? <Icon slot="trailing-icon">{trailingIcon}</Icon> : null}
+        <SelectOption aria-label="blank" value="" />
+        <SelectOption selected value="apple">
+          <div slot="headline">Apple</div>
+        </SelectOption>
+        <SelectOption value="apricot">
+          <div slot="headline">Apricot</div>
+        </SelectOption>
+        <SelectOption value="apricots">
+          <div slot="headline">Apricots</div>
+        </SelectOption>
+        <SelectOption value="avocado">
+          <div slot="headline">Avocado</div>
+        </SelectOption>
+        <SelectOption value="green_apple">
+          <div slot="headline">Green Apple</div>
+        </SelectOption>
+        <SelectOption value="green_grapes">
+          <div slot="headline">Green Grapes</div>
+        </SelectOption>
+        <SelectOption value="olive">
+          <div slot="headline">Olive</div>
+        </SelectOption>
+        <SelectOption value="orange">
+          <div slot="headline">Orange</div>
+        </SelectOption>
+      </FilledSelect>
+    );
+  },
 };

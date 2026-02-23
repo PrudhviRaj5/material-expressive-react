@@ -6,19 +6,51 @@ import React from 'react';
 import {action} from '@storybook/addon-actions';
 
 import {IconButton} from './IconButton';
+import {Icon} from '../icon';
 
 const meta = {
   title: 'icon-button/IconButton',
   component: IconButton,
   tags: ['autodocs'],
   parameters: {layout: 'centered'},
+  argTypes: {
+    disabled: {control: 'boolean'},
+    softDisabled: {control: 'boolean'},
+    flipIconInRtl: {control: 'boolean'},
+    href: {control: 'text'},
+    target: {control: 'text'},
+    toggle: {control: 'boolean'},
+    selected: {control: 'boolean'},
+    ariaLabelSelected: {control: 'text'},
+    type: {control: {type: 'select'}, options: ['submit', 'button', 'reset']},
+    value: {control: 'text'},
+    name: {control: 'text'},
+  },
 };
 
 export default meta;
 
 export const Default = {
   args: {
+    disabled: false,
+    softDisabled: false,
+    flipIconInRtl: false,
+    href: '',
+    target: '',
+    toggle: false,
+    selected: false,
+    ariaLabelSelected: '',
+    type: 'submit',
+    value: '',
+    name: '',
     onClick: action('click'),
+    onInput: action('input'),
+    onChange: action('change'),
   },
-  render: (args: any) => React.createElement(IconButton, args, "favorite"),
+  render: (args) => (
+    <IconButton {...args} aria-label="Favorite">
+      <Icon>favorite</Icon>
+      {args.toggle ? <Icon slot="selected">bookmark</Icon> : null}
+    </IconButton>
+  ),
 };

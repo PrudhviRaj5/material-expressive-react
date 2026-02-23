@@ -6,6 +6,8 @@ import React from 'react';
 import {action} from '@storybook/addon-actions';
 
 import {OutlinedSegmentedButtonSet} from './OutlinedSegmentedButtonSet';
+import {OutlinedSegmentedButton} from './OutlinedSegmentedButton';
+import {Icon} from '../icon';
 
 const meta = {
   title: 'labs/OutlinedSegmentedButtonSet',
@@ -20,5 +22,19 @@ export const Default = {
   args: {
     onSelection: action('segmented-button-set-selection'),
   },
-  render: (args) => React.createElement(OutlinedSegmentedButtonSet, args, "OutlinedSegmentedButtonSet"),
+  render: (args) => (
+    <div style={{width: 325}}>
+      <OutlinedSegmentedButtonSet {...args}>
+        <OutlinedSegmentedButton label="Enabled">
+          <Icon slot="icon">grade</Icon>
+        </OutlinedSegmentedButton>
+        <OutlinedSegmentedButton selected label="Selected">
+          <Icon slot="icon">favorite</Icon>
+        </OutlinedSegmentedButton>
+        <OutlinedSegmentedButton label="Enabled">
+          <Icon slot="icon">change_history</Icon>
+        </OutlinedSegmentedButton>
+      </OutlinedSegmentedButtonSet>
+    </div>
+  ),
 };

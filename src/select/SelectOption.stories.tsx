@@ -6,19 +6,55 @@ import React from 'react';
 import {action} from '@storybook/addon-actions';
 
 import {SelectOption} from './SelectOption';
+import {FilledSelect} from './FilledSelect';
 
 const meta = {
   title: 'select/SelectOption',
   component: SelectOption,
   tags: ['autodocs'],
-  parameters: {layout: 'centered'},
+  parameters: {
+    layout: 'centered',
+    controls: {
+      include: ['value', 'disabled', 'selected', 'headline'],
+    },
+  },
+  argTypes: {
+    value: {control: {type: 'text'}},
+    disabled: {control: {type: 'boolean'}},
+    selected: {control: {type: 'boolean'}},
+    headline: {control: {type: 'text'}},
+    onCloseMenu: {table: {disable: true}},
+    onRequestSelection: {table: {disable: true}},
+    onRequestDeselection: {table: {disable: true}},
+    children: {table: {disable: true}},
+  },
 };
 
 export default meta;
 
 export const Default = {
   args: {
-    onClick: action('click'),
+    value: 'one',
+    disabled: false,
+    selected: false,
+    headline: 'Option',
+    onCloseMenu: action('close-menu'),
+    onRequestSelection: action('request-selection'),
+    onRequestDeselection: action('request-deselection'),
   },
-  render: (args) => React.createElement(SelectOption, args, "Option"),
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  render: (args: any) => {
+    const {headline, ...optionArgs} = args;
+    return (
+      <FilledSelect label="Options" style={{width: 280}}>
+        <SelectOption aria-label="blank" value="" />
+        <SelectOption {...optionArgs}>
+          <div slot="headline">{headline}</div>
+        </SelectOption>
+        <SelectOption value="two">
+          <div slot="headline">Second</div>
+        </SelectOption>
+      </FilledSelect>
+    );
+  },
 };

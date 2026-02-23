@@ -6,19 +6,47 @@ import React from 'react';
 import {action} from '@storybook/addon-actions';
 
 import {FilterChip} from './FilterChip';
+import {Icon} from '../icon';
 
 const meta = {
   title: 'chips/FilterChip',
   component: FilterChip,
   tags: ['autodocs'],
   parameters: {layout: 'centered'},
+  argTypes: {
+    elevated: {control: 'boolean'},
+    removable: {control: 'boolean'},
+    selected: {control: 'boolean'},
+    hasSelectedIcon: {control: 'boolean'},
+    disabled: {control: 'boolean'},
+    alwaysFocusable: {control: 'boolean'},
+    label: {control: 'text'},
+    hasIcon: {control: 'boolean'},
+    ariaLabelRemove: {control: 'text'},
+  },
 };
 
 export default meta;
 
 export const Default = {
   args: {
+    elevated: false,
+    removable: true,
+    selected: true,
+    hasSelectedIcon: false,
+    disabled: false,
+    alwaysFocusable: false,
+    label: 'Filter',
+    hasIcon: true,
+    ariaLabelRemove: 'Remove',
     onClick: action('click'),
+    onRemove: action('remove'),
+    onUpdateFocus: action('update-focus'),
   },
-  render: (args) => React.createElement(FilterChip, args, "Filter"),
+  render: (args) => (
+    <FilterChip {...args}>
+      <Icon slot="icon">local_laundry_service</Icon>
+      {args.label}
+    </FilterChip>
+  ),
 };

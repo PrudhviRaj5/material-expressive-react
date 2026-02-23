@@ -6,6 +6,7 @@ import React from 'react';
 import {action} from '@storybook/addon-actions';
 
 import {OutlinedField} from './OutlinedField';
+import {Icon} from '../icon';
 
 const meta = {
   title: 'field/OutlinedField',
@@ -20,5 +21,19 @@ export const Default = {
   args: {
     onClick: action('click'),
   },
-  render: (args: any) => React.createElement(OutlinedField, args, "Field"),
+  render: (args) => (
+    <OutlinedField
+      {...args}
+      label="Label"
+      supportingText="Supporting text"
+      style={{width: 280}}
+      hasStart
+      hasEnd
+    >
+      <div id="description" slot="aria-describedby" hidden />
+      <Icon slot="start">search</Icon>
+      <input aria-label="Outlined field input" aria-describedby="description" />
+      <Icon slot="end">event</Icon>
+    </OutlinedField>
+  ),
 };

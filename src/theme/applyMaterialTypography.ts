@@ -11,14 +11,16 @@ function hasAdoptedStyleSheets(
  * Adds the Material typescale classes (e.g. `.md-typescale-body-medium`) to the
  * document so typography utility classes work.
  */
-export function applyMaterialTypography(target: Document | ShadowRoot = document) {
+export function applyMaterialTypography(target?: Document | ShadowRoot) {
   if (typeof window === 'undefined') return;
 
-  if (hasAdoptedStyleSheets(target)) {
+  const resolvedTarget = target ?? document;
+
+  if (hasAdoptedStyleSheets(resolvedTarget)) {
     const sheet = typescaleStyles.styleSheet;
     if (sheet) {
-      if (!target.adoptedStyleSheets.includes(sheet)) {
-        target.adoptedStyleSheets = [...target.adoptedStyleSheets, sheet];
+      if (!resolvedTarget.adoptedStyleSheets.includes(sheet)) {
+        resolvedTarget.adoptedStyleSheets = [...resolvedTarget.adoptedStyleSheets, sheet];
       }
       return;
     }

@@ -21,14 +21,15 @@ export interface CheckboxProps
   required?: boolean;
   name?: string;
   value?: string;
-  form?: string;
+  /** Readonly associated form element (custom element form-associated API). */
+  form?: HTMLFormElement;
 
   onChange?: (event: Event) => void;
   onInput?: (event: Event) => void;
 }
 
 export const Checkbox = forwardRef<MdCheckbox, CheckboxProps>(function Checkbox(
-  {checked, indeterminate, disabled, required, name, value, form, onChange, onInput, ...rest},
+  {checked, indeterminate, disabled, required, name, value, onChange, onInput, ...rest},
   ref,
 ) {
   useEnsureDefined('md-checkbox', () => import('@material/web/checkbox/checkbox.js'));
@@ -37,16 +38,15 @@ export const Checkbox = forwardRef<MdCheckbox, CheckboxProps>(function Checkbox(
 
   useImperativeProps(
     innerRef,
-    (el) => {
-      if (checked !== undefined) el.checked = checked;
-      if (indeterminate !== undefined) (el as unknown as {indeterminate: boolean}).indeterminate = indeterminate;
-      if (disabled !== undefined) el.disabled = disabled;
-      if (required !== undefined) (el as unknown as {required: boolean}).required = required;
-      if (name !== undefined) (el as unknown as {name: string}).name = name;
-      if (value !== undefined) (el as unknown as {value: string}).value = value;
-      if (form !== undefined) (el as unknown as {form: string}).form = form;
-    },
-    [checked, indeterminate, disabled, required, name, value, form],
+      (el) => {
+        if (checked !== undefined) el.checked = checked;
+        if (indeterminate !== undefined) (el as unknown as {indeterminate: boolean}).indeterminate = indeterminate;
+        if (disabled !== undefined) el.disabled = disabled;
+        if (required !== undefined) (el as unknown as {required: boolean}).required = required;
+        if (name !== undefined) (el as unknown as {name: string}).name = name;
+        if (value !== undefined) (el as unknown as {value: string}).value = value;
+      },
+    [checked, indeterminate, disabled, required, name, value],
   );
 
   // React will not reliably synthesize `change`/`input` for CustomElements in all setups,

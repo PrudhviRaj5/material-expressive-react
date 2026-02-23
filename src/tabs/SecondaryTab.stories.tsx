@@ -6,19 +6,61 @@ import React from 'react';
 import {action} from '@storybook/addon-actions';
 
 import {SecondaryTab} from './SecondaryTab';
+import {Tabs} from './Tabs';
+import {Icon} from '../icon';
+
+const CONTENT = ['icon/label', 'icon', 'label'] as const;
 
 const meta = {
   title: 'tabs/SecondaryTab',
   component: SecondaryTab,
   tags: ['autodocs'],
-  parameters: {layout: 'centered'},
+  parameters: {
+    layout: 'centered',
+    controls: {
+      include: ['active', 'content'],
+    },
+  },
+  argTypes: {
+    active: {control: {type: 'boolean'}},
+    content: {control: {type: 'radio'}, options: CONTENT},
+    children: {table: {disable: true}},
+  },
 };
 
 export default meta;
 
 export const Default = {
   args: {
-    onClick: action('click'),
+    active: true,
+    content: 'icon/label',
   },
-  render: (args) => React.createElement(SecondaryTab, args, "Tab"),
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  render: (args: any) => {
+    const {content, ...tabArgs} = args;
+
+    const tabContent = (icon: string, label: string) => {
+      const useIcon = content !== 'label';
+      const useLabel = content !== 'icon';
+      return (
+        <>
+          {useIcon ? <Icon slot="icon">{icon}</Icon> : null}
+          {useLabel ? label : null}
+        </>
+      );
+    };
+    const ariaLabelIfIconOnly = (label: string) =>
+      content === 'icon' ? {['aria-label']: label} : null;
+
+    return (
+      <Tabs aria-label="Secondary tabs" onChange={action('change')} style={{minWidth: 360}}>
+        <SecondaryTab {...tabArgs} {...ariaLabelIfIconOnly('Travel')}>
+          {tabContent('flight', 'Travel')}
+        </SecondaryTab>
+        <SecondaryTab {...ariaLabelIfIconOnly('Hotel')}>
+          {tabContent('hotel', 'Hotel')}
+        </SecondaryTab>
+      </Tabs>
+    );
+  },
 };

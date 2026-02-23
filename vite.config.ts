@@ -11,6 +11,7 @@ export default defineConfig({
         'checkbox/index': './src/checkbox/index.ts',
         'chips/index': './src/chips/index.ts',
         'dialog/index': './src/dialog/index.ts',
+        'datetime/index': './src/datetime/index.ts',
         'divider/index': './src/divider/index.ts',
         'elevation/index': './src/elevation/index.ts',
         'fab/index': './src/fab/index.ts',
@@ -28,6 +29,7 @@ export default defineConfig({
         'switch/index': './src/switch/index.ts',
         'tabs/index': './src/tabs/index.ts',
         'textfield/index': './src/textfield/index.ts',
+        'navigation/index': './src/navigation/index.ts',
         'labs/index': './src/labs/index.ts',
         'theme/index': './src/theme/index.ts'
       },

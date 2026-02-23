@@ -5,7 +5,12 @@
 import React from 'react';
 import {action} from '@storybook/addon-actions';
 
+import {AssistChip} from './AssistChip';
 import {ChipSet} from './ChipSet';
+import {FilterChip} from './FilterChip';
+import {InputChip} from './InputChip';
+import {SuggestionChip} from './SuggestionChip';
+import {Icon} from '../icon';
 
 const meta = {
   title: 'chips/ChipSet',
@@ -20,5 +25,24 @@ export const Default = {
   args: {
     onClick: action('click'),
   },
-  render: (args) => React.createElement(ChipSet, args, "ChipSet"),
+  render: (args) => (
+    <ChipSet {...args} aria-label="Chips">
+      <AssistChip>
+        Assist
+      </AssistChip>
+      <AssistChip>
+        <Icon slot="icon">local_laundry_service</Icon>
+        With icon
+      </AssistChip>
+      <FilterChip removable>
+        Filter
+      </FilterChip>
+      <InputChip>
+        Input
+      </InputChip>
+      <SuggestionChip>
+        Suggest
+      </SuggestionChip>
+    </ChipSet>
+  ),
 };

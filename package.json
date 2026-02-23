@@ -1,12 +1,13 @@
 {
   "name": "material-expressive-react",
-  "version": "0.0.0",
+  "version": "0.1.2",
   "description": "React wrappers for Material 3 Material Web components (@material/web)",
   "license": "Apache-2.0",
   "private": false,
   "type": "module",
   "files": [
     "dist",
+    "LICENSE",
     "README.md"
   ],
   "sideEffects": [
@@ -32,6 +33,10 @@
     "./dialog": {
       "types": "./dist/dialog/index.d.ts",
       "default": "./dist/dialog/index.js"
+    },
+    "./datetime": {
+      "types": "./dist/datetime/index.d.ts",
+      "default": "./dist/datetime/index.js"
     },
     "./divider": {
       "types": "./dist/divider/index.d.ts",
@@ -97,6 +102,10 @@
       "types": "./dist/tabs/index.d.ts",
       "default": "./dist/tabs/index.js"
     },
+    "./navigation": {
+      "types": "./dist/navigation/index.d.ts",
+      "default": "./dist/navigation/index.js"
+    },
     "./textfield": {
       "types": "./dist/textfield/index.d.ts",
       "default": "./dist/textfield/index.js"
@@ -117,6 +126,7 @@
       "checkbox": ["dist/checkbox/index.d.ts"],
       "chips": ["dist/chips/index.d.ts"],
       "dialog": ["dist/dialog/index.d.ts"],
+      "datetime": ["dist/datetime/index.d.ts"],
       "divider": ["dist/divider/index.d.ts"],
       "elevation": ["dist/elevation/index.d.ts"],
       "fab": ["dist/fab/index.d.ts"],
@@ -133,6 +143,7 @@
       "slider": ["dist/slider/index.d.ts"],
       "switch": ["dist/switch/index.d.ts"],
       "tabs": ["dist/tabs/index.d.ts"],
+      "navigation": ["dist/navigation/index.d.ts"],
       "textfield": ["dist/textfield/index.d.ts"],
       "labs": ["dist/labs/index.d.ts"],
       "theme": ["dist/theme/index.d.ts"],
@@ -150,9 +161,10 @@
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "generate": "node ./scripts/generate-wrappers.mjs",
     "build": "npm run clean && vite build && npm run typecheck",
+    "prepack": "npm run build",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "pack:check": "npm run build && npm pack --silent && node -e \"const fs=require('node:fs'); const pkg=require('./package.json'); const tgz=fs.readdirSync('.').find(f=>f.endsWith('.tgz')); if(!tgz) throw new Error('No .tgz produced'); console.log('Created', tgz);\""
+    "pack:check": "npm pack --silent && node -e \"const fs=require('node:fs'); const tgz=fs.readdirSync('.').find(f=>f.endsWith('.tgz')); if(!tgz) throw new Error('No .tgz produced'); console.log('Created', tgz);\""
   },
   "peerDependencies": {
     "react": ">=18",

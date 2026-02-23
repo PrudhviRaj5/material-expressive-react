@@ -20,5 +20,40 @@ export const Default = {
   args: {
     onClick: action('click'),
   },
-  render: (args: any) => React.createElement(FocusRing, args),
+  render: (args) => (
+    <div style={{display: 'flex', gap: 16}}>
+      <button
+        type="button"
+        style={{
+          appearance: 'none',
+          background: 'var(--md-sys-color-surface)',
+          border: 'none',
+          borderRadius: 16,
+          height: 64,
+          outline: 'none',
+          position: 'relative',
+          width: 64,
+          ['--md-focus-ring-shape' as any]: '16px',
+        }}
+      >
+        <FocusRing {...args} />
+      </button>
+      <button
+        type="button"
+        style={{
+          appearance: 'none',
+          background: 'var(--md-sys-color-surface)',
+          border: 'none',
+          borderRadius: 16,
+          height: 64,
+          outline: 'none',
+          position: 'relative',
+          width: 64,
+          ['--md-focus-ring-shape' as any]: '16px',
+        }}
+      >
+        <FocusRing {...args} />
+      </button>
+    </div>
+  ),
 };

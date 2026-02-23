@@ -6,19 +6,42 @@ import React from 'react';
 import {action} from '@storybook/addon-actions';
 
 import {SuggestionChip} from './SuggestionChip';
+import {Icon} from '../icon';
 
 const meta = {
   title: 'chips/SuggestionChip',
   component: SuggestionChip,
   tags: ['autodocs'],
   parameters: {layout: 'centered'},
+  argTypes: {
+    elevated: {control: 'boolean'},
+    href: {control: 'text'},
+    target: {control: 'text'},
+    disabled: {control: 'boolean'},
+    alwaysFocusable: {control: 'boolean'},
+    label: {control: 'text'},
+    hasIcon: {control: 'boolean'},
+  },
 };
 
 export default meta;
 
 export const Default = {
   args: {
+    elevated: false,
+    href: '',
+    target: '',
+    disabled: false,
+    alwaysFocusable: false,
+    label: 'Suggestion',
+    hasIcon: true,
     onClick: action('click'),
+    onUpdateFocus: action('update-focus'),
   },
-  render: (args) => React.createElement(SuggestionChip, args, "Suggestion"),
+  render: (args) => (
+    <SuggestionChip {...args}>
+      <Icon slot="icon">local_laundry_service</Icon>
+      {args.label}
+    </SuggestionChip>
+  ),
 };

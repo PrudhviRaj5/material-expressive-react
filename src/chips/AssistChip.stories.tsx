@@ -6,19 +6,38 @@ import React from 'react';
 import {action} from '@storybook/addon-actions';
 
 import {AssistChip} from './AssistChip';
+import {Icon} from '../icon';
 
 const meta = {
   title: 'chips/AssistChip',
   component: AssistChip,
   tags: ['autodocs'],
   parameters: {layout: 'centered'},
+  argTypes: {
+    elevated: {control: 'boolean'},
+    href: {control: 'text'},
+    target: {control: 'text'},
+    disabled: {control: 'boolean'},
+    alwaysFocusable: {control: 'boolean'},
+  },
 };
 
 export default meta;
 
 export const Default = {
   args: {
+    elevated: false,
+    href: '',
+    target: '',
+    disabled: false,
+    alwaysFocusable: false,
     onClick: action('click'),
+    onUpdateFocus: action('update-focus'),
   },
-  render: (args) => React.createElement(AssistChip, args, "Assist"),
+  render: (args) => (
+    <AssistChip {...args}>
+      <Icon slot="icon">local_laundry_service</Icon>
+      Assist
+    </AssistChip>
+  ),
 };

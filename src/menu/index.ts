@@ -5,3 +5,14 @@
 export * from './Menu.js';
 export * from './MenuItem.js';
 export * from './SubMenu.js';
+
+export type {
+  MenuCorner,
+  MenuDefaultFocus,
+  MenuPositioning,
+  MenuProps,
+} from './Menu.js';
+
+export type {MenuItemProps, MenuItemType} from './MenuItem.js';
+
+export type {SubMenuCorner, SubMenuProps} from './SubMenu.js';

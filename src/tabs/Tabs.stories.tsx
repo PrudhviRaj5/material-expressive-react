@@ -6,19 +6,139 @@ import React from 'react';
 import {action} from '@storybook/addon-actions';
 
 import {Tabs} from './Tabs';
+import {PrimaryTab} from './PrimaryTab';
+import {SecondaryTab} from './SecondaryTab';
+import {Icon} from '../icon';
+
+const CONTENT = ['icon/label', 'icon', 'label'] as const;
 
 const meta = {
   title: 'tabs/Tabs',
   component: Tabs,
   tags: ['autodocs'],
-  parameters: {layout: 'centered'},
+  parameters: {
+    layout: 'centered',
+    controls: {
+      include: ['activeTabIndex', 'autoActivate', 'inlineIcon', 'content'],
+    },
+  },
+  argTypes: {
+    activeTabIndex: {control: {type: 'number'}},
+    autoActivate: {control: {type: 'boolean'}},
+    inlineIcon: {control: {type: 'boolean'}},
+    content: {control: {type: 'radio'}, options: CONTENT},
+    onChange: {table: {disable: true}},
+    children: {table: {disable: true}},
+  },
 };
 
 export default meta;
 
 export const Default = {
   args: {
-    onClick: action('click'),
+    activeTabIndex: 0,
+    autoActivate: false,
+    inlineIcon: false,
+    content: 'icon/label',
   },
-  render: (args) => React.createElement(Tabs, args, "Tabs"),
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  render: (args: any) => {
+    const [activeTabIndex, setActiveTabIndex] = React.useState<number>(
+      typeof args.activeTabIndex === 'number' ? args.activeTabIndex : 0,
+    );
+
+    React.useEffect(() => {
+      if (typeof args.activeTabIndex === 'number') setActiveTabIndex(args.activeTabIndex);
+    }, [args.activeTabIndex]);
+
+    const tabContent = (icon: string, label: string) => {
+      const useIcon = args.content !== 'label';
+      const useLabel = args.content !== 'icon';
+      return (
+        <>
+          {useIcon ? <Icon slot="icon">{icon}</Icon> : null}
+          {useLabel ? label : null}
+        </>
+      );
+    };
+
+    const ariaLabelIfIconOnly = (label: string) =>
+      args.content === 'icon' ? {['aria-label']: label} : null;
+
+    return (
+      <div style={{display: 'grid', gap: 18, justifyItems: 'start'}}>
+        <Tabs
+          aria-label="Primary tabs"
+          activeTabIndex={activeTabIndex}
+          autoActivate={args.autoActivate}
+          onChange={(ev) => {
+            action('change')(ev);
+            const target = ev.target as unknown as {activeTabIndex?: number};
+            if (typeof target.activeTabIndex === 'number') setActiveTabIndex(target.activeTabIndex);
+          }}
+          style={{minWidth: 360}}
+        >
+          <PrimaryTab id="tab-one" aria-controls="panel-one" inlineIcon={args.inlineIcon} {...ariaLabelIfIconOnly('Keyboard')}>
+            {tabContent('piano', 'Keyboard')}
+          </PrimaryTab>
+          <PrimaryTab id="tab-two" aria-controls="panel-two" inlineIcon={args.inlineIcon} {...ariaLabelIfIconOnly('Guitar')}>
+            {tabContent('tune', 'Guitar')}
+          </PrimaryTab>
+          <PrimaryTab id="tab-three" aria-controls="panel-three" inlineIcon={args.inlineIcon} {...ariaLabelIfIconOnly('Drums')}>
+            {tabContent('graphic_eq', 'Drums')}
+          </PrimaryTab>
+        </Tabs>
+
+        <div
+          id="panel-one"
+          role="tabpanel"
+          aria-labelledby="tab-one"
+          hidden={activeTabIndex !== 0}
+          style={{padding: 16}}
+        >
+          Keyboard
+        </div>
+        <div
+          id="panel-two"
+          role="tabpanel"
+          aria-labelledby="tab-two"
+          hidden={activeTabIndex !== 1}
+          style={{padding: 16}}
+        >
+          Guitar
+        </div>
+        <div
+          id="panel-three"
+          role="tabpanel"
+          aria-labelledby="tab-three"
+          hidden={activeTabIndex !== 2}
+          style={{padding: 16}}
+        >
+          Drums
+        </div>
+
+        <Tabs
+          aria-label="Secondary tabs"
+          activeTabIndex={activeTabIndex}
+          autoActivate={args.autoActivate}
+          onChange={(ev) => {
+            action('change (secondary)')(ev);
+            const target = ev.target as unknown as {activeTabIndex?: number};
+            if (typeof target.activeTabIndex === 'number') setActiveTabIndex(target.activeTabIndex);
+          }}
+          style={{minWidth: 360}}
+        >
+          <SecondaryTab aria-controls="secondary-one" {...ariaLabelIfIconOnly('Travel')}>
+            {tabContent('flight', 'Travel')}
+          </SecondaryTab>
+          <SecondaryTab aria-controls="secondary-two" {...ariaLabelIfIconOnly('Hotel')}>
+            {tabContent('hotel', 'Hotel')}
+          </SecondaryTab>
+          <SecondaryTab aria-controls="secondary-three" {...ariaLabelIfIconOnly('Activities')}>
+            {tabContent('hiking', 'Activities')}
+          </SecondaryTab>
+        </Tabs>
+      </div>
+    );
+  },
 };

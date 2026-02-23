@@ -6,6 +6,7 @@ import React from 'react';
 import {action} from '@storybook/addon-actions';
 
 import {Item} from './Item';
+import {Icon} from '../icon';
 
 const meta = {
   title: 'labs/Item',
@@ -20,5 +21,15 @@ export const Default = {
   args: {
     onClick: action('click'),
   },
-  render: (args: any) => React.createElement(Item, args, "Item"),
+  render: (args) => (
+    <div style={{width: 360}}>
+      <Item {...args}>
+        <Icon slot="start">image</Icon>
+        <div slot="headline">Headline</div>
+        <div slot="supporting-text">Supporting text</div>
+        <div slot="trailing-supporting-text">Trailing</div>
+        <Icon slot="end">chevron_right</Icon>
+      </Item>
+    </div>
+  ),
 };

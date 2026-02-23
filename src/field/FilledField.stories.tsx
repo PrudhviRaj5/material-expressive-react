@@ -6,6 +6,7 @@ import React from 'react';
 import {action} from '@storybook/addon-actions';
 
 import {FilledField} from './FilledField';
+import {Icon} from '../icon';
 
 const meta = {
   title: 'field/FilledField',
@@ -20,5 +21,18 @@ export const Default = {
   args: {
     onClick: action('click'),
   },
-  render: (args: any) => React.createElement(FilledField, args, "Field"),
+  render: (args) => (
+    <FilledField
+      {...args}
+      label="Label"
+      supportingText="Supporting text"
+      style={{width: 280}}
+      hasStart
+      hasEnd
+    >
+      <Icon slot="start">search</Icon>
+      <input aria-label="Filled field input" />
+      <Icon slot="end">event</Icon>
+    </FilledField>
+  ),
 };

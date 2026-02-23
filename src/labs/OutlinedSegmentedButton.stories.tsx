@@ -6,6 +6,7 @@ import React from 'react';
 import {action} from '@storybook/addon-actions';
 
 import {OutlinedSegmentedButton} from './OutlinedSegmentedButton';
+import {OutlinedSegmentedButtonSet} from './OutlinedSegmentedButtonSet';
 
 const meta = {
   title: 'labs/OutlinedSegmentedButton',
@@ -20,5 +21,12 @@ export const Default = {
   args: {
     onClick: action('click'),
   },
-  render: (args) => React.createElement(OutlinedSegmentedButton, args, "Option"),
+  render: (args) => (
+    <div style={{width: 325}}>
+      <OutlinedSegmentedButtonSet>
+        <OutlinedSegmentedButton {...args} selected label="Option" />
+        <OutlinedSegmentedButton label="Second" />
+      </OutlinedSegmentedButtonSet>
+    </div>
+  ),
 };

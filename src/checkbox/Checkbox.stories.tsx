@@ -1,21 +1,20 @@
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type Any = any;
-
 import React from 'react';
 import {action} from '@storybook/addon-actions';
 
 import {Checkbox} from './Checkbox';
 
-/** @type {import('@storybook/react').Meta} */
 const meta = {
-  title: 'Inputs/Checkbox',
+  title: 'checkbox/Checkbox',
   component: Checkbox,
   tags: ['autodocs'],
+  parameters: {layout: 'centered'},
   argTypes: {
     checked: {control: 'boolean'},
     indeterminate: {control: 'boolean'},
     disabled: {control: 'boolean'},
     required: {control: 'boolean'},
+    value: {control: 'text'},
+    name: {control: 'text'},
   },
 };
 
@@ -27,10 +26,12 @@ export const Default = {
     indeterminate: false,
     disabled: false,
     required: false,
+    value: 'on',
+    name: 'example',
     onChange: action('change'),
     onInput: action('input'),
   },
-  render: (args: Any) => (
+  render: (args) => (
     <label style={{display: 'flex', alignItems: 'center', gap: 8}}>
       <Checkbox {...args} />
       <span className="md-typescale-body-medium">Checkbox</span>

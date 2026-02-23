@@ -3,6 +3,7 @@ export * from './checkbox/index.js';
 export * from './chips/index.js';
 export * from './dialog/index.js';
 export * from './divider/index.js';
+export * from './datetime/index.js';
 export * from './elevation/index.js';
 export * from './fab/index.js';
 export * from './field/index.js';
@@ -19,6 +20,7 @@ export * from './slider/index.js';
 export * from './switch/index.js';
 export * from './tabs/index.js';
 export * from './textfield/index.js';
+export * from './navigation/index.js';
 export * from './labs/index.js';
 
 export * from './internal/slot.js';

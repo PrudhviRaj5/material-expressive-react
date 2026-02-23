@@ -3,3 +3,5 @@
  */
 
 export * from './Divider.js';
+
+export type {DividerProps, DividerType, DividerVariant} from './Divider.js';

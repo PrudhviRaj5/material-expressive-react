@@ -6,19 +6,72 @@ import React from 'react';
 import {action} from '@storybook/addon-actions';
 
 import {PrimaryTab} from './PrimaryTab';
+import {Tabs} from './Tabs';
+import {Icon} from '../icon';
+
+const CONTENT = ['icon/label', 'icon', 'label'] as const;
 
 const meta = {
   title: 'tabs/PrimaryTab',
   component: PrimaryTab,
   tags: ['autodocs'],
-  parameters: {layout: 'centered'},
+  parameters: {
+    layout: 'centered',
+    controls: {
+      include: ['active', 'inlineIcon', 'content'],
+    },
+  },
+  argTypes: {
+    active: {control: {type: 'boolean'}},
+    inlineIcon: {control: {type: 'boolean'}},
+    content: {control: {type: 'radio'}, options: CONTENT},
+    children: {table: {disable: true}},
+  },
 };
 
 export default meta;
 
 export const Default = {
   args: {
-    onClick: action('click'),
+    active: true,
+    inlineIcon: false,
+    content: 'icon/label',
   },
-  render: (args) => React.createElement(PrimaryTab, args, "Tab"),
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  render: (args: any) => {
+    const {content, ...tabArgs} = args;
+
+    const tabContent = (icon: string, label: string) => {
+      const useIcon = content !== 'label';
+      const useLabel = content !== 'icon';
+      return (
+        <>
+          {useIcon ? <Icon slot="icon">{icon}</Icon> : null}
+          {useLabel ? label : null}
+        </>
+      );
+    };
+    const ariaLabelIfIconOnly = (label: string) =>
+      content === 'icon' ? {['aria-label']: label} : null;
+
+    return (
+      <Tabs
+        aria-label="Primary tabs"
+        onChange={action('change')}
+        style={{minWidth: 360}}
+      >
+        <PrimaryTab
+          {...tabArgs}
+          {...ariaLabelIfIconOnly('Keyboard')}
+          aria-controls="panel-one"
+          id="tab-one"
+        >
+          {tabContent('piano', 'Keyboard')}
+        </PrimaryTab>
+        <PrimaryTab aria-controls="panel-two" id="tab-two" inlineIcon={args.inlineIcon}>
+          {tabContent('tune', 'Guitar')}
+        </PrimaryTab>
+      </Tabs>
+    );
+  },
 };

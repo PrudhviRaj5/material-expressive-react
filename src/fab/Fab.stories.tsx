@@ -6,19 +6,49 @@ import React from 'react';
 import {action} from '@storybook/addon-actions';
 
 import {Fab} from './Fab';
+import {Icon} from '../icon';
 
 const meta = {
   title: 'fab/Fab',
   component: Fab,
   tags: ['autodocs'],
   parameters: {layout: 'centered'},
+  argTypes: {
+    variant: {
+      control: {type: 'select'},
+      options: ['surface', 'primary', 'secondary', 'tertiary'],
+    },
+    size: {
+      control: {type: 'select'},
+      options: ['small', 'medium', 'large'],
+    },
+    label: {control: 'text'},
+    lowered: {control: 'boolean'},
+    touchTarget: {
+      control: {type: 'select'},
+      options: ['', 'wrapper', 'none'],
+    },
+  },
 };
 
 export default meta;
 
 export const Default = {
   args: {
+    variant: 'surface',
+    size: 'medium',
+    label: '',
+    lowered: false,
+    touchTarget: '',
     onClick: action('click'),
   },
-  render: (args: any) => React.createElement(Fab, args, "Edit"),
+  render: (args) => (
+    <Fab
+      {...args}
+      touchTarget={args.touchTarget ? args.touchTarget : undefined}
+      aria-label={args.label ? args.label : 'Edit'}
+    >
+      <Icon slot="icon">edit</Icon>
+    </Fab>
+  ),
 };

@@ -6,19 +6,45 @@ import React from 'react';
 import {action} from '@storybook/addon-actions';
 
 import {FilledIconButton} from './FilledIconButton';
+import {Icon} from '../icon';
 
 const meta = {
   title: 'icon-button/FilledIconButton',
   component: FilledIconButton,
   tags: ['autodocs'],
   parameters: {layout: 'centered'},
+  argTypes: {
+    disabled: {control: 'boolean'},
+    softDisabled: {control: 'boolean'},
+    flipIconInRtl: {control: 'boolean'},
+    href: {control: 'text'},
+    target: {control: 'text'},
+    toggle: {control: 'boolean'},
+    selected: {control: 'boolean'},
+    ariaLabelSelected: {control: 'text'},
+  },
 };
 
 export default meta;
 
 export const Default = {
   args: {
+    disabled: false,
+    softDisabled: false,
+    flipIconInRtl: false,
+    href: '',
+    target: '',
+    toggle: false,
+    selected: false,
+    ariaLabelSelected: '',
     onClick: action('click'),
+    onInput: action('input'),
+    onChange: action('change'),
   },
-  render: (args: any) => React.createElement(FilledIconButton, args, "favorite"),
+  render: (args) => (
+    <FilledIconButton {...args} aria-label="Filled favorite">
+      <Icon>favorite</Icon>
+      {args.toggle ? <Icon slot="selected">bookmark</Icon> : null}
+    </FilledIconButton>
+  ),
 };

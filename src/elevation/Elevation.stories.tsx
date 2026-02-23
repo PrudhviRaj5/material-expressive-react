@@ -20,5 +20,24 @@ export const Default = {
   args: {
     onClick: action('click'),
   },
-  render: (args: any) => React.createElement(Elevation, args),
+  render: (args) => (
+    <div
+      style={{
+        alignItems: 'center',
+        background: 'var(--md-sys-color-primary-container)',
+        border: '1px solid var(--md-sys-color-outline)',
+        borderRadius: 16,
+        color: 'var(--md-sys-color-on-primary-container)',
+        display: 'flex',
+        height: 96,
+        justifyContent: 'center',
+        position: 'relative',
+        width: 160,
+        ['--md-elevation-level' as any]: 2,
+      }}
+    >
+      Level 2
+      <Elevation {...args} />
+    </div>
+  ),
 };

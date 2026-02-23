@@ -20,5 +20,18 @@ export const Default = {
   args: {
     onClick: action('click'),
   },
-  render: (args: any) => React.createElement(Badge, args, "1"),
+  render: (args) => (
+    <div style={{position: 'relative', width: 48, height: 48}}>
+      <div
+        style={{
+          width: 48,
+          height: 48,
+          borderRadius: 12,
+          background: 'var(--md-sys-color-secondary-container)',
+          outline: '1px solid var(--md-sys-color-outline)',
+        }}
+      />
+      <Badge {...args} value="1" style={{position: 'absolute', top: 0, right: 0}} />
+    </div>
+  ),
 };

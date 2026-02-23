@@ -5,19 +5,39 @@ import type {MdTextButton} from '@material/web/button/text-button.js';
 
 import {useEnsureDefined, useImperativeProps, useMergedRefs} from '../internal/hooks';
 
+import type {ButtonSize} from './buttonSizes';
+import {getButtonSizeStyleVars} from './buttonSizes';
+
 export interface TextButtonProps
   extends Omit<React.HTMLAttributes<MdTextButton>, 'disabled'> {
+  size?: ButtonSize;
   disabled?: boolean;
-  softDisabled?: boolean;
   trailingIcon?: boolean;
   href?: string;
   target?: string;
-  type?: string;
+  type?: 'button' | 'reset' | 'submit';
+  value?: string;
+  name?: string;
+  /** Associates the button with a form by id (sets the `form` attribute). */
+  form?: string;
 }
 
 export const TextButton = forwardRef<MdTextButton, TextButtonProps>(
   function TextButton(
-    {disabled, softDisabled, trailingIcon, href, target, type, children, ...rest},
+    {
+      size = 'medium',
+      disabled,
+      trailingIcon,
+      href,
+      target,
+      type,
+      value,
+      name,
+      form,
+      children,
+      style,
+      ...rest
+    },
     ref,
   ) {
     useEnsureDefined('md-text-button', () => import('@material/web/button/text-button.js'));
@@ -28,21 +48,44 @@ export const TextButton = forwardRef<MdTextButton, TextButtonProps>(
       innerRef,
       (el) => {
         if (disabled !== undefined) el.disabled = disabled;
-        if (softDisabled !== undefined) (el as unknown as {softDisabled: boolean}).softDisabled = softDisabled;
         if (trailingIcon !== undefined) (el as unknown as {trailingIcon: boolean}).trailingIcon = trailingIcon;
         if (href !== undefined) (el as unknown as {href: string}).href = href;
         if (target !== undefined) (el as unknown as {target: string}).target = target;
         if (type !== undefined) (el as unknown as {type: string}).type = type;
+        if (value !== undefined) (el as unknown as {value: string}).value = value;
+        if (name !== undefined) (el as unknown as {name: string}).name = name;
+        if (form !== undefined) {
+          if (form) {
+            el.setAttribute('form', form);
+          } else {
+            el.removeAttribute('form');
+          }
+        }
       },
-      [disabled, softDisabled, trailingIcon, href, target, type],
+      [
+        disabled,
+        trailingIcon,
+        href,
+        target,
+        type,
+        value,
+        name,
+        form,
+      ],
     );
+
+    const sizeVars = getButtonSizeStyleVars('text-button', size);
+    const mergedStyle = size === 'medium' ? style : {...style, ...sizeVars};
 
     return (
       // eslint-disable-next-line react/no-unknown-property
-      <md-text-button ref={mergedRef} {...rest}>
+      <md-text-button
+        ref={mergedRef}
+        {...rest}
+        style={mergedStyle}
+      >
         {children}
       </md-text-button>
     );
   },
 );
-

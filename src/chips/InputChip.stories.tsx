@@ -6,19 +6,49 @@ import React from 'react';
 import {action} from '@storybook/addon-actions';
 
 import {InputChip} from './InputChip';
+import {Icon} from '../icon';
 
 const meta = {
   title: 'chips/InputChip',
   component: InputChip,
   tags: ['autodocs'],
   parameters: {layout: 'centered'},
+  argTypes: {
+    avatar: {control: 'boolean'},
+    href: {control: 'text'},
+    target: {control: 'text'},
+    removeOnly: {control: 'boolean'},
+    selected: {control: 'boolean'},
+    disabled: {control: 'boolean'},
+    alwaysFocusable: {control: 'boolean'},
+    label: {control: 'text'},
+    hasIcon: {control: 'boolean'},
+    ariaLabelRemove: {control: 'text'},
+  },
 };
 
 export default meta;
 
 export const Default = {
   args: {
+    avatar: false,
+    href: '',
+    target: '',
+    removeOnly: false,
+    selected: false,
+    disabled: false,
+    alwaysFocusable: false,
+    label: 'Input',
+    hasIcon: true,
+    ariaLabelRemove: 'Remove',
     onClick: action('click'),
+    onRemove: action('remove'),
+    onUpdateFocus: action('update-focus'),
   },
-  render: (args) => React.createElement(InputChip, args, "Input"),
+  render: (args) => (
+    <InputChip {...args}>
+      <Icon slot="icon">local_laundry_service</Icon>
+      {args.label}
+    </InputChip>
+  ),
 };

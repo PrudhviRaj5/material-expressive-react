@@ -6,19 +6,137 @@ import React from 'react';
 import {action} from '@storybook/addon-actions';
 
 import {Menu} from './Menu';
+import {MenuItem} from './MenuItem';
+import {FilledButton} from '../button';
+
+const CORNERS = ['start-start', 'start-end', 'end-start', 'end-end'] as const;
+const DEFAULT_FOCUS = ['first-item', 'last-item', 'list-root', 'none'] as const;
+const POSITIONING = ['absolute', 'fixed', 'document', 'popover'] as const;
 
 const meta = {
   title: 'menu/Menu',
   component: Menu,
   tags: ['autodocs'],
-  parameters: {layout: 'centered'},
+  parameters: {
+    layout: 'centered',
+    controls: {
+      include: [
+        'anchorCorner',
+        'menuCorner',
+        'defaultFocus',
+        'positioning',
+        'open',
+        'quick',
+        'hasOverflow',
+        'stayOpenOnOutsideClick',
+        'stayOpenOnFocusout',
+        'skipRestoreFocus',
+        'xOffset',
+        'yOffset',
+        'noHorizontalFlip',
+        'noVerticalFlip',
+        'typeaheadDelay',
+        'listTabIndex',
+      ],
+    },
+  },
+  argTypes: {
+    anchorCorner: {control: {type: 'select'}, options: CORNERS},
+    menuCorner: {control: {type: 'select'}, options: CORNERS},
+    defaultFocus: {control: {type: 'select'}, options: DEFAULT_FOCUS},
+    positioning: {control: {type: 'select'}, options: POSITIONING},
+    open: {control: {type: 'boolean'}},
+    quick: {control: {type: 'boolean'}},
+    hasOverflow: {control: {type: 'boolean'}},
+    stayOpenOnOutsideClick: {control: {type: 'boolean'}},
+    stayOpenOnFocusout: {control: {type: 'boolean'}},
+    skipRestoreFocus: {control: {type: 'boolean'}},
+    xOffset: {control: {type: 'number'}},
+    yOffset: {control: {type: 'number'}},
+    noHorizontalFlip: {control: {type: 'boolean'}},
+    noVerticalFlip: {control: {type: 'boolean'}},
+    typeaheadDelay: {control: {type: 'number'}},
+    listTabIndex: {control: {type: 'number'}},
+    onOpening: {table: {disable: true}},
+    onOpened: {table: {disable: true}},
+    onClosing: {table: {disable: true}},
+    onClosed: {table: {disable: true}},
+    onCloseMenu: {table: {disable: true}},
+    anchor: {table: {disable: true}},
+    anchorElement: {table: {disable: true}},
+    children: {table: {disable: true}},
+  },
 };
 
 export default meta;
 
 export const Default = {
   args: {
-    onClick: action('click'),
+    anchorCorner: 'end-start',
+    menuCorner: 'start-start',
+    defaultFocus: 'first-item',
+    positioning: 'absolute',
+    open: false,
+    quick: false,
+    hasOverflow: false,
+    stayOpenOnOutsideClick: false,
+    stayOpenOnFocusout: false,
+    skipRestoreFocus: false,
+    xOffset: 0,
+    yOffset: 0,
+    noHorizontalFlip: false,
+    noVerticalFlip: false,
+    typeaheadDelay: 200,
+    listTabIndex: -1,
   },
-  render: (args) => React.createElement(Menu, args, "Menu"),
+  render: (args) => {
+    const [open, setOpen] = React.useState(Boolean(args.open));
+    React.useEffect(() => {
+      setOpen(Boolean(args.open));
+    }, [args.open]);
+
+    const defaultFocusIsListRoot = args.defaultFocus === 'list-root';
+    return (
+      <div style={{display: 'grid', gap: 12, justifyItems: 'start'}}>
+        <div style={{fontSize: 12, opacity: 0.75}}>
+          Use controls for `anchorCorner`, `menuCorner`, `defaultFocus`, `positioning`, and `open`.
+        </div>
+
+        <div style={{position: 'relative', minHeight: 220}}>
+          <FilledButton id="menu-anchor" onClick={() => setOpen((v) => !v)}>
+            Toggle menu
+          </FilledButton>
+
+          <Menu
+            {...args}
+            anchor="menu-anchor"
+            open={open}
+            listTabIndex={args.listTabIndex}
+            style={{
+              minWidth: 220,
+              ...(defaultFocusIsListRoot ? {display: 'flex'} : null),
+            }}
+            onCloseMenu={(ev) => {
+              action('close-menu')(ev);
+              setOpen(false);
+            }}
+            onOpening={action('opening')}
+            onOpened={action('opened')}
+            onClosing={action('closing')}
+            onClosed={action('closed')}
+          >
+            <MenuItem>
+              <div slot="headline">Apple</div>
+            </MenuItem>
+            <MenuItem>
+              <div slot="headline">Banana</div>
+            </MenuItem>
+            <MenuItem>
+              <div slot="headline">Cucumber</div>
+            </MenuItem>
+          </Menu>
+        </div>
+      </div>
+    );
+  },
 };
