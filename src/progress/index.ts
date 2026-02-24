@@ -4,3 +4,4 @@
 
 export * from './CircularProgress.js';
 export * from './LinearProgress.js';
+export * from './LoadingIndicator.js';
