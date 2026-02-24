@@ -7,5 +7,3 @@ export * from './ElevatedCard.js';
 export * from './FilledCard.js';
 export * from './Item.js';
 export * from './OutlinedCard.js';
-export * from './OutlinedSegmentedButton.js';
-export * from './OutlinedSegmentedButtonSet.js';

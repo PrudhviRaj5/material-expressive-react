@@ -1,4 +1,5 @@
 export * from './button/index.js';
+export * from './button-group/index.js';
 export * from './checkbox/index.js';
 export * from './chips/index.js';
 export * from './dialog/index.js';
