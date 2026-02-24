@@ -18,39 +18,51 @@
   width: var(--mer-loading-indicator-size);
   height: var(--mer-loading-indicator-size);
   overflow: visible;
+  animation: mer-loading-rotate 1400ms linear infinite;
+  transform-origin: 50% 50%;
 }
 
 .mer-loading__shape {
   fill: var(--mer-loading-indicator-color);
+  opacity: 0;
   transform-origin: 50% 50%;
-  animation: mer-loading-morph 1200ms ease-in-out infinite,
-    mer-loading-rotate 1200ms linear infinite;
+  animation: mer-loading-cycle 1400ms steps(1, end) infinite,
+    mer-loading-pop 700ms ease-in-out infinite;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .mer-loading__svg {
+    animation: none;
+  }
+  .mer-loading__shape {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+.mer-loading__shape--0 { animation-delay: 0ms, 0ms; }
+.mer-loading__shape--1 { animation-delay: -200ms, -200ms; }
+.mer-loading__shape--2 { animation-delay: -400ms, -400ms; }
+.mer-loading__shape--3 { animation-delay: -600ms, -600ms; }
+.mer-loading__shape--4 { animation-delay: -800ms, -800ms; }
+.mer-loading__shape--5 { animation-delay: -1000ms, -1000ms; }
+.mer-loading__shape--6 { animation-delay: -1200ms, -1200ms; }
 
 @keyframes mer-loading-rotate {
   from {
-    transform: rotate(0deg) scale(1);
+    transform: rotate(0deg);
   }
   to {
-    transform: rotate(360deg) scale(1);
+    transform: rotate(360deg);
   }
 }
 
-@keyframes mer-loading-morph {
-  0% {
-    d: path('M 12 2 A 10 10 0 1 1 11.999 2 Z');
-    transform: rotate(0deg) scale(1);
-  }
-  33% {
-    d: path('M 12 3 L 21 12 L 12 21 L 3 12 Z');
-    transform: rotate(30deg) scale(0.98);
-  }
-  66% {
-    d: path('M 12 3 L 22 12 L 12 21 L 2 12 Z');
-    transform: rotate(60deg) scale(1.02);
-  }
-  100% {
-    d: path('M 12 2 A 10 10 0 1 1 11.999 2 Z');
-    transform: rotate(90deg) scale(1);
-  }
+@keyframes mer-loading-cycle {
+  0%, 14.285% { opacity: 1; }
+  14.286%, 100% { opacity: 0; }
+}
+
+@keyframes mer-loading-pop {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(0.96); }
 }
