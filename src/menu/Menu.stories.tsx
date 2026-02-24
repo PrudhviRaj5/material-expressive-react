@@ -8,6 +8,7 @@ import {action} from '@storybook/addon-actions';
 import {Menu} from './Menu';
 import {MenuItem} from './MenuItem';
 import {FilledButton} from '../button';
+import {Icon} from '../icon';
 
 const CORNERS = ['start-start', 'start-end', 'end-start', 'end-end'] as const;
 const DEFAULT_FOCUS = ['first-item', 'last-item', 'list-root', 'none'] as const;
@@ -37,6 +38,7 @@ const meta = {
         'noVerticalFlip',
         'typeaheadDelay',
         'listTabIndex',
+        'expressive',
       ],
     },
   },
@@ -57,6 +59,7 @@ const meta = {
     noVerticalFlip: {control: {type: 'boolean'}},
     typeaheadDelay: {control: {type: 'number'}},
     listTabIndex: {control: {type: 'number'}},
+    expressive: {control: {type: 'boolean'}},
     onOpening: {table: {disable: true}},
     onOpened: {table: {disable: true}},
     onClosing: {table: {disable: true}},
@@ -88,6 +91,7 @@ export const Default = {
     noVerticalFlip: false,
     typeaheadDelay: 200,
     listTabIndex: -1,
+    expressive: true,
   },
   render: (args) => {
     const [open, setOpen] = React.useState(Boolean(args.open));
@@ -113,11 +117,11 @@ export const Default = {
             open={open}
             listTabIndex={args.listTabIndex}
             style={{
-              minWidth: 220,
+              minWidth: 420,
               ...(defaultFocusIsListRoot ? {display: 'flex'} : null),
             }}
             onCloseMenu={(ev) => {
-              action('close-menu')(ev);
+              action('close-menu')('close-menu');
               setOpen(false);
             }}
             onOpening={action('opening')}
@@ -126,13 +130,32 @@ export const Default = {
             onClosed={action('closed')}
           >
             <MenuItem>
-              <div slot="headline">Apple</div>
+              <Icon slot="start">star</Icon>
+              <div slot="headline">Label</div>
+              <Icon slot="end">chevron_right</Icon>
             </MenuItem>
             <MenuItem>
-              <div slot="headline">Banana</div>
+              <Icon slot="start">star</Icon>
+              <div slot="headline">Label</div>
+              <Icon slot="end">chevron_right</Icon>
             </MenuItem>
             <MenuItem>
-              <div slot="headline">Cucumber</div>
+              <Icon slot="start">star</Icon>
+              <div slot="headline">Label</div>
+              <Icon slot="end">chevron_right</Icon>
+            </MenuItem>
+
+            <div className="mer-menu__divider" />
+
+            <MenuItem>
+              <Icon slot="start">star</Icon>
+              <div slot="headline">Label</div>
+              <Icon slot="end">chevron_right</Icon>
+            </MenuItem>
+            <MenuItem>
+              <Icon slot="start">star</Icon>
+              <div slot="headline">Label</div>
+              <Icon slot="end">chevron_right</Icon>
             </MenuItem>
           </Menu>
         </div>

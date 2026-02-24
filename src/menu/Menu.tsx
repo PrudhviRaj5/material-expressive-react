@@ -1,6 +1,8 @@
 import type * as React from 'react';
 import {forwardRef} from 'react';
 
+import './menu-expressive.css';
+
 import type {MdMenu} from '@material/web/menu/menu.js';
 
 import {useWebComponent} from '../internal/useWebComponent';
@@ -38,6 +40,9 @@ export interface MenuProps
   /** Alias for the menu's `tabIndex` used in demos/controls. */
   listTabIndex?: number;
 
+  /** Applies the expressive (Figma) menu surface + item styling. */
+  expressive?: boolean;
+
   onOpening?: (event: Event) => void;
   onOpened?: (event: Event) => void;
   onClosing?: (event: Event) => void;
@@ -49,12 +54,14 @@ export interface MenuProps
 export const Menu = forwardRef<MdMenu, MenuProps>(function Menu(
   {
     children,
+    expressive = true,
     listTabIndex,
     onOpening,
     onOpened,
     onClosing,
     onClosed,
     onCloseMenu,
+    className,
     ...rest
   },
   ref,
@@ -80,7 +87,16 @@ export const Menu = forwardRef<MdMenu, MenuProps>(function Menu(
 
   return (
     // eslint-disable-next-line react/no-unknown-property
-    <md-menu ref={mergedRef} {...domProps}>
+    <md-menu
+      ref={mergedRef}
+      {...domProps}
+      className={[
+        expressive ? 'mer-menu' : null,
+        className,
+      ]
+        .filter(Boolean)
+        .join(' ')}
+    >
       {children}
     </md-menu>
   );

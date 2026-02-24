@@ -1,0 +1,46 @@
+/* Expressive menu styling (Figma: rounded corners + grouped gaps). */
+
+.mer-menu {
+  --mer-menu-radius: 32px;
+  --mer-menu-bg: var(--md-sys-color-surface-container, #f3eef8);
+  --mer-menu-shadow: 0 16px 30px rgba(0, 0, 0, 0.18);
+  --mer-menu-padding: 14px;
+  --mer-menu-group-gap: 16px;
+  --mer-menu-item-radius: 9999px;
+  --mer-menu-item-padding-inline: 18px;
+  --mer-menu-item-min-height: 64px;
+}
+
+/* Menu container */
+.mer-menu md-menu::part(menu) {
+  background: var(--mer-menu-bg);
+  border-radius: var(--mer-menu-radius);
+  box-shadow: var(--mer-menu-shadow);
+  padding: var(--mer-menu-padding);
+}
+
+/* Let items breathe a bit */
+.mer-menu md-menu-item::part(item) {
+  border-radius: var(--mer-menu-item-radius);
+  min-height: var(--mer-menu-item-min-height);
+  padding-inline: var(--mer-menu-item-padding-inline);
+}
+
+.mer-menu md-menu-item::part(headline) {
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: 600;
+  letter-spacing: 0.1px;
+}
+
+/* Start icon sizing (matches Figma visual weight) */
+.mer-menu md-menu-item [slot='start'] {
+  font-size: 28px;
+  width: 28px;
+  height: 28px;
+}
+
+/* Grouping divider used by story */
+.mer-menu__divider {
+  height: var(--mer-menu-group-gap);
+}
