@@ -1,15 +1,15 @@
 import type * as React from 'react';
 import {forwardRef, useRef} from 'react';
 
-import type {MdFilledTonalIconButton} from '@material/web/iconbutton/filled-tonal-icon-button.js';
+import type {MdIconButton} from '@material/web/iconbutton/icon-button.js';
 
 import {useEnsureDefined, useEventListener, useImperativeProps, useMergedRefs} from '../internal/hooks';
 
-export type FilledTonalIconButtonTarget = '_blank' | '_parent' | '_self' | '_top' | '';
+export type IconButtonTarget = '_blank' | '_parent' | '_self' | '_top' | '';
 
-export interface FilledTonalIconButtonProps
+export interface DefaultIconButtonProps
   extends Omit<
-    React.HTMLAttributes<MdFilledTonalIconButton>,
+    React.HTMLAttributes<MdIconButton>,
     'disabled' | 'onChange' | 'onInput' | 'type'
   > {
   disabled?: boolean;
@@ -17,7 +17,7 @@ export interface FilledTonalIconButtonProps
   softDisabled?: boolean;
   flipIconInRtl?: boolean;
   href?: string;
-  target?: FilledTonalIconButtonTarget;
+  target?: IconButtonTarget;
   ariaLabelSelected?: string;
   toggle?: boolean;
   selected?: boolean;
@@ -30,10 +30,7 @@ export interface FilledTonalIconButtonProps
   children?: React.ReactNode;
 }
 
-export const FilledTonalIconButton = forwardRef<
-  MdFilledTonalIconButton,
-  FilledTonalIconButtonProps
->(function FilledTonalIconButton(
+export const DefaultIconButton = forwardRef<MdIconButton, DefaultIconButtonProps>(function DefaultIconButton(
   {
     disabled,
     softDisabled,
@@ -53,9 +50,9 @@ export const FilledTonalIconButton = forwardRef<
   },
   ref,
 ) {
-  useEnsureDefined('md-filled-tonal-icon-button', () => import('@material/web/iconbutton/filled-tonal-icon-button.js'));
+  useEnsureDefined('md-icon-button', () => import('@material/web/iconbutton/icon-button.js'));
 
-  const innerRef = useRef<MdFilledTonalIconButton>(null);
+  const innerRef = useRef<MdIconButton>(null);
   const mergedRef = useMergedRefs(ref, innerRef);
 
   useImperativeProps(
@@ -65,7 +62,7 @@ export const FilledTonalIconButton = forwardRef<
       if (softDisabled !== undefined) (el as unknown as {softDisabled: boolean}).softDisabled = softDisabled;
       if (flipIconInRtl !== undefined) (el as unknown as {flipIconInRtl: boolean}).flipIconInRtl = flipIconInRtl;
       if (href !== undefined) (el as unknown as {href: string}).href = href;
-      if (target !== undefined) (el as unknown as {target: FilledTonalIconButtonTarget}).target = target;
+      if (target !== undefined) (el as unknown as {target: IconButtonTarget}).target = target;
       if (ariaLabelSelected !== undefined) (el as unknown as {ariaLabelSelected: string}).ariaLabelSelected = ariaLabelSelected;
       if (toggle !== undefined) (el as unknown as {toggle: boolean}).toggle = toggle;
       if (selected !== undefined) (el as unknown as {selected: boolean}).selected = selected;
@@ -88,13 +85,14 @@ export const FilledTonalIconButton = forwardRef<
     ],
   );
 
+  // React won't always wire these for CustomElements.
   useEventListener(innerRef, 'change', onChange);
   useEventListener(innerRef, 'input', onInput as unknown as ((e: Event) => void) | undefined);
 
   return (
     // eslint-disable-next-line react/no-unknown-property
-    <md-filled-tonal-icon-button ref={mergedRef} {...rest}>
+    <md-icon-button ref={mergedRef} {...rest}>
       {children}
-    </md-filled-tonal-icon-button>
+    </md-icon-button>
   );
 });

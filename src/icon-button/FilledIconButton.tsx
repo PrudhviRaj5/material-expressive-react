@@ -10,7 +10,7 @@ export type FilledIconButtonTarget = '_blank' | '_parent' | '_self' | '_top' | '
 export interface FilledIconButtonProps
   extends Omit<
     React.HTMLAttributes<MdFilledIconButton>,
-    'disabled' | 'onChange' | 'onInput'
+    'disabled' | 'onChange' | 'onInput' | 'type'
   > {
   disabled?: boolean;
   /** Disabled but still focusable. */
@@ -21,7 +21,7 @@ export interface FilledIconButtonProps
   ariaLabelSelected?: string;
   toggle?: boolean;
   selected?: boolean;
-  type?: 'button' | 'reset' | 'submit';
+  buttonType?: 'button' | 'reset' | 'submit';
   value?: string;
   name?: string;
 
@@ -41,7 +41,7 @@ export const FilledIconButton = forwardRef<MdFilledIconButton, FilledIconButtonP
       ariaLabelSelected,
       toggle,
       selected,
-      type,
+      buttonType,
       value,
       name,
       onChange,
@@ -67,7 +67,7 @@ export const FilledIconButton = forwardRef<MdFilledIconButton, FilledIconButtonP
         if (ariaLabelSelected !== undefined) (el as unknown as {ariaLabelSelected: string}).ariaLabelSelected = ariaLabelSelected;
         if (toggle !== undefined) (el as unknown as {toggle: boolean}).toggle = toggle;
         if (selected !== undefined) (el as unknown as {selected: boolean}).selected = selected;
-        if (type !== undefined) (el as unknown as {type: string}).type = type;
+        if (buttonType !== undefined) (el as unknown as {type: string}).type = buttonType;
         if (value !== undefined) (el as unknown as {value: string}).value = value;
         if (name !== undefined) (el as unknown as {name: string}).name = name;
       },
@@ -80,7 +80,7 @@ export const FilledIconButton = forwardRef<MdFilledIconButton, FilledIconButtonP
         ariaLabelSelected,
         toggle,
         selected,
-        type,
+        buttonType,
         value,
         name,
       ],

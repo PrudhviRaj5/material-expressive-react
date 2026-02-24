@@ -5,4 +5,14 @@
 export * from './FilledIconButton.js';
 export * from './FilledTonalIconButton.js';
 export * from './IconButton.js';
+export * from './DefaultIconButton.js';
 export * from './OutlinedIconButton.js';
+
+export type {
+  IconButtonStyle,
+  IconButtonType,
+  IconButtonWidth,
+  IconButtonProps,
+} from './IconButton.js';
+
+export type {DefaultIconButtonProps} from './DefaultIconButton.js';
