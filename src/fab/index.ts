@@ -4,3 +4,4 @@
 
 export * from './BrandedFab.js';
 export * from './Fab.js';
+export * from './FABMenu.js';
