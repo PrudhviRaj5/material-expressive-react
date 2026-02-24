@@ -2035,6 +2035,23 @@ async function main() {
       continue;
     }
 
+    // icon-button exports include shared helper types.
+    if (group === 'icon-button') {
+      const lines = [fileHeader()];
+      for (const name of comps.sort()) {
+        lines.push(`export * from './${name}.js';`);
+      }
+      lines.push('');
+      lines.push(
+        `export type {IconButtonVariant, IconButtonType, IconButtonWidth, IconButtonProps} from './IconButton.js';`,
+      );
+      lines.push('');
+      lines.push(`export type {DefaultIconButtonProps} from './DefaultIconButton.js';`);
+      lines.push('');
+      await writeFileAtomic(indexPath, lines.join('\n'));
+      continue;
+    }
+
     const lines = [fileHeader()];
     for (const name of comps.sort()) {
       lines.push(`export * from './${name}.js';`);

@@ -94,28 +94,28 @@ export const Default = {
           <div style={row} className="md-typescale-body-medium">
             <div style={column}>
               <p style={label}>Standard</p>
-              <IconButton aria-label="Open settings" style="standard" {...common}>
+              <IconButton aria-label="Open settings" variant="standard" {...common}>
                 <Icon>{iconName}</Icon>
               </IconButton>
             </div>
 
             <div style={column}>
               <p style={label}>Outlined</p>
-              <IconButton aria-label="Search" style="outline" {...common}>
+              <IconButton aria-label="Search" variant="outline" {...common}>
                 <Icon>{icon || 'search'}</Icon>
               </IconButton>
             </div>
 
             <div style={column}>
               <p style={label}>Filled</p>
-              <IconButton aria-label="Complete" style="filled" {...common}>
+              <IconButton aria-label="Complete" variant="filled" {...common}>
                 <Icon>{icon || 'done'}</Icon>
               </IconButton>
             </div>
 
             <div style={column}>
               <p style={label}>Filled tonal</p>
-              <IconButton aria-label="Add new" style="tonal" {...common}>
+              <IconButton aria-label="Add new" variant="tonal" {...common}>
                 <Icon>{icon || 'add'}</Icon>
               </IconButton>
             </div>
@@ -130,7 +130,7 @@ export const Default = {
               <IconButton
                 aria-label="Show password"
                 ariaLabelSelected="Hide password"
-                style="standard"
+                variant="standard"
                 {...commonToggle}
               >
                 <Icon>{icon || 'visibility'}</Icon>
@@ -143,7 +143,7 @@ export const Default = {
               <IconButton
                 aria-label="Play"
                 ariaLabelSelected="Pause"
-                style="outline"
+                variant="outline"
                 {...commonToggle}
               >
                 <Icon>{icon || 'play_arrow'}</Icon>
@@ -156,7 +156,7 @@ export const Default = {
               <IconButton
                 aria-label="Show more"
                 ariaLabelSelected="Show less"
-                style="filled"
+                variant="filled"
                 {...commonToggle}
               >
                 <Icon>{icon || 'expand_more'}</Icon>
@@ -169,7 +169,7 @@ export const Default = {
               <IconButton
                 aria-label="Open menu"
                 ariaLabelSelected="Close menu"
-                style="tonal"
+                variant="tonal"
                 {...commonToggle}
               >
                 <Icon>{icon || 'menu'}</Icon>
@@ -183,7 +183,7 @@ export const Default = {
               <p style={label}>
                 Selected
               </p>
-              <IconButton style="standard" toggle selected aria-label="Unselected" ariaLabelSelected="Selected" {...common}>
+              <IconButton variant="standard" toggle selected aria-label="Unselected" ariaLabelSelected="Selected" {...common}>
                 <Icon>close</Icon>
                 <Icon slot="selected">check</Icon>
               </IconButton>
@@ -196,28 +196,28 @@ export const Default = {
           <div style={row}>
             <div style={column}>
               <p style={label}>Standard</p>
-              <IconButton aria-label="Go home" style="standard" {...linkProps}>
+              <IconButton aria-label="Go home" variant="standard" {...linkProps}>
                 <Icon>{icon || 'home'}</Icon>
               </IconButton>
             </div>
 
             <div style={column}>
               <p style={label}>Outlined</p>
-              <IconButton aria-label="Open new tab" style="outline" {...linkProps}>
+              <IconButton aria-label="Open new tab" variant="outline" {...linkProps}>
                 <Icon>{icon || 'open_in_new'}</Icon>
               </IconButton>
             </div>
 
             <div style={column}>
               <p style={label}>Filled</p>
-              <IconButton aria-label="Download Google" style="filled" {...linkProps}>
+              <IconButton aria-label="Download Google" variant="filled" {...linkProps}>
                 <Icon>{icon || 'download'}</Icon>
               </IconButton>
             </div>
 
             <div style={column}>
               <p style={label}>Filled tonal</p>
-              <IconButton aria-label="Logout" style="tonal" {...linkProps}>
+              <IconButton aria-label="Logout" variant="tonal" {...linkProps}>
                 <Icon>{icon || 'logout'}</Icon>
               </IconButton>
             </div>

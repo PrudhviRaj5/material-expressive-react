@@ -15,12 +15,10 @@ import {FilledTonalIconButton} from './FilledTonalIconButton';
 import {OutlinedIconButton} from './OutlinedIconButton';
 
 export type IconButtonVariant =
-  | 'default'
-  | 'outlined'
+  | 'standard'
+  | 'outline'
   | 'filled'
-  | 'filledTonal';
-
-export type IconButtonStyle = 'standard' | 'outline' | 'filled' | 'tonal';
+  | 'tonal';
 export type IconButtonType = 'round' | 'square';
 export type IconButtonWidth = 'narrow' | 'default' | 'wide';
 
@@ -30,10 +28,8 @@ export type IconButtonRef =
   | MdFilledIconButton
   | MdFilledTonalIconButton;
 
-export interface IconButtonProps extends Omit<DefaultIconButtonProps, 'style'> {
-  /** Visual style (Figma). */
-  style?: IconButtonStyle;
-  /** Back-compat alias; prefer `style`. */
+export interface IconButtonProps extends DefaultIconButtonProps {
+  /** Visual variant (Figma). */
   variant?: IconButtonVariant;
 
   /** Shape type (Figma). */
@@ -43,21 +39,22 @@ export interface IconButtonProps extends Omit<DefaultIconButtonProps, 'style'> {
   /** Width (Figma). */
   width?: IconButtonWidth;
 
-  /** Inline styles for the host element. */
-  containerStyle?: React.CSSProperties;
 }
 
-function getStylePrefix(style: IconButtonStyle): {
-  tagVariant: IconButtonVariant;
+function getVariantConfig(variant: IconButtonVariant): {
+  tagVariant: 'default' | 'outlined' | 'filled' | 'filledTonal';
   varPrefix: string;
 } {
-  switch (style) {
+  switch (variant) {
     case 'filled':
       return {tagVariant: 'filled', varPrefix: 'md-filled-icon-button'};
-    case 'tonal':
-      return {tagVariant: 'filledTonal', varPrefix: 'md-filled-tonal-icon-button'};
     case 'outline':
       return {tagVariant: 'outlined', varPrefix: 'md-outlined-icon-button'};
+    case 'tonal':
+      return {
+        tagVariant: 'filledTonal',
+        varPrefix: 'md-filled-tonal-icon-button',
+      };
     case 'standard':
     default:
       return {tagVariant: 'default', varPrefix: 'md-icon-button'};
@@ -100,28 +97,14 @@ function shapeValue(type: IconButtonType | undefined) {
 
 export const IconButton = forwardRef<IconButtonRef, IconButtonProps>(
   function IconButton({
-    style: styleProp = 'filled',
-    variant,
+    variant = 'filled',
     type,
     size,
     width,
-    containerStyle,
+    style,
     ...rest
   }, ref) {
-    // If `variant` is passed (older API), map it to the equivalent style.
-    const styleFromVariant: IconButtonStyle | undefined =
-      variant === 'filled'
-        ? 'filled'
-        : variant === 'filledTonal'
-          ? 'tonal'
-          : variant === 'outlined'
-            ? 'outline'
-            : variant === 'default'
-              ? 'standard'
-              : undefined;
-
-    const resolvedStyle = styleFromVariant ?? styleProp;
-    const {tagVariant, varPrefix} = getStylePrefix(resolvedStyle);
+    const {tagVariant, varPrefix} = getVariantConfig(variant);
 
     const s = sizeConfig(size);
     const w = Math.round(s.h * widthRatio(width));
@@ -144,7 +127,7 @@ export const IconButton = forwardRef<IconButtonRef, IconButtonProps>(
             [`--${varPrefix}-icon-size` as any]: `${s.icon}px`,
           };
 
-    const mergedStyle = {...styleVars, ...(containerStyle ?? {})};
+    const mergedStyle = {...styleVars, ...(style ?? {})};
 
     switch (tagVariant) {
       case 'outlined':

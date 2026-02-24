@@ -10,7 +10,7 @@ const meta = {
   tags: ['autodocs'],
   parameters: {layout: 'centered'},
   argTypes: {
-    style: {
+    variant: {
       control: {type: 'select'},
       options: ['filled', 'tonal', 'outline', 'standard'],
     },
@@ -41,7 +41,7 @@ export default meta;
 
 export const Default = {
   args: {
-    style: 'filled',
+    variant: 'filled',
     type: 'round',
     size: 'medium',
     width: 'default',
@@ -69,7 +69,7 @@ export const Default = {
 };
 
 const baseArgs = {
-  style: 'filled',
+  variant: 'filled',
   type: 'round',
   size: 'medium',
   width: 'default',
@@ -92,7 +92,7 @@ const baseArgs = {
 export const Outlined = {
   args: {
     ...baseArgs,
-    style: 'outline',
+    variant: 'outline',
   },
   render: (args) => (
     <IconButton {...args} aria-label="Outlined">
@@ -104,7 +104,7 @@ export const Outlined = {
 export const Filled = {
   args: {
     ...baseArgs,
-    style: 'filled',
+    variant: 'filled',
   },
   render: (args) => (
     <IconButton {...args} aria-label="Filled">
@@ -116,7 +116,7 @@ export const Filled = {
 export const FilledTonal = {
   args: {
     ...baseArgs,
-    style: 'tonal',
+    variant: 'tonal',
   },
   render: (args) => (
     <IconButton {...args} aria-label="Filled tonal">

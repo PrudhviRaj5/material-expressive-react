@@ -9,7 +9,7 @@ export * from './DefaultIconButton.js';
 export * from './OutlinedIconButton.js';
 
 export type {
-  IconButtonStyle,
+  IconButtonVariant,
   IconButtonType,
   IconButtonWidth,
   IconButtonProps,
