@@ -6,7 +6,7 @@ This project follows the official Google Material Design principles and componen
 https://m3.material.io/components
 
 Developer docs (Storybook)
-- GitHub Pages: `https://<org>.github.io/<repo>/` (see “Hosting Storybook on GitHub Pages”)
+- GitHub Pages: https://prudhviraj5.github.io/material-expressive-react/
 
 ## Why this library
 
