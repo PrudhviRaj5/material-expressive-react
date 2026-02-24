@@ -1,9 +1,10 @@
 import * as React from 'react';
 
-import {Button, type ButtonVariant} from './Button';
+import {Button, type ButtonStyle, type ButtonVariant} from './Button';
 import type {ButtonSize} from './buttonSizes';
 import {Icon} from '../icon';
 import {Menu, MenuItem} from '../menu';
+import {Ripple} from '../ripple';
 
 export interface SplitButtonOption {
   label: string;
@@ -48,13 +49,69 @@ function renderPrimaryIcon(icon: React.ReactNode | string | undefined): React.Re
 function getTokenPrefix(variant: ButtonVariant) {
   return variant === 'outlined'
     ? 'outlined-button'
-    : variant === 'filledTonal'
+    : variant === 'filledTonal' || variant === 'tonal'
       ? 'filled-tonal-button'
-      : variant === 'text'
-        ? 'text-button'
-        : variant === 'elevated'
-          ? 'elevated-button'
-          : 'filled-button';
+    : variant === 'text'
+      ? 'text-button'
+    : variant === 'elevated'
+      ? 'elevated-button'
+      : 'filled-button';
+}
+
+function resolveButtonStyle(variant: ButtonVariant): ButtonStyle {
+  if (variant === 'filledTonal') return 'tonal';
+  return (variant as ButtonStyle) || 'filled';
+}
+
+function getExpandPalette(style: ButtonStyle) {
+  const shadowColor =
+    'color-mix(in srgb, var(--md-sys-color-on-surface) 18%, transparent)';
+  const elevatedShadow = `0 2px 6px ${shadowColor}, 0 1px 2px ${shadowColor}`;
+
+  switch (style) {
+    case 'filled':
+      return {
+        background: 'var(--md-sys-color-primary)',
+        color: 'var(--md-sys-color-on-primary)',
+        border: '1px solid transparent',
+        boxShadow: undefined as string | undefined,
+        dividerInk: 'var(--md-sys-color-on-primary)',
+      };
+    case 'tonal':
+      return {
+        background: 'var(--md-sys-color-secondary-container)',
+        color: 'var(--md-sys-color-on-secondary-container)',
+        border: '1px solid transparent',
+        boxShadow: undefined as string | undefined,
+        dividerInk: 'var(--md-sys-color-on-secondary-container)',
+      };
+    case 'outlined':
+      return {
+        background: 'var(--md-sys-color-surface)',
+        color: 'var(--md-sys-color-on-surface)',
+        border: '1px solid var(--md-sys-color-outline)',
+        boxShadow: undefined as string | undefined,
+        dividerInk: 'var(--md-sys-color-on-surface)',
+      };
+    case 'text':
+      return {
+        background: 'transparent',
+        color: 'var(--md-sys-color-primary)',
+        border: '1px solid transparent',
+        boxShadow: undefined as string | undefined,
+        dividerInk: 'var(--md-sys-color-on-surface)',
+      };
+    case 'elevated':
+    default:
+      return {
+        background: 'var(--md-sys-color-surface)',
+        color: 'var(--md-sys-color-on-surface)',
+        border:
+          '1px solid color-mix(in srgb, var(--md-sys-color-outline) 40%, transparent)',
+        boxShadow: elevatedShadow,
+        dividerInk: 'var(--md-sys-color-on-surface)',
+      };
+  }
 }
 
 function getPillShapeVars(variant: ButtonVariant): React.CSSProperties {
@@ -100,39 +157,6 @@ function getButtonDiameter(size: ButtonSize) {
   return 40; // medium
 }
 
-function getArrowCircleVars(variant: ButtonVariant): React.CSSProperties {
-  const prefix = getTokenPrefix(variant);
-  return {
-    [`--md-${prefix}-leading-space` as any]: '0px',
-    [`--md-${prefix}-trailing-space` as any]: '0px',
-    [`--md-${prefix}-with-leading-icon-leading-space` as any]: '0px',
-    [`--md-${prefix}-with-leading-icon-trailing-space` as any]: '0px',
-    [`--md-${prefix}-container-shape` as any]: '999px',
-  };
-}
-
-function getArrowSpacingVars(variant: ButtonVariant, size: ButtonSize): React.CSSProperties {
-  const prefix = getTokenPrefix(variant);
-
-  const space =
-    size === 'xsmall'
-      ? '8px'
-      : size === 'small'
-        ? '10px'
-        : size === 'large'
-          ? '14px'
-          : size === 'xlarge'
-            ? '16px'
-            : '12px';
-
-  return {
-    [`--md-${prefix}-leading-space` as any]: space,
-    [`--md-${prefix}-trailing-space` as any]: space,
-    [`--md-${prefix}-with-leading-icon-leading-space` as any]: space,
-    [`--md-${prefix}-with-leading-icon-trailing-space` as any]: space,
-  };
-}
-
 export function SplitButton({
   variant = 'filled',
   size = 'medium',
@@ -149,10 +173,11 @@ export function SplitButton({
   ...rest
 }: SplitButtonProps) {
   const [open, setOpen] = React.useState(false);
+  const [expandButtonEl, setExpandButtonEl] = React.useState<HTMLButtonElement | null>(null);
   // React's useId() includes characters like ':' which break querySelector `#id`.
   // md-menu resolves `anchor` via a selector, so keep this CSS-selector-safe.
   const reactId = React.useId().replace(/[^a-zA-Z0-9_-]/g, '_');
-  const arrowId = `split-button-arrow-${reactId}`;
+  const expandButtonId = `split-button-expand-${reactId}`;
 
   React.useEffect(() => {
     if (disabled) setOpen(false);
@@ -166,44 +191,68 @@ export function SplitButton({
     ...((style as React.CSSProperties) ?? {}),
   };
 
-  const leftStyle = {
+  // Keep the primary button styling stable when the menu toggles.
+  const primaryButtonStyle = {
     ...getPillShapeVars(variant),
     ...getSegmentShapeVars(variant, 'primary'),
   };
+
   const diameter = getButtonDiameter(size);
-  const prefix = getTokenPrefix(variant);
-  const arrowStyle = {
-    ...getArrowCircleVars(variant),
-    // Force the button's internal container height to match our circle.
-    [`--md-${prefix}-container-height` as any]: `${diameter}px`,
-    ...getSegmentShapeVars(variant, 'arrow'),
-    minWidth: diameter,
+  const expandStyle = resolveButtonStyle(variant);
+  const palette = getExpandPalette(expandStyle);
+  const expandShellStyle: React.CSSProperties = {
+    position: 'relative',
+    display: 'inline-flex',
+    alignItems: 'stretch',
+    justifyContent: 'stretch',
+    boxSizing: 'border-box',
+    height: diameter,
     width: diameter,
+    minWidth: diameter,
     maxWidth: diameter,
-    paddingInline: 0,
-  } as React.CSSProperties;
+    background: palette.background,
+    color: palette.color,
+    border: palette.border,
+    // Avoid a double border between primary + expand when closed.
+    borderLeft: open ? palette.border : '0',
+    boxShadow: palette.boxShadow,
+    overflow: 'hidden',
+    borderTopLeftRadius: open ? 999 : 0,
+    borderBottomLeftRadius: open ? 999 : 0,
+    borderTopRightRadius: 999,
+    borderBottomRightRadius: 999,
+    transition:
+      'width 200ms cubic-bezier(0.2, 0.0, 0, 1), min-width 200ms cubic-bezier(0.2, 0.0, 0, 1), max-width 200ms cubic-bezier(0.2, 0.0, 0, 1)',
+  };
+
+  const expandButtonStyle: React.CSSProperties = {
+    appearance: 'none',
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+    height: '100%',
+    padding: 0,
+    margin: 0,
+    border: 0,
+    borderRadius: 'inherit',
+    background: 'transparent',
+    color: 'inherit',
+    cursor: disabled ? 'not-allowed' : 'pointer',
+    outlineOffset: 2,
+  };
 
   const shellStyle: React.CSSProperties = {
     display: 'inline-flex',
     alignItems: 'stretch',
-    borderRadius: 999,
-    overflow: 'hidden',
+    borderRadius: open ? 0 : 999,
+    overflow: open ? 'visible' : 'hidden',
+    gap: open ? 2 : 0,
+    transition: 'gap 180ms cubic-bezier(0.2, 0.0, 0, 1)',
   };
 
-  const dividerInk =
-    variant === 'filled'
-      ? 'var(--md-sys-color-on-primary)'
-      : variant === 'filledTonal'
-        ? 'var(--md-sys-color-on-secondary-container)'
-        : 'var(--md-sys-color-on-surface)';
-
   const dividerStyle: React.CSSProperties = {
-    width: 2,
-    // dotted divider like the gif
-    backgroundImage:
-      'repeating-linear-gradient(to bottom, color-mix(in srgb, var(--_split-divider-ink) 80%, transparent) 0 2px, transparent 2px 6px)',
-    ['--_split-divider-ink' as any]: dividerInk,
-    opacity: open ? 0.9 : 0.7,
+    width: 2
   };
 
   const arrowIconStyle: React.CSSProperties = {
@@ -221,39 +270,40 @@ export function SplitButton({
           size={size}
           disabled={disabled}
           onClick={onPrimaryClick}
-          style={leftStyle}
+          style={primaryButtonStyle}
         >
           {renderPrimaryIcon(primaryIcon)}
           {primaryLabel}
         </Button>
 
-        <div aria-hidden style={dividerStyle} />
+        {!open && <div aria-hidden style={dividerStyle} />}
 
-        <Button
-          variant={variant}
-          size={size}
-          disabled={disabled}
-          aria-label={arrowAriaLabel}
-          aria-expanded={open}
-          onClick={(ev) => {
-            // Prevent md-menu from treating the opener click as an outside click.
-            ev.preventDefault();
-            ev.stopPropagation();
-            setOpen((v) => !v);
-          }}
-          id={arrowId}
-          style={arrowStyle}
-        >
-          <Icon slot="icon" style={arrowIconStyle}>
-            expand_more
-          </Icon>
-        </Button>
+        <div style={expandShellStyle}>
+          <Ripple disabled={disabled} control={expandButtonEl} />
+          <button
+            type="button"
+            disabled={disabled}
+            aria-label={arrowAriaLabel}
+            aria-expanded={open}
+            onClick={(ev) => {
+              // Prevent md-menu from treating the opener click as an outside click.
+              ev.preventDefault();
+              ev.stopPropagation();
+              setOpen((v) => !v);
+            }}
+            id={expandButtonId}
+            ref={setExpandButtonEl}
+            style={expandButtonStyle}
+          >
+            <Icon style={arrowIconStyle}>expand_more</Icon>
+          </button>
+        </div>
       </div>
 
       <Menu
         open={open}
         quick
-        anchor={arrowId}
+        anchor={expandButtonId}
         positioning="absolute"
         anchorCorner="end-end"
         menuCorner="start-end"
