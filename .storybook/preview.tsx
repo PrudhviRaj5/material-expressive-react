@@ -68,17 +68,23 @@ const preview = {
           const keyA = String(titleA).split('/')[1] ?? '';
           const keyB = String(titleB).split('/')[1] ?? '';
           const order = [
-            'AllIconButtons',
+            'All IconButtons',
             'IconButton',
-            'OutlinedIconButton',
-            'FilledIconButton',
-            'FilledTonalIconButton',
           ];
           const ixA = order.indexOf(keyA);
           const ixB = order.indexOf(keyB);
           const rankA = ixA === -1 ? 999 : ixA;
           const rankB = ixB === -1 ? 999 : ixB;
           if (rankA !== rankB) return rankA - rankB;
+
+          if (keyA === 'IconButton' && keyB === 'IconButton') {
+            const nameOrder = ['Default', 'Outlined', 'Filled', 'FilledTonal', 'Docs'];
+            const nxA = nameOrder.indexOf(String(nameA));
+            const nxB = nameOrder.indexOf(String(nameB));
+            const nrA = nxA === -1 ? 999 : nxA;
+            const nrB = nxB === -1 ? 999 : nxB;
+            if (nrA !== nrB) return nrA - nrB;
+          }
         }
 
         if (groupA === 'list' && groupB === 'list') {
@@ -161,7 +167,7 @@ const preview = {
         if (groupA === 'button' && groupB === 'button') {
           const keyA = String(titleA).split('/')[1] ?? '';
           const keyB = String(titleB).split('/')[1] ?? '';
-          const order = ['All Buttons', 'Button'];
+          const order = ['All Buttons', 'Button', 'SplitButton', 'ToggleButton'];
           const ixA = order.indexOf(keyA);
           const ixB = order.indexOf(keyB);
           const rankA = ixA === -1 ? 999 : ixA;
@@ -176,6 +182,17 @@ const preview = {
             const nrB = nxB === -1 ? 999 : nxB;
             if (nrA !== nrB) return nrA - nrB;
           }
+        }
+
+        if (groupA === 'button-group' && groupB === 'button-group') {
+          const keyA = String(titleA).split('/')[1] ?? '';
+          const keyB = String(titleB).split('/')[1] ?? '';
+          const order = ['ConnectedButtonGroup', 'OutlinedSegmentedButtonSet'];
+          const ixA = order.indexOf(keyA);
+          const ixB = order.indexOf(keyB);
+          const rankA = ixA === -1 ? 999 : ixA;
+          const rankB = ixB === -1 ? 999 : ixB;
+          if (rankA !== rankB) return rankA - rankB;
         }
 
         const titleCmp = String(titleA).localeCompare(String(titleB));

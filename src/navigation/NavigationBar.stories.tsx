@@ -50,7 +50,7 @@ export const Default = {
           hideInactiveLabels={args.hideInactiveLabels}
           activeIndex={activeIndex}
           onActivated={(ev) => {
-            action('navigation-bar-activated')(ev);
+            action('navigation-bar-activated')(ev.detail);
             setActiveIndex(ev.detail.activeIndex);
           }}
         >

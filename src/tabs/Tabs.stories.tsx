@@ -71,9 +71,9 @@ export const Default = {
           aria-label="Primary tabs"
           activeTabIndex={activeTabIndex}
           autoActivate={args.autoActivate}
-          onChange={(ev) => {
-            action('change')(ev);
+           onChange={(ev) => {
             const target = ev.target as unknown as {activeTabIndex?: number};
+            action('change')({activeTabIndex: target.activeTabIndex});
             if (typeof target.activeTabIndex === 'number') setActiveTabIndex(target.activeTabIndex);
           }}
           style={{minWidth: 360}}

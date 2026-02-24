@@ -64,7 +64,7 @@ export const Default = {
           pivot={args.pivot}
           opened={opened}
           onChanged={(ev) => {
-            action('navigation-drawer-changed')(ev);
+            action('navigation-drawer-changed')(ev.detail);
           }}
           value={value}
           onValueChange={(next) => {
