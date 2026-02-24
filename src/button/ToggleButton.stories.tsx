@@ -23,7 +23,7 @@ const meta = {
     shape: {control: {type: 'select'}, options: ['round', 'square']},
     state: {
       control: {type: 'select'},
-      options: [undefined, 'enabled', 'hovered', 'focused', 'pressed', 'disabled'],
+      options: ['', 'enabled', 'hovered', 'focused', 'pressed', 'disabled'],
     },
     size: {
       control: {type: 'select'},
@@ -42,11 +42,12 @@ export const Example = {
   args: {
     variant: 'default',
     shape: 'round',
-    state: undefined,
+    state: '',
     size: 'medium',
     disabled: false,
   },
   render: (args) => {
+    const resolvedArgs = {...args, state: args.state ? args.state : undefined};
     const [left, setLeft] = React.useState(false);
     const [right, setRight] = React.useState(true);
     const click = action('click');
@@ -64,7 +65,7 @@ export const Example = {
     return (
       <div style={wrap}>
         <ToggleButton
-          {...args}
+          {...resolvedArgs}
           selected={left}
           onClick={click}
           onSelectedChange={(next) => {
@@ -75,7 +76,7 @@ export const Example = {
           Unselected
         </ToggleButton>
         <ToggleButton
-          {...args}
+          {...resolvedArgs}
           selected={right}
           onClick={click}
           onSelectedChange={(next) => {
@@ -94,17 +95,18 @@ export const IconOnly = {
   args: {
     variant: 'tonal',
     shape: 'square',
-    state: undefined,
+    state: '',
     size: 'large',
     disabled: false,
   },
   render: (args) => {
+    const resolvedArgs = {...args, state: args.state ? args.state : undefined};
     const [on, setOn] = React.useState(false);
     const click = action('click');
     const selectedChange = action('selected-change');
     return (
       <ToggleButton
-        {...args}
+        {...resolvedArgs}
         selected={on}
         onClick={click}
         onSelectedChange={(next) => {
