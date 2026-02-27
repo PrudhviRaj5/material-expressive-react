@@ -1,0 +1,129 @@
+.mer-tooltip-reset {
+  box-sizing: border-box;
+}
+
+.mer-tooltip-reset *,
+.mer-tooltip-reset *::before,
+.mer-tooltip-reset *::after {
+  box-sizing: inherit;
+}
+
+.mer-plain-tooltip {
+  --mer-plain-tooltip-container-color: var(
+    --md-sys-color-inverse-surface,
+    #322f35
+  );
+  --mer-plain-tooltip-text-color: var(
+    --md-sys-color-inverse-on-surface,
+    #f5eff7
+  );
+  --mer-plain-tooltip-shape: 8px;
+  --mer-plain-tooltip-elevation: 0 6px 18px rgba(0, 0, 0, 0.18);
+
+  align-items: center;
+  background: var(--mer-plain-tooltip-container-color);
+  border-radius: var(--mer-plain-tooltip-shape);
+  box-shadow: var(--mer-plain-tooltip-elevation);
+  color: var(--mer-plain-tooltip-text-color);
+  display: inline-flex;
+  max-width: 92vw;
+  padding: 8px 12px;
+}
+
+.mer-plain-tooltip__text {
+  font-family: var(--md-sys-typescale-body-small-font, Roboto, sans-serif);
+  font-size: var(--md-sys-typescale-body-small-size, 14px);
+  font-weight: var(--md-sys-typescale-body-small-weight, 400);
+  letter-spacing: var(--md-sys-typescale-body-small-tracking, 0.25px);
+  line-height: var(--md-sys-typescale-body-small-line-height, 20px);
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.mer-rich-tooltip {
+  --mer-rich-tooltip-container-color: var(
+    --md-sys-color-secondary-container,
+    #e8def8
+  );
+  --mer-rich-tooltip-fg: var(
+    --md-sys-color-on-secondary-container,
+    #1d192b
+  );
+  --mer-rich-tooltip-title-color: var(
+    --md-sys-color-on-surface-variant,
+    #49454f
+  );
+  --mer-rich-tooltip-action-color: var(--md-sys-color-primary, #6750a4);
+  --mer-rich-tooltip-shape: 20px;
+  --mer-rich-tooltip-elevation: 0 10px 24px rgba(0, 0, 0, 0.18);
+
+  background: var(--mer-rich-tooltip-container-color);
+  border-radius: var(--mer-rich-tooltip-shape);
+  box-shadow: var(--mer-rich-tooltip-elevation);
+  color: var(--mer-rich-tooltip-fg);
+  display: grid;
+  gap: 10px;
+  max-width: 92vw;
+  padding: 22px 24px 18px;
+}
+
+.mer-rich-tooltip__title {
+  color: var(--mer-rich-tooltip-title-color);
+  font-family: var(--md-sys-typescale-title-large-font, Roboto, sans-serif);
+  font-size: var(--md-sys-typescale-title-large-size, 22px);
+  font-weight: var(--md-sys-typescale-title-large-weight, 500);
+  letter-spacing: var(--md-sys-typescale-title-large-tracking, 0);
+  line-height: var(--md-sys-typescale-title-large-line-height, 28px);
+  margin: 0;
+}
+
+.mer-rich-tooltip__supporting-text {
+  color: var(--mer-rich-tooltip-title-color);
+  font-family: var(--md-sys-typescale-body-large-font, Roboto, sans-serif);
+  font-size: var(--md-sys-typescale-body-large-size, 16px);
+  font-weight: var(--md-sys-typescale-body-large-weight, 400);
+  letter-spacing: var(--md-sys-typescale-body-large-tracking, 0.15px);
+  line-height: var(--md-sys-typescale-body-large-line-height, 24px);
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.mer-rich-tooltip__actions {
+  display: flex;
+  gap: 26px;
+  margin-top: 10px;
+}
+
+.mer-rich-tooltip__action-btn {
+  -webkit-tap-highlight-color: transparent;
+  appearance: none;
+  background: transparent;
+  border: 0;
+  border-radius: 10px;
+  color: var(--mer-rich-tooltip-action-color);
+  cursor: pointer;
+  font-family: var(--md-sys-typescale-label-large-font, Roboto, sans-serif);
+  font-size: var(--md-sys-typescale-label-large-size, 14px);
+  font-weight: var(--md-sys-typescale-label-large-weight, 500);
+  letter-spacing: var(--md-sys-typescale-label-large-tracking, 0.1px);
+  line-height: var(--md-sys-typescale-label-large-line-height, 20px);
+  min-height: 36px;
+  outline: none;
+  padding: 0 10px;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.mer-rich-tooltip__action-btn:hover {
+  background: color-mix(in srgb, var(--mer-rich-tooltip-action-color) 10%, transparent);
+}
+
+.mer-rich-tooltip__action-btn:focus-visible {
+  background: color-mix(in srgb, var(--mer-rich-tooltip-action-color) 14%, transparent);
+  outline: 2px solid var(--mer-rich-tooltip-action-color);
+  outline-offset: 2px;
+}
+
+.mer-rich-tooltip__action-btn:active {
+  background: color-mix(in srgb, var(--mer-rich-tooltip-action-color) 14%, transparent);
+}
