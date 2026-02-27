@@ -6,18 +6,35 @@ import {forwardRef} from 'react';
 import type {WebComponentProps} from '../internal/createComponent';
 import {useWebComponent} from '../internal/useWebComponent';
 
-export interface FocusRingProps extends WebComponentProps<MdFocusRing> {}
+export interface FocusRingProps extends WebComponentProps<MdFocusRing> {
+  /**
+   * Alias for the underlying `for` attribute.
+   * Material Web uses the `htmlFor` property name.
+   */
+  htmlFor?: string;
+  /**
+   * HTML attribute name alias (matches docs).
+   * Prefer `htmlFor` in React.
+   */
+  'for'?: string;
+}
 
 export const FocusRing = forwardRef<MdFocusRing, FocusRingProps>(function FocusRing(
-  {children, ...rest},
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  {children, htmlFor, 'for': forValue, ...rest},
   ref,
 ) {
+  const resolvedHtmlFor = htmlFor ?? forValue;
+
   const {ref: mergedRef, domProps} = useWebComponent<MdFocusRing>(
     {
       tagName: 'md-focus-ring',
       importer: () => import('@material/web/focus/md-focus-ring.js'),
     },
-    rest,
+    {
+      ...rest,
+      ...(resolvedHtmlFor ? {htmlFor: resolvedHtmlFor} : null),
+    },
     ref,
   );
 
