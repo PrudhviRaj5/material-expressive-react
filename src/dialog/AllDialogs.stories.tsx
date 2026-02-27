@@ -5,7 +5,7 @@ import {Dialog} from './Dialog';
 import {FilledButton, FilledTonalButton, TextButton} from '../button';
 import {Icon} from '../icon';
 import {Radio} from '../radio';
-import {FilledTextField} from '../textfield';
+import {Textfield} from '../textfield';
 
 const meta = {
   title: 'dialog/AllDialogs',
@@ -112,7 +112,7 @@ export const Default = {
             open={standard.open}
             aria-label={headlineText ? undefined : 'A simple dialog'}
             onClosed={(ev) => {
-              args?.onClosed?.(ev);
+              args?.onClosed?.({type: ev?.type, detail: ev?.detail});
               standard.hide();
             }}
           >
@@ -142,7 +142,7 @@ export const Default = {
             type="alert"
             open={alert.open}
             onClosed={(ev) => {
-              args?.onClosed?.(ev);
+              args?.onClosed?.({type: ev?.type, detail: ev?.detail});
               alert.hide();
             }}
           >
@@ -168,7 +168,7 @@ export const Default = {
             open={confirm.open}
             style={{maxWidth: 320}}
             onClosed={(ev) => {
-              args?.onClosed?.(ev);
+              args?.onClosed?.({type: ev?.type, detail: ev?.detail});
               confirm.hide();
             }}
           >
@@ -197,7 +197,7 @@ export const Default = {
             {...baseDialogProps}
             open={choose.open}
             onClosed={(ev) => {
-              args?.onClosed?.(ev);
+              args?.onClosed?.({type: ev?.type, detail: ev?.detail});
               choose.hide();
             }}
           >
@@ -237,7 +237,7 @@ export const Default = {
             open={form.open}
             className="contacts"
             onClosed={(ev) => {
-              args?.onClosed?.(ev);
+              args?.onClosed?.({type: ev?.type, detail: ev?.detail});
               form.hide();
             }}
           >
@@ -246,15 +246,15 @@ export const Default = {
             </span>
             <form id="dialog-form" slot="content" method="dialog" style={{display: 'grid', gap: 8}}>
               <div style={{display: 'flex', gap: 8}}>
-                <FilledTextField autofocus label="First Name" style={{flex: 1}} />
-                <FilledTextField label="Last Name" style={{flex: 1}} />
+                <Textfield autofocus label="First Name" style={{flex: 1}} />
+                <Textfield label="Last Name" style={{flex: 1}} />
               </div>
               <div style={{display: 'flex', gap: 8}}>
-                <FilledTextField label="Company" style={{flex: 1}} />
-                <FilledTextField label="Job Title" style={{flex: 1}} />
+                <Textfield label="Company" style={{flex: 1}} />
+                <Textfield label="Job Title" style={{flex: 1}} />
               </div>
-              <FilledTextField label="Email" />
-              <FilledTextField label="Phone" />
+              <Textfield label="Email" />
+              <Textfield label="Phone" />
             </form>
             <div slot="actions" style={{display: 'flex', gap: 8, alignItems: 'center'}}>
               <TextButton form="dialog-form" value="reset" type="reset">
@@ -280,7 +280,7 @@ export const Default = {
             {...baseDialogProps}
             open={sheet.open}
             onClosed={(ev) => {
-              args?.onClosed?.(ev);
+              args?.onClosed?.({type: ev?.type, detail: ev?.detail});
               sheet.hide();
             }}
           >

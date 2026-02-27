@@ -12,7 +12,7 @@ const meta = {
   argTypes: {
     quick: {control: 'boolean'},
     noFocusTrap: {control: 'boolean'},
-    type: {control: {type: 'select'}, options: [undefined, 'alert']},
+    type: {control: {type: 'select'}, options: ['', 'alert']},
     open: {control: 'boolean'},
     returnValue: {control: 'text'},
     getOpenAnimation: {control: false},
@@ -26,7 +26,7 @@ export const Default = {
   args: {
     quick: false,
     noFocusTrap: false,
-    type: undefined,
+    type: '',
     open: false,
     returnValue: '',
     onOpen: action('open'),
@@ -43,7 +43,7 @@ export const Default = {
     }, [args.open]);
 
     const onClosed = (ev) => {
-      args?.onClosed?.(ev);
+      args?.onClosed?.({type: ev?.type, detail: ev?.detail});
       setOpen(false);
     };
 
@@ -53,7 +53,13 @@ export const Default = {
           Open dialog
         </FilledButton>
 
-        <Dialog {...args} open={open} onClosed={onClosed} aria-label="Example dialog">
+        <Dialog
+          {...args}
+          type={args.type === '' ? undefined : args.type}
+          open={open}
+          onClosed={onClosed}
+          aria-label="Example dialog"
+        >
           <div slot="headline">Dialog</div>
           <form id="dialog-form" slot="content" method="dialog">
             <span>Just a simple dialog.</span>
