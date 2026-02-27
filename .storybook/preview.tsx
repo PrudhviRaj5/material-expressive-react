@@ -24,7 +24,10 @@ const preview = {
         const groupA = String(titleA).split('/')[0] ?? '';
         const groupB = String(titleB).split('/')[0] ?? '';
 
-        if (groupA === 'chips' && groupB === 'chips') {
+        const groupKeyA = String(groupA).toLowerCase();
+        const groupKeyB = String(groupB).toLowerCase();
+
+        if (groupKeyA === 'chips' && groupKeyB === 'chips') {
           const keyA = String(titleA).split('/')[1] ?? '';
           const keyB = String(titleB).split('/')[1] ?? '';
           const order = [
@@ -42,7 +45,7 @@ const preview = {
           if (rankA !== rankB) return rankA - rankB;
         }
 
-        if (groupA === 'dialog' && groupB === 'dialog') {
+        if (groupKeyA === 'dialog' && groupKeyB === 'dialog') {
           const keyA = String(titleA).split('/')[1] ?? '';
           const keyB = String(titleB).split('/')[1] ?? '';
           const order = ['AllDialogs', 'Dialog'];
@@ -53,7 +56,7 @@ const preview = {
           if (rankA !== rankB) return rankA - rankB;
         }
 
-        if (groupA === 'fab' && groupB === 'fab') {
+        if (groupKeyA === 'fab' && groupKeyB === 'fab') {
           const keyA = String(titleA).split('/')[1] ?? '';
           const keyB = String(titleB).split('/')[1] ?? '';
           const order = ['AllFabs', 'Fab', 'BrandedFab'];
@@ -64,7 +67,7 @@ const preview = {
           if (rankA !== rankB) return rankA - rankB;
         }
 
-        if (groupA === 'icon-button' && groupB === 'icon-button') {
+        if (groupKeyA === 'icon-button' && groupKeyB === 'icon-button') {
           const keyA = String(titleA).split('/')[1] ?? '';
           const keyB = String(titleB).split('/')[1] ?? '';
           const order = [
@@ -87,10 +90,10 @@ const preview = {
           }
         }
 
-        if (groupA === 'list' && groupB === 'list') {
+        if (groupKeyA === 'list' && groupKeyB === 'list') {
           const keyA = String(titleA).split('/')[1] ?? '';
           const keyB = String(titleB).split('/')[1] ?? '';
-          const order = ['AllLists', 'List', 'ListItem'];
+          const order = ['AllLists', 'List', 'IconListItem', 'ImageListItem'];
           const ixA = order.indexOf(keyA);
           const ixB = order.indexOf(keyB);
           const rankA = ixA === -1 ? 999 : ixA;
@@ -98,7 +101,7 @@ const preview = {
           if (rankA !== rankB) return rankA - rankB;
         }
 
-        if (groupA === 'progress' && groupB === 'progress') {
+        if (groupKeyA === 'progress' && groupKeyB === 'progress') {
           const keyA = String(titleA).split('/')[1] ?? '';
           const keyB = String(titleB).split('/')[1] ?? '';
           const order = ['AllProgressIndicators', 'CircularProgress', 'LinearProgress'];
@@ -109,40 +112,87 @@ const preview = {
           if (rankA !== rankB) return rankA - rankB;
         }
 
-        if (groupA === 'slider' && groupB === 'slider') {
+        if (groupKeyA === 'slider' && groupKeyB === 'slider') {
           const keyA = String(titleA).split('/')[1] ?? '';
           const keyB = String(titleB).split('/')[1] ?? '';
-          const order = ['AllSliders', 'Slider'];
+          const order = ['Slider'];
           const ixA = order.indexOf(keyA);
           const ixB = order.indexOf(keyB);
           const rankA = ixA === -1 ? 999 : ixA;
           const rankB = ixB === -1 ? 999 : ixB;
           if (rankA !== rankB) return rankA - rankB;
+
+          if (keyA === 'Slider' && keyB === 'Slider') {
+            const nameOrder = ['Default', 'Docs'];
+            const nxA = nameOrder.indexOf(String(nameA));
+            const nxB = nameOrder.indexOf(String(nameB));
+            const nrA = nxA === -1 ? 999 : nxA;
+            const nrB = nxB === -1 ? 999 : nxB;
+            if (nrA !== nrB) return nrA - nrB;
+          }
         }
 
-        if (groupA === 'switch' && groupB === 'switch') {
+        if (groupKeyA === 'switch' && groupKeyB === 'switch') {
           const keyA = String(titleA).split('/')[1] ?? '';
           const keyB = String(titleB).split('/')[1] ?? '';
-          const order = ['AllSwitches', 'Switch'];
+          const order = ['Switch'];
           const ixA = order.indexOf(keyA);
           const ixB = order.indexOf(keyB);
           const rankA = ixA === -1 ? 999 : ixA;
           const rankB = ixB === -1 ? 999 : ixB;
           if (rankA !== rankB) return rankA - rankB;
+
+          if (keyA === 'Switch' && keyB === 'Switch') {
+            const nameOrder = ['Default', 'Icons'];
+            const nxA = nameOrder.indexOf(String(nameA));
+            const nxB = nameOrder.indexOf(String(nameB));
+            const nrA = nxA === -1 ? 999 : nxA;
+            const nrB = nxB === -1 ? 999 : nxB;
+            if (nrA !== nrB) return nrA - nrB;
+          }
         }
 
-        if (groupA === 'textfield' && groupB === 'textfield') {
+        if (groupKeyA === 'tabs' && groupKeyB === 'tabs') {
           const keyA = String(titleA).split('/')[1] ?? '';
           const keyB = String(titleB).split('/')[1] ?? '';
-          const order = ['AllTextFields', 'FilledTextField', 'OutlinedTextField'];
+          const order = ['Tabs'];
           const ixA = order.indexOf(keyA);
           const ixB = order.indexOf(keyB);
           const rankA = ixA === -1 ? 999 : ixA;
           const rankB = ixB === -1 ? 999 : ixB;
           if (rankA !== rankB) return rankA - rankB;
+
+          if (keyA === 'Tabs' && keyB === 'Tabs') {
+            const nameOrder = ['Default', 'PrimaryTab', 'SecondaryTab', 'Docs'];
+            const nxA = nameOrder.indexOf(String(nameA));
+            const nxB = nameOrder.indexOf(String(nameB));
+            const nrA = nxA === -1 ? 999 : nxA;
+            const nrB = nxB === -1 ? 999 : nxB;
+            if (nrA !== nrB) return nrA - nrB;
+          }
         }
 
-        if (groupA === 'divider' && groupB === 'divider') {
+        if (groupKeyA === 'textfield' && groupKeyB === 'textfield') {
+          const keyA = String(titleA).split('/')[1] ?? '';
+          const keyB = String(titleB).split('/')[1] ?? '';
+          const order = ['Textfield'];
+          const ixA = order.indexOf(keyA);
+          const ixB = order.indexOf(keyB);
+          const rankA = ixA === -1 ? 999 : ixA;
+          const rankB = ixB === -1 ? 999 : ixB;
+          if (rankA !== rankB) return rankA - rankB;
+
+          if (keyA === 'Textfield' && keyB === 'Textfield') {
+            const nameOrder = ['Default', 'Docs'];
+            const nxA = nameOrder.indexOf(String(nameA));
+            const nxB = nameOrder.indexOf(String(nameB));
+            const nrA = nxA === -1 ? 999 : nxA;
+            const nrB = nxB === -1 ? 999 : nxB;
+            if (nrA !== nrB) return nrA - nrB;
+          }
+        }
+
+        if (groupKeyA === 'divider' && groupKeyB === 'divider') {
           const keyA = String(titleA).split('/')[1] ?? '';
           const keyB = String(titleB).split('/')[1] ?? '';
           const order = ['AllDividers', 'Divider'];
@@ -153,10 +203,10 @@ const preview = {
           if (rankA !== rankB) return rankA - rankB;
         }
 
-        if (groupA === 'menu' && groupB === 'menu') {
+        if (groupKeyA === 'menu' && groupKeyB === 'menu') {
           const keyA = String(titleA).split('/')[1] ?? '';
           const keyB = String(titleB).split('/')[1] ?? '';
-          const order = ['AllMenus', 'Menu', 'MenuItem', 'SubMenu'];
+          const order = ['Menu', 'MenuItem', 'SubMenu'];
           const ixA = order.indexOf(keyA);
           const ixB = order.indexOf(keyB);
           const rankA = ixA === -1 ? 999 : ixA;
@@ -164,7 +214,7 @@ const preview = {
           if (rankA !== rankB) return rankA - rankB;
         }
 
-        if (groupA === 'button' && groupB === 'button') {
+        if (groupKeyA === 'button' && groupKeyB === 'button') {
           const keyA = String(titleA).split('/')[1] ?? '';
           const keyB = String(titleB).split('/')[1] ?? '';
           const order = ['All Buttons', 'Button', 'SplitButton', 'ToggleButton'];
@@ -184,7 +234,7 @@ const preview = {
           }
         }
 
-        if (groupA === 'button-group' && groupB === 'button-group') {
+        if (groupKeyA === 'button-group' && groupKeyB === 'button-group') {
           const keyA = String(titleA).split('/')[1] ?? '';
           const keyB = String(titleB).split('/')[1] ?? '';
           const order = ['ConnectedButtonGroup', 'OutlinedSegmentedButtonSet'];

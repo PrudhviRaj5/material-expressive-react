@@ -30,6 +30,10 @@
       "types": "./dist/chips/index.d.ts",
       "default": "./dist/chips/index.js"
     },
+    "./card": {
+      "types": "./dist/card/index.d.ts",
+      "default": "./dist/card/index.js"
+    },
     "./dialog": {
       "types": "./dist/dialog/index.d.ts",
       "default": "./dist/dialog/index.js"
@@ -110,6 +114,14 @@
       "types": "./dist/textfield/index.d.ts",
       "default": "./dist/textfield/index.js"
     },
+    "./toolbar": {
+      "types": "./dist/toolbar/index.d.ts",
+      "default": "./dist/toolbar/index.js"
+    },
+    "./tooltip": {
+      "types": "./dist/tooltip/index.d.ts",
+      "default": "./dist/tooltip/index.js"
+    },
     "./labs": {
       "types": "./dist/labs/index.d.ts",
       "default": "./dist/labs/index.js"
@@ -125,6 +137,7 @@
       "button": ["dist/button/index.d.ts"],
       "checkbox": ["dist/checkbox/index.d.ts"],
       "chips": ["dist/chips/index.d.ts"],
+      "card": ["dist/card/index.d.ts"],
       "dialog": ["dist/dialog/index.d.ts"],
       "datetime": ["dist/datetime/index.d.ts"],
       "divider": ["dist/divider/index.d.ts"],
@@ -145,6 +158,8 @@
       "tabs": ["dist/tabs/index.d.ts"],
       "navigation": ["dist/navigation/index.d.ts"],
       "textfield": ["dist/textfield/index.d.ts"],
+      "toolbar": ["dist/toolbar/index.d.ts"],
+      "tooltip": ["dist/tooltip/index.d.ts"],
       "labs": ["dist/labs/index.d.ts"],
       "theme": ["dist/theme/index.d.ts"],
       "*": ["dist/*"]

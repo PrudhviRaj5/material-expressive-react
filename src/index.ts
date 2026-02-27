@@ -22,6 +22,10 @@ export * from './switch/index.js';
 export * from './tabs/index.js';
 export * from './textfield/index.js';
 export * from './navigation/index.js';
+export * from './snackbar/index.js';
+export * from './card/index.js';
 export * from './labs/index.js';
+export * from './toolbar/index.js';
+export * from './tooltip/index.js';
 
 export * from './internal/slot.js';

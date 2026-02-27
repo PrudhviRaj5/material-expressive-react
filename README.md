@@ -140,7 +140,7 @@ Or import from a group entrypoint:
 
 ```ts
 import {Button} from 'material-expressive-react/button';
-import {FilledTextField} from 'material-expressive-react/textfield';
+import {Textfield} from 'material-expressive-react/textfield';
 ```
 
 ## SSR / Next.js notes
@@ -155,10 +155,7 @@ If you use Next.js App Router, place these imports in a `"use client"` file.
 
 ToDo
 - [ ] Carousels
-- [ ] Floating Toolbar
 - [ ] Search
-- [ ] Snackbar
-- [ ] Tooltip
 
 Enhance
 - [ ] List

@@ -2015,7 +2015,7 @@ async function main() {
 
   // Generate group index.ts for generated groups (do not touch button/checkbox/icon).
   for (const [group, comps] of indexExports.entries()) {
-    if (group === 'button' || group === 'checkbox' || group === 'icon') continue;
+    if (group === 'button' || group === 'checkbox' || group === 'icon' || group === 'menu') continue;
 
     const groupDir = path.join(srcRoot, group);
     const indexPath = path.join(groupDir, 'index.ts');
