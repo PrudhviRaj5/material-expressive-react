@@ -1,103 +1,140 @@
-import type * as React from 'react';
-import {forwardRef} from 'react';
+import * as React from 'react';
 
-import './menu-expressive.css';
+import './menu-supporting.css';
 
-import type {MdMenu} from '@material/web/menu/menu.js';
+import {MenuContext, type MenuSelectType} from './menu-context';
+import {MenuSurface, type MenuVariant} from './MenuSurface';
 
-import {useWebComponent} from '../internal/useWebComponent';
+export interface MenuProps extends Omit<React.ComponentProps<typeof MenuSurface>, 'children'> {
+  variant?: MenuVariant;
+  selectType?: MenuSelectType;
 
-export type MenuCorner = 'start-start' | 'start-end' | 'end-start' | 'end-end';
-export type MenuDefaultFocus = 'first-item' | 'last-item' | 'list-root' | 'none';
-export type MenuPositioning = 'absolute' | 'fixed' | 'document' | 'popover';
+  /** Controlled selection. */
+  value?: string | string[];
+  /** Uncontrolled selection. */
+  defaultValue?: string | string[];
+  onValueChange?: (value: string | string[]) => void;
+  gap?: number | string;
+  groupGap?: number | string;
 
-export interface MenuProps
-  extends Omit<
-    React.HTMLAttributes<MdMenu>,
-    'children' | 'onOpening' | 'onOpened' | 'onClosing' | 'onClosed'
-  > {
-  children?: React.ReactNode;
-
-  anchor?: string;
-  anchorElement?: HTMLElement | null;
-  positioning?: MenuPositioning;
-  quick?: boolean;
-  hasOverflow?: boolean;
-  open?: boolean;
-  xOffset?: number;
-  yOffset?: number;
-  noHorizontalFlip?: boolean;
-  noVerticalFlip?: boolean;
-  typeaheadDelay?: number;
-  anchorCorner?: MenuCorner;
-  menuCorner?: MenuCorner;
-  stayOpenOnOutsideClick?: boolean;
-  stayOpenOnFocusout?: boolean;
-  skipRestoreFocus?: boolean;
-  defaultFocus?: MenuDefaultFocus;
-  noNavigationWrap?: boolean;
-
-  /** Alias for the menu's `tabIndex` used in demos/controls. */
-  listTabIndex?: number;
-
-  /** Applies the expressive (Figma) menu surface + item styling. */
-  expressive?: boolean;
-
-  onOpening?: (event: Event) => void;
-  onOpened?: (event: Event) => void;
-  onClosing?: (event: Event) => void;
-  onClosed?: (event: Event) => void;
-  /** Re-emits the `close-menu` CustomEvent (bubbles from menu items). */
-  onCloseMenu?: (event: Event) => void;
+  children: React.ReactNode;
 }
 
-export const Menu = forwardRef<MdMenu, MenuProps>(function Menu(
+export interface MenuGroupGapProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Gap between groups */
+  groupGap?: number | string;
+}
+
+function toSet(v: string | string[] | undefined, selectType: MenuSelectType): Set<string> {
+  if (selectType === 'multi') {
+    const arr = Array.isArray(v) ? v : v ? [v] : [];
+    return new Set(arr);
+  }
+  const one = Array.isArray(v) ? v[0] : v;
+  return new Set(one ? [one] : []);
+}
+
+function fromSet(s: Set<string>, selectType: MenuSelectType): string | string[] {
+  const arr = Array.from(s);
+  return selectType === 'multi' ? arr : arr[0] ?? '';
+}
+
+export const Menu = React.forwardRef<HTMLDivElement, MenuProps>(function Menu(
   {
+    variant = 'standard',
+    selectType = 'single',
+    value,
+    defaultValue,
+    onValueChange,
+    gap,
+    groupGap,
+    context,
+    style,
     children,
-    expressive = true,
-    listTabIndex,
-    onOpening,
-    onOpened,
-    onClosing,
-    onClosed,
-    onCloseMenu,
-    className,
     ...rest
   },
   ref,
 ) {
-  const mergedProps =
-    listTabIndex === undefined ? rest : {...rest, tabIndex: listTabIndex};
+  const isControlled = value !== undefined;
+  const prevSelectTypeRef = React.useRef<MenuSelectType>(selectType);
+  const [uncontrolled, setUncontrolled] = React.useState(() =>
+    toSet(defaultValue as any, selectType),
+  );
+  const selected = isControlled ? toSet(value as any, selectType) : uncontrolled;
 
-  const {ref: mergedRef, domProps} = useWebComponent<MdMenu>(
-    {
-      tagName: 'md-menu',
-      importer: () => import('@material/web/menu/menu.js'),
-      events: {
-        opening: 'onOpening',
-        opened: 'onOpened',
-        closing: 'onClosing',
-        closed: 'onClosed',
-        'close-menu': 'onCloseMenu',
-      },
+  React.useEffect(() => {
+    const prevType = prevSelectTypeRef.current;
+    if (prevType === selectType) return;
+    prevSelectTypeRef.current = selectType;
+    if (isControlled) return;
+
+    // Convert the existing uncontrolled selection to the new selectType.
+    setUncontrolled((prev) => toSet(fromSet(prev, prevType), selectType));
+  }, [isControlled, selectType]);
+
+  const toggleValue = React.useCallback(
+    (v: string) => {
+      const next = new Set(selected);
+      if (selectType === 'multi') {
+        if (next.has(v)) next.delete(v);
+        else next.add(v);
+      } else {
+        next.clear();
+        next.add(v);
+      }
+
+      if (!isControlled) setUncontrolled(next);
+      onValueChange?.(fromSet(next, selectType));
     },
-    {onOpening, onOpened, onClosing, onClosed, onCloseMenu, ...mergedProps},
-    ref,
+    [isControlled, onValueChange, selectType, selected],
   );
 
+  const ctx = React.useMemo(
+    () => ({variant, selectType, selected, toggleValue}),
+    [variant, selectType, selected, toggleValue],
+  );
+
+  const content = (
+    <MenuContext.Provider value={ctx}>
+      <MenuSurface
+        {...rest}
+        ref={ref}
+        variant={variant}
+        context={context}
+        gap={gap}
+        style={{
+          ...(style ?? {}),
+        }}
+      >
+        {children}
+      </MenuSurface>
+    </MenuContext.Provider>
+  );
+
+  return content;
+});
+
+export function MenuDivider() {
+  return <div className="mer-menu-divider" role="separator" aria-hidden="true" />;
+}
+
+export const MenuGroupGap = React.forwardRef<HTMLDivElement, MenuGroupGapProps>(function MenuGap(
+  {groupGap, className, style, ...rest},
+  ref,
+) {
+  const resolvedGroupGap = groupGap ?? 10;
+  const gapValue = typeof resolvedGroupGap === 'number' ? `${resolvedGroupGap}px` : resolvedGroupGap;
+
   return (
-    // eslint-disable-next-line react/no-unknown-property
-    <md-menu
-      ref={mergedRef}
-      {...domProps}
-      className={[
-        expressive ? 'mer-menu' : null,
-        className,
-      ]
-        .filter(Boolean)
-        .join(' ')}
-    >
-      {children}
-    </md-menu>
+    <div
+      {...rest}
+      ref={ref}
+      className={["mer-menu-gap", className].filter(Boolean).join(' ')}
+      aria-hidden="true"
+      style={{
+        ...(style ?? {}),
+        ...(gapValue ? ({['--mer-menu-group-gap' as any]: gapValue} as React.CSSProperties) : null),
+      }}
+    />
   );
 });

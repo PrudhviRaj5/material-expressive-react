@@ -1,46 +1,83 @@
 /* Expressive menu styling (Figma: rounded corners + grouped gaps). */
 
-.mer-menu {
+/*
+  Material Web menu/menu-item are styled via CSS custom properties:
+  - md-menu: `--md-menu-*`
+  - md-menu-item: `--md-menu-item-*`
+*/
+
+md-menu.mer-menu {
   --mer-menu-radius: 32px;
-  --mer-menu-bg: var(--md-sys-color-surface-container, #f3eef8);
-  --mer-menu-shadow: 0 16px 30px rgba(0, 0, 0, 0.18);
-  --mer-menu-padding: 14px;
-  --mer-menu-group-gap: 16px;
-  --mer-menu-item-radius: 9999px;
-  --mer-menu-item-padding-inline: 18px;
-  --mer-menu-item-min-height: 64px;
+  --mer-menu-surface: var(--md-sys-color-surface-container, #f3eef8);
+  --mer-menu-shadow: rgba(0, 0, 0, 0.28);
+  --mer-menu-padding-block: 18px;
+  --mer-menu-padding-inline: 18px;
+  --mer-menu-item-gap: 12px;
+  --mer-menu-group-gap: 18px;
+
+  /* Menu surface */
+  --md-menu-container-shape: var(--mer-menu-radius);
+  --md-menu-container-color: var(--mer-menu-surface);
+  --md-menu-container-elevation: 5;
+  --md-menu-container-shadow-color: var(--mer-menu-shadow);
+  --md-menu-top-space: var(--mer-menu-padding-block);
+  --md-menu-bottom-space: var(--mer-menu-padding-block);
 }
 
-/* Menu container */
-.mer-menu md-menu::part(menu) {
-  background: var(--mer-menu-bg);
-  border-radius: var(--mer-menu-radius);
-  box-shadow: var(--mer-menu-shadow);
-  padding: var(--mer-menu-padding);
+/* Item spacing to create the gapped list look */
+md-menu.mer-menu md-menu-item {
+  margin-block: calc(var(--mer-menu-item-gap) / 2);
 }
 
-/* Let items breathe a bit */
-.mer-menu md-menu-item::part(item) {
-  border-radius: var(--mer-menu-item-radius);
-  min-height: var(--mer-menu-item-min-height);
-  padding-inline: var(--mer-menu-item-padding-inline);
+/* Item container shape + padding */
+md-menu.mer-menu md-menu-item {
+  --md-menu-item-container-shape: 9999px;
+  --md-menu-item-one-line-container-height: 72px;
+  --md-menu-item-leading-space: var(--mer-menu-padding-inline);
+  --md-menu-item-trailing-space: var(--mer-menu-padding-inline);
+  --md-menu-item-top-space: 10px;
+  --md-menu-item-bottom-space: 10px;
+
+  /* Text */
+  --md-menu-item-label-text-size: 26px;
+  --md-menu-item-label-text-line-height: 30px;
+  --md-menu-item-label-text-weight: 650;
+
+  /* Icon slots */
+  --md-menu-item-leading-icon-color: var(--md-sys-color-on-surface-variant, #49454f);
+  --md-menu-item-trailing-icon-color: var(--md-sys-color-on-surface-variant, #49454f);
+
+  /* Default row background is transparent for the pill-on-surface feel */
+  --md-menu-item-container-color: transparent;
+  --md-menu-item-selected-container-color: var(
+    --md-sys-color-secondary-container,
+    rgba(103, 80, 164, 0.16)
+  );
+  --md-menu-item-selected-label-text-color: var(--md-sys-color-on-surface, #1c1b1f);
+
+  /* State layers */
+  --md-menu-item-hover-state-layer-color: var(--md-sys-color-on-surface, #1c1b1f);
+  --md-menu-item-hover-state-layer-opacity: 0.06;
+  --md-menu-item-pressed-state-layer-color: var(--md-sys-color-on-surface, #1c1b1f);
+  --md-menu-item-pressed-state-layer-opacity: 0.1;
 }
 
-.mer-menu md-menu-item::part(headline) {
-  font-size: 24px;
-  line-height: 28px;
-  font-weight: 600;
-  letter-spacing: 0.1px;
+/* Figma-like outlined circle icon container */
+md-menu.mer-menu md-menu-item [slot='start'] {
+  align-items: center;
+  border: 2px solid currentColor;
+  border-radius: 9999px;
+  display: inline-flex;
+  height: 36px;
+  justify-content: center;
+  width: 36px;
 }
 
-/* Start icon sizing (matches Figma visual weight) */
-.mer-menu md-menu-item [slot='start'] {
-  font-size: 28px;
-  width: 28px;
-  height: 28px;
+md-menu.mer-menu md-menu-item [slot='start'] > * {
+  font-size: 22px;
 }
 
-/* Grouping divider used by story */
+/* Building-block helpers */
 .mer-menu__divider {
   height: var(--mer-menu-group-gap);
 }
