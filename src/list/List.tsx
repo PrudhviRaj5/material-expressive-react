@@ -1,27 +1,67 @@
-import type * as React from 'react';
-import {forwardRef, useRef} from 'react';
+import * as React from 'react';
 
-import type {MdList} from '@material/web/list/list.js';
+import './list.css';
 
-import {useEnsureDefined, useMergedRefs} from '../internal/hooks';
+import type {ListSelectType, ListSize, ListVariant} from './list-context';
+import {ListContextProvider} from './list-context';
 
-export interface ListProps extends React.HTMLAttributes<MdList> {
+export interface ListProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'children'> {
   children?: React.ReactNode;
+  width?: number;
+  gap?: number;
+  size?: ListSize;
+  variant?: ListVariant;
+  selectType?: ListSelectType;
 }
 
-export const List = forwardRef<MdList, ListProps>(function List(
-  {children, ...rest},
+export const List = React.forwardRef<HTMLDivElement, ListProps>(function List(
+  {
+    children,
+    width = 300,
+    gap = 5,
+    size = 'Medium',
+    variant = 'standard',
+    selectType = 'single',
+    className,
+    style,
+    role,
+    ...rest
+  },
   ref,
 ) {
-  useEnsureDefined('md-list', () => import('@material/web/list/list.js'));
+  const sizeClass = `mer-list--size-${size.toLowerCase()}`;
 
-  const innerRef = useRef<MdList>(null);
-  const mergedRef = useMergedRefs(ref, innerRef);
+  const mergedStyle = {
+    ...(style ?? {}),
+    width: `${width}px`,
+    ['--mer-list-gap' as never]: `${gap}px`,
+    ['--mer-list-width' as never]: `${width}px`,
+  } as React.CSSProperties;
 
   return (
-    // eslint-disable-next-line react/no-unknown-property
-    <md-list ref={mergedRef} {...rest}>
-      {children}
-    </md-list>
+    <ListContextProvider value={{size, variant, selectType}}>
+      <div
+        {...rest}
+        ref={ref}
+        role={role ?? 'listbox'}
+        aria-multiselectable={selectType === 'multi' ? 'true' : undefined}
+        className={
+          [
+            'mer-list',
+            sizeClass,
+            variant === 'vibrant' ? 'mer-list--vibrant' : null,
+            className,
+          ]
+            .filter(Boolean)
+            .join(' ')
+        }
+        style={mergedStyle}
+        data-mer-variant={variant}
+        data-mer-select-type={selectType}
+      >
+        {children}
+      </div>
+    </ListContextProvider>
   );
 });

@@ -1,8 +1,10 @@
 import React from 'react';
 
+import {action} from '@storybook/addon-actions';
+
 import {List} from './List';
-import {ListItem} from './ListItem';
-import {Icon} from '../icon';
+import {IconListItem} from './IconListItem';
+import {ImageListItem} from './ImageListItem';
 
 const meta = {
   title: 'list/List',
@@ -10,11 +12,11 @@ const meta = {
   tags: ['autodocs'],
   parameters: {layout: 'centered'},
   argTypes: {
-    disabled: {control: 'boolean'},
-    overline: {control: 'text'},
-    trailingSupportingText: {control: 'text'},
-    leadingIcon: {control: 'boolean'},
-    trailingIcon: {control: 'boolean'},
+    width: {control: {type: 'number', min: 200, max: 640, step: 10}},
+    gap: {control: {type: 'number', min: 0, max: 24, step: 1}},
+    size: {control: {type: 'select'}, options: ['XSmall', 'Small', 'Medium', 'Large', 'XLarge']},
+    variant: {control: {type: 'select'}, options: ['standard', 'vibrant']},
+    selectType: {control: {type: 'select'}, options: ['single', 'multi']},
   },
 };
 
@@ -22,55 +24,81 @@ export default meta;
 
 export const Default = {
   args: {
-    disabled: false,
-    overline: '',
-    trailingSupportingText: '',
-    leadingIcon: true,
-    trailingIcon: false,
+    width: 300,
+    gap: 5,
+    size: 'Medium',
+    variant: 'standard',
+    selectType: 'single',
   },
-  render: ({disabled, overline, trailingSupportingText, leadingIcon, trailingIcon}) => {
-    const card = {
-      borderRadius: 12,
-      outline: '1px solid var(--md-sys-color-outline)',
-      maxWidth: 360,
-      overflow: 'hidden',
-      width: '100%',
-      background: 'var(--md-sys-color-surface)',
+  render: ({selectType, ...args}) => {
+    const onItemClick = action('item-click');
+
+    const [selected, setSelected] = React.useState<string[]>(['2']);
+    const toggle = (id: string) => {
+      setSelected((prev) => {
+        if (selectType === 'single') return [id];
+        return prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id];
+      });
     };
-    const leading = leadingIcon ? <Icon slot="start">event</Icon> : null;
-    const trailing = trailingIcon ? <Icon slot="end">link</Icon> : null;
-    const overlineSlot = overline ? <div slot="overline">{overline}</div> : null;
-    const trailingSupport = trailingSupportingText ? (
-      <div slot="trailing-supporting-text">{trailingSupportingText}</div>
-    ) : null;
+
+    const surface = {
+      padding: 28,
+      borderRadius: 24,
+      display: 'flex',
+      gap: 36,
+      alignItems: 'flex-start',
+    } as const;
 
     return (
-      <List aria-label="List" style={card}>
-        <ListItem disabled={disabled}>
-          {leading}
-          <div slot="headline">Single line item</div>
-          {trailing}
-        </ListItem>
-        <ListItem disabled={disabled}>
-          {leading}
-          {overlineSlot}
-          <div slot="headline">Two line item</div>
-          <div slot="supporting-text">Supporting text</div>
-          {trailingSupport}
-          {trailing}
-        </ListItem>
-        <ListItem disabled={disabled}>
-          {leading}
-          {overlineSlot}
-          <div slot="headline">Three line item</div>
-          <div slot="supporting-text">
-            <div>Second line text</div>
-            <div>Third line text</div>
-          </div>
-          {trailingSupport}
-          {trailing}
-        </ListItem>
-      </List>
+      <div style={surface}>
+        <List {...args} selectType={selectType} aria-label="Icon list">
+          {[
+            {id: '1', headline: 'Label text', supportText: undefined},
+            {id: '2', headline: 'Label text', supportText: undefined},
+            {id: '3', headline: 'Label text', supportText: undefined},
+            {id: '4', headline: 'Label text', supportText: undefined},
+            {id: '5', headline: 'Label text', supportText: undefined},
+            {id: '6', headline: 'Label text', supportText: undefined},
+          ].map((item, idx) => (
+            <IconListItem
+              key={item.id}
+              headline={item.headline}
+              supportText={item.supportText}
+              leadingIcon={idx % 2 === 0 ? 'star' : 'person'}
+              leadingIconContainer={idx % 3 === 0 ? 'circle' : 'none'}
+              trailingText={idx === 0 ? '100+' : '100+'}
+              trailingIcon="chevron_right"
+              isSelected={selected.includes(item.id)}
+              onClick={() => {
+                onItemClick(item.id);
+                toggle(item.id);
+              }}
+            />
+          ))}
+        </List>
+
+        <List {...args} selectType={selectType} aria-label="Image list">
+          {[
+            {id: 'a', headline: 'List item 1', supportText: 'Overline'},
+            {id: 'b', headline: 'List item 2', supportText: 'Overline'},
+            {id: 'c', headline: 'List item 3', supportText: 'Overline'},
+          ].map((item) => (
+            <ImageListItem
+              key={item.id}
+              imgURL="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=240&q=60"
+              headline={item.headline}
+              supportText={item.supportText}
+              trailingText="100+"
+              trailingIcon="star"
+              isSelected={selected.includes(item.id)}
+              onClick={() => {
+                onItemClick(item.id);
+                toggle(item.id);
+              }}
+            />
+          ))}
+        </List>
+      </div>
     );
   },
 };
