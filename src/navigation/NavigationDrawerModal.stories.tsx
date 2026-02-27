@@ -36,7 +36,7 @@ export const Default = {
           opened={opened}
           pivot="start"
           onChanged={(ev) => {
-            args.onChanged?.(ev);
+            args.onChanged?.(ev.detail);
             setOpened(ev.detail.opened);
           }}
           header={<div style={{padding: 8, fontWeight: 600}}>Menu</div>}
