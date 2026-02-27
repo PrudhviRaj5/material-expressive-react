@@ -2,8 +2,11 @@ import type * as React from 'react';
 import {forwardRef} from 'react';
 
 import type {MdFilledTextField} from '@material/web/textfield/filled-text-field.js';
+import type {MdOutlinedTextField} from '@material/web/textfield/outlined-text-field.js';
 
 import {useWebComponent} from '../internal/useWebComponent';
+
+export type TextfieldVariant = 'filled' | 'outlined';
 
 export type TextFieldType =
   | 'text'
@@ -19,11 +22,12 @@ export type TextFieldSelectionDirection = 'forward' | 'backward' | 'none' | null
 
 type TextFieldInputMode = React.InputHTMLAttributes<HTMLInputElement>['inputMode'];
 
-export interface FilledTextFieldProps
-  extends Omit<
-    React.HTMLAttributes<MdFilledTextField>,
-    'onChange' | 'onInput' | 'onSelect'
-  > {
+type MdTextfield = MdFilledTextField | MdOutlinedTextField;
+
+export interface TextfieldProps
+  extends Omit<React.HTMLAttributes<MdTextfield>, 'onChange' | 'onInput' | 'onSelect'> {
+  variant?: TextfieldVariant;
+
   children?: React.ReactNode;
 
   error?: boolean;
@@ -65,29 +69,47 @@ export interface FilledTextFieldProps
 
   disabled?: boolean;
   name?: string;
+  autofocus?: boolean;
 
   onSelect?: (event: Event) => void;
   onChange?: (event: Event) => void;
   onInput?: (event: InputEvent) => void;
 }
 
-export const FilledTextField = forwardRef<MdFilledTextField, FilledTextFieldProps>(
-  function FilledTextField({children, onSelect, onChange, onInput, ...rest}, ref) {
-    const {ref: mergedRef, domProps} = useWebComponent<MdFilledTextField>(
-      {
-        tagName: 'md-filled-text-field',
-        importer: () => import('@material/web/textfield/filled-text-field.js'),
-        events: {select: 'onSelect', change: 'onChange', input: 'onInput'},
-      },
-      {onSelect, onChange, onInput, ...rest},
-      ref,
-    );
+export const Textfield = forwardRef<MdTextfield, TextfieldProps>(function Textfield(
+  {variant = 'filled', children, onSelect, onChange, onInput, ...rest},
+  ref,
+) {
+  const isOutlined = variant === 'outlined';
 
+  const tagName = isOutlined ? 'md-outlined-text-field' : 'md-filled-text-field';
+  const importer = isOutlined
+    ? () => import('@material/web/textfield/outlined-text-field.js')
+    : () => import('@material/web/textfield/filled-text-field.js');
+
+  const {ref: mergedRef, domProps} = useWebComponent<MdTextfield>(
+    {
+      tagName,
+      importer,
+      events: {select: 'onSelect', change: 'onChange', input: 'onInput'},
+    },
+    {onSelect, onChange, onInput, ...rest},
+    ref,
+  );
+
+  if (isOutlined) {
     return (
       // eslint-disable-next-line react/no-unknown-property
-      <md-filled-text-field ref={mergedRef} {...domProps}>
+      <md-outlined-text-field ref={mergedRef} {...domProps}>
         {children}
-      </md-filled-text-field>
+      </md-outlined-text-field>
     );
-  },
-);
+  }
+
+  return (
+    // eslint-disable-next-line react/no-unknown-property
+    <md-filled-text-field ref={mergedRef} {...domProps}>
+      {children}
+    </md-filled-text-field>
+  );
+});
