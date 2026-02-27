@@ -1,0 +1,131 @@
+.mer-toolbar {
+  --mer-toolbar-container-color: var(
+    --md-sys-color-surface-container,
+    var(--md-sys-color-surface-variant, #e7e0ec)
+  );
+  --mer-toolbar-container-fg: var(
+    --md-sys-color-on-surface,
+    var(--md-sys-color-on-surface-variant, #49454f)
+  );
+  --mer-toolbar-floating-shadow: 0 8px 18px rgba(0, 0, 0, 0.16);
+  --mer-toolbar-docked-shadow: none;
+
+  --mer-toolbar-thickness: 56px;
+  --mer-toolbar-padding: 10px;
+  --mer-toolbar-gap: 10px;
+
+  --mer-toolbar-floating-shape: 9999px;
+  --mer-toolbar-docked-shape: 20px;
+
+  box-sizing: border-box;
+  align-items: center;
+  background: var(--mer-toolbar-container-color);
+  color: var(--mer-toolbar-container-fg);
+  display: inline-flex;
+  gap: var(--mer-toolbar-gap);
+  justify-content: center;
+  padding: var(--mer-toolbar-padding);
+
+  /* Provide a reasonable default for Material Web icon-buttons inside. */
+  --md-icon-button-icon-color: var(--mer-toolbar-container-fg);
+}
+
+.mer-toolbar *,
+.mer-toolbar *::before,
+.mer-toolbar *::after {
+  box-sizing: inherit;
+}
+
+.mer-toolbar--horizontal {
+  flex-direction: row;
+  min-height: var(--mer-toolbar-thickness);
+}
+
+.mer-toolbar--vertical {
+  flex-direction: column;
+  min-width: var(--mer-toolbar-thickness);
+}
+
+.mer-toolbar--standard {
+  --mer-toolbar-container-color: var(
+    --md-sys-color-surface-container,
+    var(--md-sys-color-surface-variant, #e7e0ec)
+  );
+  --mer-toolbar-container-fg: var(
+    --md-sys-color-on-surface,
+    var(--md-sys-color-on-surface-variant, #49454f)
+  );
+}
+
+.mer-toolbar--vibrant {
+  --mer-toolbar-container-color: var(
+    --md-sys-color-primary-container,
+    #eaddff
+  );
+  --mer-toolbar-container-fg: var(
+    --md-sys-color-on-primary-container,
+    #21005d
+  );
+}
+
+.mer-toolbar--floating {
+  border-radius: var(--mer-toolbar-floating-shape);
+  box-shadow: var(--mer-toolbar-floating-shadow);
+}
+
+.mer-toolbar--docked {
+  border-radius: var(--mer-toolbar-docked-shape);
+  box-shadow: var(--mer-toolbar-docked-shadow);
+}
+
+/* Dock position helpers: useful when the docked toolbar is flush to an edge. */
+.mer-toolbar--docked.mer-toolbar--dock-top {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.mer-toolbar--docked.mer-toolbar--dock-bottom {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.mer-toolbar--docked.mer-toolbar--dock-left {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.mer-toolbar--docked.mer-toolbar--dock-right {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* Size presets */
+.mer-toolbar--xsmall {
+  --mer-toolbar-thickness: 40px;
+  --mer-toolbar-padding: 6px;
+  --mer-toolbar-gap: 6px;
+}
+
+.mer-toolbar--small {
+  --mer-toolbar-thickness: 48px;
+  --mer-toolbar-padding: 8px;
+  --mer-toolbar-gap: 8px;
+}
+
+.mer-toolbar--medium {
+  --mer-toolbar-thickness: 56px;
+  --mer-toolbar-padding: 10px;
+  --mer-toolbar-gap: 10px;
+}
+
+.mer-toolbar--large {
+  --mer-toolbar-thickness: 64px;
+  --mer-toolbar-padding: 12px;
+  --mer-toolbar-gap: 12px;
+}
+
+.mer-toolbar--xlarge {
+  --mer-toolbar-thickness: 72px;
+  --mer-toolbar-padding: 14px;
+  --mer-toolbar-gap: 14px;
+}
