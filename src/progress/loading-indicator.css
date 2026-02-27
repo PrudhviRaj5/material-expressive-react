@@ -5,6 +5,8 @@
   --mer-loading-container-width: 48px;
   --mer-loading-container-height: 48px;
   --mer-loading-container-radius: 9999px;
+  --mer-loading-cycle-duration: 2100ms;
+  --mer-loading-pop-duration: 1050ms;
 
   display: inline-grid;
   place-items: center;
@@ -18,7 +20,7 @@
   width: var(--mer-loading-indicator-size);
   height: var(--mer-loading-indicator-size);
   overflow: visible;
-  animation: mer-loading-rotate 1400ms linear infinite;
+  animation: mer-loading-rotate var(--mer-loading-cycle-duration) linear infinite;
   transform-origin: 50% 50%;
 }
 
@@ -26,8 +28,8 @@
   fill: var(--mer-loading-indicator-color);
   opacity: 0;
   transform-origin: 50% 50%;
-  animation: mer-loading-cycle 1400ms steps(1, end) infinite,
-    mer-loading-pop 700ms ease-in-out infinite;
+  animation: mer-loading-cycle var(--mer-loading-cycle-duration) steps(1, end) infinite,
+    mer-loading-pop var(--mer-loading-pop-duration) ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -41,12 +43,12 @@
 }
 
 .mer-loading__shape--0 { animation-delay: 0ms, 0ms; }
-.mer-loading__shape--1 { animation-delay: -200ms, -200ms; }
-.mer-loading__shape--2 { animation-delay: -400ms, -400ms; }
-.mer-loading__shape--3 { animation-delay: -600ms, -600ms; }
-.mer-loading__shape--4 { animation-delay: -800ms, -800ms; }
-.mer-loading__shape--5 { animation-delay: -1000ms, -1000ms; }
-.mer-loading__shape--6 { animation-delay: -1200ms, -1200ms; }
+.mer-loading__shape--1 { animation-delay: -300ms, -300ms; }
+.mer-loading__shape--2 { animation-delay: -600ms, -600ms; }
+.mer-loading__shape--3 { animation-delay: -900ms, -900ms; }
+.mer-loading__shape--4 { animation-delay: -1200ms, -1200ms; }
+.mer-loading__shape--5 { animation-delay: -1500ms, -1500ms; }
+.mer-loading__shape--6 { animation-delay: -1800ms, -1800ms; }
 
 @keyframes mer-loading-rotate {
   from {
