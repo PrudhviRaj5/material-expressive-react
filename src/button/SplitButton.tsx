@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-import {Button, type ButtonStyle, type ButtonVariant} from './Button';
+import {Button, type ButtonVariant} from './Button';
 import type {ButtonSize} from './buttonSizes';
 import {Icon} from '../icon';
-import {Menu, MenuItem} from '../menu';
+import {MenuItem, MenuSurface} from '../menu';
 import {Ripple} from '../ripple';
 
 export interface SplitButtonOption {
@@ -29,15 +29,13 @@ export interface SplitButtonProps
   menuAriaLabel?: string;
 }
 
-function renderStartIcon(icon: React.ReactNode): React.ReactNode {
+function renderLeadingIcon(icon: React.ReactNode): React.ReactNode {
   if (!icon) return null;
-  if (typeof icon === 'string') return <Icon slot="start">{icon}</Icon>;
+  if (typeof icon === 'string') return <Icon>{icon}</Icon>;
   if (React.isValidElement(icon)) {
-    const props = (icon.props ?? {}) as Record<string, unknown>;
-    if (props.slot) return icon;
-    return React.cloneElement(icon as React.ReactElement, {slot: 'start'});
+    return icon;
   }
-  return <span slot="start">{icon}</span>;
+  return icon;
 }
 
 function renderPrimaryIcon(icon: React.ReactNode | string | undefined): React.ReactNode {
@@ -49,7 +47,7 @@ function renderPrimaryIcon(icon: React.ReactNode | string | undefined): React.Re
 function getTokenPrefix(variant: ButtonVariant) {
   return variant === 'outlined'
     ? 'outlined-button'
-    : variant === 'filledTonal' || variant === 'tonal'
+    : variant === 'filledTonal'
       ? 'filled-tonal-button'
     : variant === 'text'
       ? 'text-button'
@@ -58,32 +56,25 @@ function getTokenPrefix(variant: ButtonVariant) {
       : 'filled-button';
 }
 
-function resolveButtonStyle(variant: ButtonVariant): ButtonStyle {
-  if (variant === 'filledTonal') return 'tonal';
-  return (variant as ButtonStyle) || 'filled';
-}
-
-function getExpandPalette(style: ButtonStyle) {
+function getExpandPalette(variant: ButtonVariant) {
   const shadowColor =
     'color-mix(in srgb, var(--md-sys-color-on-surface) 18%, transparent)';
   const elevatedShadow = `0 2px 6px ${shadowColor}, 0 1px 2px ${shadowColor}`;
 
-  switch (style) {
+  switch (variant) {
     case 'filled':
       return {
         background: 'var(--md-sys-color-primary)',
         color: 'var(--md-sys-color-on-primary)',
         border: '1px solid transparent',
         boxShadow: undefined as string | undefined,
-        dividerInk: 'var(--md-sys-color-on-primary)',
       };
-    case 'tonal':
+    case 'filledTonal':
       return {
         background: 'var(--md-sys-color-secondary-container)',
         color: 'var(--md-sys-color-on-secondary-container)',
         border: '1px solid transparent',
         boxShadow: undefined as string | undefined,
-        dividerInk: 'var(--md-sys-color-on-secondary-container)',
       };
     case 'outlined':
       return {
@@ -91,7 +82,6 @@ function getExpandPalette(style: ButtonStyle) {
         color: 'var(--md-sys-color-on-surface)',
         border: '1px solid var(--md-sys-color-outline)',
         boxShadow: undefined as string | undefined,
-        dividerInk: 'var(--md-sys-color-on-surface)',
       };
     case 'text':
       return {
@@ -99,7 +89,6 @@ function getExpandPalette(style: ButtonStyle) {
         color: 'var(--md-sys-color-primary)',
         border: '1px solid transparent',
         boxShadow: undefined as string | undefined,
-        dividerInk: 'var(--md-sys-color-on-surface)',
       };
     case 'elevated':
     default:
@@ -109,7 +98,6 @@ function getExpandPalette(style: ButtonStyle) {
         border:
           '1px solid color-mix(in srgb, var(--md-sys-color-outline) 40%, transparent)',
         boxShadow: elevatedShadow,
-        dividerInk: 'var(--md-sys-color-on-surface)',
       };
   }
 }
@@ -173,6 +161,7 @@ export function SplitButton({
   ...rest
 }: SplitButtonProps) {
   const [open, setOpen] = React.useState(false);
+  const rootRef = React.useRef<HTMLDivElement | null>(null);
   const [expandButtonEl, setExpandButtonEl] = React.useState<HTMLButtonElement | null>(null);
   // React's useId() includes characters like ':' which break querySelector `#id`.
   // md-menu resolves `anchor` via a selector, so keep this CSS-selector-safe.
@@ -182,6 +171,19 @@ export function SplitButton({
   React.useEffect(() => {
     if (disabled) setOpen(false);
   }, [disabled]);
+
+  React.useEffect(() => {
+    if (!open) return;
+    const onDoc = (ev: MouseEvent) => {
+      const t = ev.target as Node | null;
+      if (!t) return;
+      const root = rootRef.current;
+      if (!root) return;
+      if (!root.contains(t)) setOpen(false);
+    };
+    document.addEventListener('mousedown', onDoc);
+    return () => document.removeEventListener('mousedown', onDoc);
+  }, [open]);
 
   const containerStyle: React.CSSProperties = {
     display: 'inline-flex',
@@ -198,8 +200,7 @@ export function SplitButton({
   };
 
   const diameter = getButtonDiameter(size);
-  const expandStyle = resolveButtonStyle(variant);
-  const palette = getExpandPalette(expandStyle);
+  const palette = getExpandPalette(variant);
   const expandShellStyle: React.CSSProperties = {
     position: 'relative',
     display: 'inline-flex',
@@ -262,8 +263,28 @@ export function SplitButton({
 
   const close = () => setOpen(false);
 
+  const menuWrapStyle: React.CSSProperties = {
+    position: 'absolute',
+    zIndex: 10,
+    insetInlineEnd: 0,
+    top: 'calc(100% + 8px)',
+  };
+
   return (
-    <div {...rest} className={className} style={containerStyle}>
+    <div
+      {...rest}
+      ref={rootRef}
+      className={className}
+      style={containerStyle}
+      onKeyDown={(ev) => {
+        rest.onKeyDown?.(ev);
+        if (ev.defaultPrevented) return;
+        if (ev.key === 'Escape') {
+          ev.preventDefault();
+          close();
+        }
+      }}
+    >
       <div style={shellStyle}>
         <Button
           variant={variant}
@@ -300,34 +321,25 @@ export function SplitButton({
         </div>
       </div>
 
-      <Menu
-        open={open}
-        quick
-        anchor={expandButtonId}
-        positioning="absolute"
-        anchorCorner="end-end"
-        menuCorner="start-end"
-        stayOpenOnOutsideClick={false}
-        stayOpenOnFocusout={false}
-        skipRestoreFocus
-        aria-label={menuAriaLabel}
-        onCloseMenu={() => close()}
-        onClosed={() => close()}
-        style={{minWidth: 220}}
-      >
-        {options.map((opt) => (
-          <MenuItem
-            key={opt.value}
-            onClick={() => {
-              onSelect?.(opt.value);
-              close();
-            }}
-          >
-            {renderStartIcon(opt.icon)}
-            <div slot="headline">{opt.label}</div>
-          </MenuItem>
-        ))}
-      </Menu>
+      {open ? (
+        <div style={menuWrapStyle} aria-label={menuAriaLabel}>
+          <MenuSurface variant="standard" width={220} maxHeight={360}>
+            {options.map((opt) => (
+              <MenuItem
+                key={opt.value}
+                value={opt.value}
+                label={opt.label}
+                leadingIcon={renderLeadingIcon(opt.icon)}
+                showSelectedIcon={false}
+                onClick={() => {
+                  onSelect?.(opt.value);
+                  close();
+                }}
+              />
+            ))}
+          </MenuSurface>
+        </div>
+      ) : null}
     </div>
   );
 }
