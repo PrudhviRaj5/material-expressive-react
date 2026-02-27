@@ -6,8 +6,8 @@ import React from 'react';
 import {action} from '@storybook/addon-actions';
 
 import {Tabs} from './Tabs';
-import {PrimaryTab} from './PrimaryTab';
-import {SecondaryTab} from './SecondaryTab';
+import {PrimaryTab as PrimaryTabComponent} from './PrimaryTab';
+import {SecondaryTab as SecondaryTabComponent} from './SecondaryTab';
 import {Icon} from '../icon';
 
 const CONTENT = ['icon/label', 'icon', 'label'] as const;
@@ -34,26 +34,33 @@ const meta = {
 
 export default meta;
 
-export const Default = {
+const PrimaryTab = {
   args: {
-    activeTabIndex: 0,
-    autoActivate: false,
+    active: true,
     inlineIcon: false,
     content: 'icon/label',
   },
+  parameters: {
+    layout: 'centered',
+    controls: {
+      include: ['active', 'inlineIcon', 'content'],
+    },
+  },
+  argTypes: {
+    active: {control: {type: 'boolean'}},
+    children: {table: {disable: true}},
+  },
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   render: (args: any) => {
+    const {content, ...tabArgs} = args;
+
     const [activeTabIndex, setActiveTabIndex] = React.useState<number>(
       typeof args.activeTabIndex === 'number' ? args.activeTabIndex : 0,
     );
 
-    React.useEffect(() => {
-      if (typeof args.activeTabIndex === 'number') setActiveTabIndex(args.activeTabIndex);
-    }, [args.activeTabIndex]);
-
     const tabContent = (icon: string, label: string) => {
-      const useIcon = args.content !== 'label';
-      const useLabel = args.content !== 'icon';
+      const useIcon = content !== 'label';
+      const useLabel = content !== 'icon';
       return (
         <>
           {useIcon ? <Icon slot="icon">{icon}</Icon> : null}
@@ -63,30 +70,45 @@ export const Default = {
     };
 
     const ariaLabelIfIconOnly = (label: string) =>
-      args.content === 'icon' ? {['aria-label']: label} : null;
+      content === 'icon' ? {['aria-label']: label} : undefined;
 
     return (
-      <div style={{display: 'grid', gap: 18, justifyItems: 'start'}}>
-        <Tabs
+      <>
+         <Tabs
           aria-label="Primary tabs"
           activeTabIndex={activeTabIndex}
           autoActivate={args.autoActivate}
-           onChange={(ev) => {
+          onChange={(ev) => {
             const target = ev.target as unknown as {activeTabIndex?: number};
             action('change')({activeTabIndex: target.activeTabIndex});
             if (typeof target.activeTabIndex === 'number') setActiveTabIndex(target.activeTabIndex);
           }}
           style={{minWidth: 360}}
         >
-          <PrimaryTab id="tab-one" aria-controls="panel-one" inlineIcon={args.inlineIcon} {...ariaLabelIfIconOnly('Keyboard')}>
+          <PrimaryTabComponent
+            id="tab-one"
+            aria-controls="panel-one"
+            inlineIcon={args.inlineIcon}
+            {...ariaLabelIfIconOnly('Keyboard')}
+          >
             {tabContent('piano', 'Keyboard')}
-          </PrimaryTab>
-          <PrimaryTab id="tab-two" aria-controls="panel-two" inlineIcon={args.inlineIcon} {...ariaLabelIfIconOnly('Guitar')}>
+          </PrimaryTabComponent>
+          <PrimaryTabComponent
+            id="tab-two"
+            aria-controls="panel-two"
+            inlineIcon={args.inlineIcon}
+            {...ariaLabelIfIconOnly('Guitar')}
+          >
             {tabContent('tune', 'Guitar')}
-          </PrimaryTab>
-          <PrimaryTab id="tab-three" aria-controls="panel-three" inlineIcon={args.inlineIcon} {...ariaLabelIfIconOnly('Drums')}>
+          </PrimaryTabComponent>
+          <PrimaryTabComponent
+            id="tab-three"
+            aria-controls="panel-three"
+            inlineIcon={args.inlineIcon}
+            {...ariaLabelIfIconOnly('Drums')}
+          >
             {tabContent('graphic_eq', 'Drums')}
-          </PrimaryTab>
+          </PrimaryTabComponent>
         </Tabs>
 
         <div
@@ -116,29 +138,104 @@ export const Default = {
         >
           Drums
         </div>
+      </>
+    );
+  },
+};
 
+export const Default = PrimaryTab;
+
+export const SecondaryTab = {
+  args: {
+    active: true,
+    content: 'icon/label',
+  },
+  parameters: {
+    layout: 'centered',
+    controls: {
+      include: ['active', 'content'],
+    },
+  },
+  argTypes: {
+    active: {control: {type: 'boolean'}},
+    children: {table: {disable: true}},
+  },
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  render: (args: any) => {
+    const {content, ...tabArgs} = args;
+
+    const [activeTabIndex, setActiveTabIndex] = React.useState<number>(
+      typeof args.activeTabIndex === 'number' ? args.activeTabIndex : 0,
+    );
+
+    const tabContent = (icon: string, label: string) => {
+      const useIcon = content !== 'label';
+      const useLabel = content !== 'icon';
+      return (
+        <>
+          {useIcon ? <Icon slot="icon">{icon}</Icon> : null}
+          {useLabel ? label : null}
+        </>
+      );
+    };
+
+    const ariaLabelIfIconOnly = (label: string) =>
+      content === 'icon' ? {['aria-label']: label} : undefined;
+
+    return (
+      <>
         <Tabs
           aria-label="Secondary tabs"
           activeTabIndex={activeTabIndex}
           autoActivate={args.autoActivate}
           onChange={(ev) => {
-            action('change (secondary)')(ev);
             const target = ev.target as unknown as {activeTabIndex?: number};
+            action('change (secondary)')({activeTabIndex: target.activeTabIndex});
             if (typeof target.activeTabIndex === 'number') setActiveTabIndex(target.activeTabIndex);
           }}
           style={{minWidth: 360}}
         >
-          <SecondaryTab aria-controls="secondary-one" {...ariaLabelIfIconOnly('Travel')}>
+          <SecondaryTabComponent aria-controls="secondary-one" {...ariaLabelIfIconOnly('Travel')}>
             {tabContent('flight', 'Travel')}
-          </SecondaryTab>
-          <SecondaryTab aria-controls="secondary-two" {...ariaLabelIfIconOnly('Hotel')}>
+          </SecondaryTabComponent>
+          <SecondaryTabComponent aria-controls="secondary-two" {...ariaLabelIfIconOnly('Hotel')}>
             {tabContent('hotel', 'Hotel')}
-          </SecondaryTab>
-          <SecondaryTab aria-controls="secondary-three" {...ariaLabelIfIconOnly('Activities')}>
+          </SecondaryTabComponent>
+          <SecondaryTabComponent
+            aria-controls="secondary-three"
+            {...ariaLabelIfIconOnly('Activities')}
+          >
             {tabContent('hiking', 'Activities')}
-          </SecondaryTab>
+          </SecondaryTabComponent>
         </Tabs>
-      </div>
+        <div
+          id="panel-one"
+          role="tabpanel"
+          aria-labelledby="tab-one"
+          hidden={activeTabIndex !== 0}
+          style={{padding: 16}}
+        >
+          Travel
+        </div>
+        <div
+          id="panel-two"
+          role="tabpanel"
+          aria-labelledby="tab-two"
+          hidden={activeTabIndex !== 1}
+          style={{padding: 16}}
+        >
+          Hotel
+        </div>
+        <div
+          id="panel-three"
+          role="tabpanel"
+          aria-labelledby="tab-three"
+          hidden={activeTabIndex !== 2}
+          style={{padding: 16}}
+        >
+          Activities
+        </div>
+      </>
     );
   },
 };
