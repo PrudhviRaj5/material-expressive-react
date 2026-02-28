@@ -1,6 +1,8 @@
-# material-expressive-react
+# Material 3 Expressive UI React Components
 
-React wrappers for Material 3 web components, built on top of `@material/web`.
+React components inspired by Material 3 Expressive, built on top of the Material 3 Web Components package [`@material/web`](https://github.com/material-components/material-web).
+
+This library adds custom CSS and animations to make the experience more expressive and to get as close as possible to the feel of Android component motion.
 
 This project follows the official Google Material Design principles and component guidance:
 https://m3.material.io/components
@@ -19,12 +21,18 @@ In practice, teams wanting “Material 3 Expressive” in React typically run in
 - There’s no official Google-supported React wrapper that tracks the design guidance and exposes ergonomic React APIs.
 - You end up hand-wrapping Custom Elements, dealing with event/prop mismatches, typing, and documentation.
 
-If you want the Material 3 expressive visual language in React right now, this library is a pragmatic alternative:
+If you want the Material 3 Expressive visual language in React right now, this library is a pragmatic alternative:
 - Use the official Google-authored web components as the underlying implementation.
 - Consume them with ergonomic React components, typed props, and Storybook-based API docs.
 - Keep your app aligned with Material 3 guidance while avoiding the friction of hand-wrapping Custom Elements yourself.
 
-Note: this project is not affiliated with or endorsed by Google.
+This project also layers in additional styling and motion where needed to better match the Expressive direction and Android-like component animations.
+
+### Disclaimer
+
+This project is neither affiliated with, endorsed by, nor supported by Google.
+
+It was built out of necessity after statements from Google managers indicated that Material 3 Expressive for the web is unlikely to be released anytime soon.
 
 ## Install
 
