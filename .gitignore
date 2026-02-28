@@ -1,6 +1,13 @@
 node_modules/
 dist/
 storybook-static/
+pages-dist/
+
+# Docs site (Docusaurus)
+docs/node_modules/
+docs/build/
+docs/.docusaurus/
+docs/.cache-loader/
 
 *.tgz
 *.tsbuildinfo
