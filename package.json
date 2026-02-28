@@ -174,7 +174,11 @@
   "types": "./dist/index.d.ts",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "git+https://github.com/prudhviraj5/material-expressive-react.git"
+  },
+  "homepage": "https://prudhviraj5.github.io/material-expressive-react/",
+  "bugs": {
+    "url": "https://github.com/prudhviraj5/material-expressive-react/issues"
   },
   "scripts": {
     "clean": "rm -rf dist storybook-static",
