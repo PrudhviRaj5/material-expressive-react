@@ -28,4 +28,6 @@ export * from './labs/index.js';
 export * from './toolbar/index.js';
 export * from './tooltip/index.js';
 
+export * from './search/index.js';
+
 export * from './internal/slot.js';

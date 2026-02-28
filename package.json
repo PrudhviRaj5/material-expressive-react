@@ -74,6 +74,10 @@
       "types": "./dist/list/index.d.ts",
       "default": "./dist/list/index.js"
     },
+    "./search": {
+      "types": "./dist/search/index.d.ts",
+      "default": "./dist/search/index.js"
+    },
     "./menu": {
       "types": "./dist/menu/index.d.ts",
       "default": "./dist/menu/index.js"
@@ -148,6 +152,7 @@
       "icon": ["dist/icon/index.d.ts"],
       "icon-button": ["dist/icon-button/index.d.ts"],
       "list": ["dist/list/index.d.ts"],
+      "search": ["dist/search/index.d.ts"],
       "menu": ["dist/menu/index.d.ts"],
       "progress": ["dist/progress/index.d.ts"],
       "radio": ["dist/radio/index.d.ts"],
