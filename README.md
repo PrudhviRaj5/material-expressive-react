@@ -155,9 +155,8 @@ If you use Next.js App Router, place these imports in a `"use client"` file.
 
 ToDo
 - [ ] Carousels
-- [ ] Search
 
 Enhance
-- [ ] List
 - [ ] Loading indicators
 - [ ] TimeRangeComponent
+- [ ] Animations
