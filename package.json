@@ -184,6 +184,10 @@
     "prepack": "npm run build",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
+    "docs:generate": "node ./scripts/generate-docs.mjs",
+    "docs:build": "npm run docs:generate && cd docs && npm run build",
+    "pages:build": "node ./scripts/build-pages.mjs",
+    "pages:serve": "node ./scripts/serve-pages.mjs pages-dist 5173",
     "pack:check": "npm pack --silent && node -e \"const fs=require('node:fs'); const tgz=fs.readdirSync('.').find(f=>f.endsWith('.tgz')); if(!tgz) throw new Error('No .tgz produced'); console.log('Created', tgz);\""
   },
   "peerDependencies": {
@@ -206,6 +210,7 @@
     "storybook": "8.6.17",
     "typescript": "^5.8.2",
     "vite": "^6.1.0",
-    "vite-plugin-dts": "^4.5.0"
+    "vite-plugin-dts": "^4.5.0",
+    "react-docgen-typescript": "^2.2.2"
   }
 }
