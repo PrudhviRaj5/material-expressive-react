@@ -28,14 +28,14 @@ const locationStyles: Record<SnackbarLocation, React.CSSProperties> = {
 
 const modeTokens = {
   light: {
-    '--md-sys-color-inverse-surface': '#322f35',
-    '--md-sys-color-inverse-on-surface': '#f5eff7',
-    '--md-sys-color-inverse-primary': '#d0bcff',
+    '--md-sys-color-inverse-surface': 'var(--md-sys-color-on-surface)',
+    '--md-sys-color-inverse-on-surface': 'var(--md-sys-color-surface)',
+    '--md-sys-color-inverse-primary': 'var(--md-sys-color-primary-container)',
   } as React.CSSProperties,
   dark: {
-    '--md-sys-color-inverse-surface': '#e6e0e9',
-    '--md-sys-color-inverse-on-surface': '#322f35',
-    '--md-sys-color-inverse-primary': '#6750a4',
+    '--md-sys-color-inverse-surface': 'var(--md-sys-color-surface)',
+    '--md-sys-color-inverse-on-surface': 'var(--md-sys-color-on-surface)',
+    '--md-sys-color-inverse-primary': 'var(--md-sys-color-primary)',
   } as React.CSSProperties,
 };
 
@@ -112,7 +112,7 @@ export const Default = {
           position: 'relative',
           width: '100vw',
           height: '100vh',
-          background: mode === 'dark' ? '#1c1b1f' : '#fffbfe',
+          background: mode === 'dark' ? 'var(--md-sys-color-on-surface)' : 'var(--md-sys-color-surface)',
         }}
       >
         <button
@@ -177,7 +177,7 @@ export const WithAction = {
           position: 'relative',
           width: '100vw',
           height: '100vh',
-          background: mode === 'dark' ? '#1c1b1f' : '#fffbfe',
+          background: mode === 'dark' ? 'var(--md-sys-color-on-surface)' : 'var(--md-sys-color-surface)',
         }}
       >
         <button
@@ -242,7 +242,7 @@ export const WithCloseButton = {
           position: 'relative',
           width: '100vw',
           height: '100vh',
-          background: mode === 'dark' ? '#1c1b1f' : '#fffbfe',
+          background: mode === 'dark' ? 'var(--md-sys-color-on-surface)' : 'var(--md-sys-color-surface)',
         }}
       >
         <button
@@ -308,7 +308,7 @@ export const WithActionAndCloseButton = {
           position: 'relative',
           width: '100vw',
           height: '100vh',
-          background: mode === 'dark' ? '#1c1b1f' : '#fffbfe',
+          background: mode === 'dark' ? 'var(--md-sys-color-on-surface)' : 'var(--md-sys-color-surface)',
         }}
       >
         <button
@@ -376,7 +376,7 @@ export const MultiLine = {
           position: 'relative',
           width: '100vw',
           height: '100vh',
-          background: mode === 'dark' ? '#1c1b1f' : '#fffbfe',
+          background: mode === 'dark' ? 'var(--md-sys-color-on-surface)' : 'var(--md-sys-color-surface)',
         }}
       >
         <button
@@ -440,7 +440,7 @@ export const AutoDismiss = {
           position: 'relative',
           width: '100vw',
           height: '100vh',
-          background: mode === 'dark' ? '#1c1b1f' : '#fffbfe',
+          background: mode === 'dark' ? 'var(--md-sys-color-on-surface)' : 'var(--md-sys-color-surface)',
         }}
       >
         <button

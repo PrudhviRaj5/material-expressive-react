@@ -1,18 +1,12 @@
 .mer-dtp {
-  --mer-dtp-surface: var(--md-sys-color-surface-container-high, #f1edf6);
-  --mer-dtp-on-surface: var(--md-sys-color-on-surface, #1c1b1f);
-  --mer-dtp-on-surface-variant: var(--md-sys-color-on-surface-variant, #49454f);
-  --mer-dtp-primary: var(--md-sys-color-primary, #6750a4);
-  --mer-dtp-on-primary: var(--md-sys-color-on-primary, #ffffff);
-  --mer-dtp-secondary-container: var(
-    --md-sys-color-secondary-container,
-    #e8def8
-  );
-  --mer-dtp-on-secondary-container: var(
-    --md-sys-color-on-secondary-container,
-    #1d192b
-  );
-  --mer-dtp-outline: var(--md-sys-color-outline, #79747e);
+  --mer-dtp-surface: var(--md-sys-color-surface-container-high);
+  --mer-dtp-on-surface: var(--md-sys-color-on-surface);
+  --mer-dtp-on-surface-variant: var(--md-sys-color-on-surface-variant);
+  --mer-dtp-primary: var(--md-sys-color-primary);
+  --mer-dtp-on-primary: var(--md-sys-color-on-primary);
+  --mer-dtp-secondary-container: var(--md-sys-color-secondary-container);
+  --mer-dtp-on-secondary-container: var(--md-sys-color-on-secondary-container);
+  --mer-dtp-outline: var(--md-sys-color-outline);
   --mer-dtp-radius: 24px;
 
   box-sizing: border-box;
@@ -36,7 +30,11 @@
 }
 
 .mer-dtp__scrim {
-  background: rgba(0, 0, 0, 0.38);
+  background: color-mix(
+    in srgb,
+    var(--md-sys-color-scrim, var(--md-sys-color-on-surface)) 38%,
+    transparent
+  );
   inset: 0;
   position: absolute;
 }
@@ -44,7 +42,12 @@
 .mer-dtp__dialog {
   background: var(--mer-dtp-surface);
   border-radius: var(--mer-dtp-radius);
-  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
+  box-shadow: 0 18px 48px
+    color-mix(
+      in srgb,
+      var(--md-sys-color-shadow, var(--md-sys-color-on-surface)) 28%,
+      transparent
+    );
   display: grid;
   grid-template-rows: auto auto 1fr auto;
   min-width: min(360px, 92vw);
@@ -110,7 +113,8 @@
 }
 
 .mer-dtp__divider {
-  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  border-top: 1px solid
+    color-mix(in srgb, var(--md-sys-color-on-surface) 8%, transparent);
 }
 
 .mer-dtp__body {
@@ -142,7 +146,7 @@
 }
 
 .mer-dtp__monthbtn:hover {
-  background: rgba(0, 0, 0, 0.05);
+  background: color-mix(in srgb, var(--md-sys-color-on-surface) 5%, transparent);
 }
 
 .mer-dtp__nav {
@@ -208,7 +212,7 @@
 }
 
 .mer-dtp__range {
-  background: rgba(103, 80, 164, 0.16);
+  background: color-mix(in srgb, var(--mer-dtp-primary) 16%, transparent);
 }
 
 .mer-dtp__years {

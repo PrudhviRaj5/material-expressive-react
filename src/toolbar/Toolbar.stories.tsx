@@ -66,7 +66,7 @@ export const Default = {
       height: '100vh',
       display: 'grid',
       placeItems: 'center',
-      background: 'var(--md-sys-color-background, #fffbfe)',
+      background: 'var(--md-sys-color-background)',
     };
 
     const dockWrapStyle: React.CSSProperties = isDocked
@@ -137,7 +137,7 @@ export const Variants = {
       justifyItems: 'center',
       alignContent: 'start',
       gap: 24,
-      background: 'var(--md-sys-color-background, #fffbfe)',
+      background: 'var(--md-sys-color-background)',
     };
 
     const title: React.CSSProperties = {
@@ -145,7 +145,7 @@ export const Variants = {
       fontSize: 28,
       fontWeight: 560,
       letterSpacing: '0.1px',
-      color: 'var(--md-sys-color-on-background, #1c1b1f)',
+      color: 'var(--md-sys-color-on-background)',
     };
 
     const grid: React.CSSProperties = {
@@ -160,7 +160,7 @@ export const Variants = {
       fontSize: 18,
       fontWeight: 560,
       letterSpacing: '0.2px',
-      color: 'var(--md-sys-color-on-background, #1c1b1f)',
+      color: 'var(--md-sys-color-on-background)',
       textAlign: 'center',
     };
 
@@ -168,12 +168,12 @@ export const Variants = {
       margin: '0 0 12px',
       fontSize: 14,
       letterSpacing: '0.2px',
-      color: 'var(--md-sys-color-on-surface-variant, #49454f)',
+      color: 'var(--md-sys-color-on-surface-variant)',
       textAlign: 'center',
     };
 
     const card: React.CSSProperties = {
-      border: '2px dashed rgba(103, 80, 164, 0.35)',
+      border: '2px dashed color-mix(in srgb, var(--md-sys-color-primary) 35%, transparent)',
       borderRadius: 18,
       padding: 28,
       boxSizing: 'border-box',

@@ -8,8 +8,12 @@
 
 md-menu.mer-menu {
   --mer-menu-radius: 32px;
-  --mer-menu-surface: var(--md-sys-color-surface-container, #f3eef8);
-  --mer-menu-shadow: rgba(0, 0, 0, 0.28);
+  --mer-menu-surface: var(--md-sys-color-surface-container);
+  --mer-menu-shadow: color-mix(
+    in srgb,
+    var(--md-sys-color-shadow, var(--md-sys-color-on-surface)) 28%,
+    transparent
+  );
   --mer-menu-padding-block: 18px;
   --mer-menu-padding-inline: 18px;
   --mer-menu-item-gap: 12px;
@@ -44,21 +48,18 @@ md-menu.mer-menu md-menu-item {
   --md-menu-item-label-text-weight: 650;
 
   /* Icon slots */
-  --md-menu-item-leading-icon-color: var(--md-sys-color-on-surface-variant, #49454f);
-  --md-menu-item-trailing-icon-color: var(--md-sys-color-on-surface-variant, #49454f);
+  --md-menu-item-leading-icon-color: var(--md-sys-color-on-surface-variant);
+  --md-menu-item-trailing-icon-color: var(--md-sys-color-on-surface-variant);
 
   /* Default row background is transparent for the pill-on-surface feel */
   --md-menu-item-container-color: transparent;
-  --md-menu-item-selected-container-color: var(
-    --md-sys-color-secondary-container,
-    rgba(103, 80, 164, 0.16)
-  );
-  --md-menu-item-selected-label-text-color: var(--md-sys-color-on-surface, #1c1b1f);
+  --md-menu-item-selected-container-color: var(--md-sys-color-secondary-container);
+  --md-menu-item-selected-label-text-color: var(--md-sys-color-on-surface);
 
   /* State layers */
-  --md-menu-item-hover-state-layer-color: var(--md-sys-color-on-surface, #1c1b1f);
+  --md-menu-item-hover-state-layer-color: var(--md-sys-color-on-surface);
   --md-menu-item-hover-state-layer-opacity: 0.06;
-  --md-menu-item-pressed-state-layer-color: var(--md-sys-color-on-surface, #1c1b1f);
+  --md-menu-item-pressed-state-layer-color: var(--md-sys-color-on-surface);
   --md-menu-item-pressed-state-layer-opacity: 0.1;
 }
 

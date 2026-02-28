@@ -1,5 +1,5 @@
 .mer-loading {
-  --mer-loading-indicator-color: var(--md-sys-color-primary, #6750a4);
+  --mer-loading-indicator-color: var(--md-sys-color-primary);
   --mer-loading-container-color: transparent;
   --mer-loading-indicator-size: 38px;
   --mer-loading-container-width: 48px;

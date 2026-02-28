@@ -1,11 +1,11 @@
 .mer-tp {
-  --mer-tp-surface: var(--md-sys-color-surface-container-high, #f1edf6);
-  --mer-tp-on-surface: var(--md-sys-color-on-surface, #1c1b1f);
-  --mer-tp-on-surface-variant: var(--md-sys-color-on-surface-variant, #49454f);
-  --mer-tp-primary: var(--md-sys-color-primary, #6750a4);
-  --mer-tp-on-primary: var(--md-sys-color-on-primary, #ffffff);
-  --mer-tp-outline: var(--md-sys-color-outline, #79747e);
-  --mer-tp-face: var(--md-sys-color-surface-container-highest, #e8e0f0);
+  --mer-tp-surface: var(--md-sys-color-surface-container-high);
+  --mer-tp-on-surface: var(--md-sys-color-on-surface);
+  --mer-tp-on-surface-variant: var(--md-sys-color-on-surface-variant);
+  --mer-tp-primary: var(--md-sys-color-primary);
+  --mer-tp-on-primary: var(--md-sys-color-on-primary);
+  --mer-tp-outline: var(--md-sys-color-outline);
+  --mer-tp-face: var(--md-sys-color-surface-container-highest);
   --mer-tp-radius: 24px;
 
   box-sizing: border-box;
@@ -29,7 +29,11 @@
 }
 
 .mer-tp__scrim {
-  background: rgba(0, 0, 0, 0.38);
+  background: color-mix(
+    in srgb,
+    var(--md-sys-color-scrim, var(--md-sys-color-on-surface)) 38%,
+    transparent
+  );
   inset: 0;
   position: absolute;
 }
@@ -37,7 +41,12 @@
 .mer-tp__dialog {
   background: var(--mer-tp-surface);
   border-radius: var(--mer-tp-radius);
-  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
+  box-shadow: 0 18px 48px
+    color-mix(
+      in srgb,
+      var(--md-sys-color-shadow, var(--md-sys-color-on-surface)) 28%,
+      transparent
+    );
   display: grid;
   grid-template-rows: auto 1fr auto;
   min-width: min(360px, 92vw);
@@ -102,7 +111,7 @@
 .mer-tp__chip {
   align-items: center;
   appearance: none;
-  background: rgba(0, 0, 0, 0.06);
+  background: color-mix(in srgb, var(--md-sys-color-on-surface) 6%, transparent);
   border: 0;
   border-radius: 12px;
   color: var(--mer-tp-on-surface);
@@ -117,7 +126,7 @@
 }
 
 .mer-tp__chip--active {
-  background: rgba(103, 80, 164, 0.18);
+  background: color-mix(in srgb, var(--mer-tp-primary) 18%, transparent);
   color: var(--mer-tp-primary);
 }
 
@@ -135,7 +144,8 @@
 .mer-tp__period-btn {
   appearance: none;
   background: transparent;
-  border: 1px solid rgba(0, 0, 0, 0.16);
+  border: 1px solid
+    color-mix(in srgb, var(--md-sys-color-on-surface) 16%, transparent);
   border-radius: 9999px;
   color: var(--mer-tp-on-surface-variant);
   cursor: pointer;
@@ -145,13 +155,14 @@
 }
 
 .mer-tp__period-btn--active {
-  background: rgba(103, 80, 164, 0.18);
+  background: color-mix(in srgb, var(--mer-tp-primary) 18%, transparent);
   border-color: transparent;
   color: var(--mer-tp-primary);
 }
 
 .mer-tp__divider {
-  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  border-top: 1px solid
+    color-mix(in srgb, var(--md-sys-color-on-surface) 8%, transparent);
 }
 
 .mer-tp__body {
@@ -285,6 +296,6 @@
 }
 
 .mer-tp__range-tab--active {
-  background: rgba(103, 80, 164, 0.18);
+  background: color-mix(in srgb, var(--mer-tp-primary) 18%, transparent);
   color: var(--mer-tp-primary);
 }

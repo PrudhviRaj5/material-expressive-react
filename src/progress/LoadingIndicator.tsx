@@ -116,7 +116,9 @@ export const LoadingIndicator = React.forwardRef<
     ...(indicatorColor ? ({['--mer-loading-indicator-color' as any]: indicatorColor} as any) : null),
     ...(variant === 'contained'
       ? ({
-          ['--mer-loading-container-color' as any]: containerColor ?? 'rgba(0,0,0,0.06)',
+          ['--mer-loading-container-color' as any]:
+            containerColor ??
+            'color-mix(in srgb, var(--md-sys-color-on-surface) 6%, transparent)',
         } as any)
       : ({['--mer-loading-container-color' as any]: 'transparent'} as any)),
     ...(indicatorSize

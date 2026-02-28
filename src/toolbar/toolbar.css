@@ -1,13 +1,12 @@
 .mer-toolbar {
-  --mer-toolbar-container-color: var(
-    --md-sys-color-surface-container,
-    var(--md-sys-color-surface-variant, #e7e0ec)
-  );
-  --mer-toolbar-container-fg: var(
-    --md-sys-color-on-surface,
-    var(--md-sys-color-on-surface-variant, #49454f)
-  );
-  --mer-toolbar-floating-shadow: 0 8px 18px rgba(0, 0, 0, 0.16);
+  --mer-toolbar-container-color: var(--md-sys-color-surface-container);
+  --mer-toolbar-container-fg: var(--md-sys-color-on-surface);
+  --mer-toolbar-floating-shadow: 0 8px 18px
+    color-mix(
+      in srgb,
+      var(--md-sys-color-shadow, var(--md-sys-color-on-surface)) 16%,
+      transparent
+    );
   --mer-toolbar-docked-shadow: none;
 
   --mer-toolbar-thickness: 56px;
@@ -47,25 +46,13 @@
 }
 
 .mer-toolbar--standard {
-  --mer-toolbar-container-color: var(
-    --md-sys-color-surface-container,
-    var(--md-sys-color-surface-variant, #e7e0ec)
-  );
-  --mer-toolbar-container-fg: var(
-    --md-sys-color-on-surface,
-    var(--md-sys-color-on-surface-variant, #49454f)
-  );
+  --mer-toolbar-container-color: var(--md-sys-color-surface-container);
+  --mer-toolbar-container-fg: var(--md-sys-color-on-surface);
 }
 
 .mer-toolbar--vibrant {
-  --mer-toolbar-container-color: var(
-    --md-sys-color-primary-container,
-    #eaddff
-  );
-  --mer-toolbar-container-fg: var(
-    --md-sys-color-on-primary-container,
-    #21005d
-  );
+  --mer-toolbar-container-color: var(--md-sys-color-primary-container);
+  --mer-toolbar-container-fg: var(--md-sys-color-on-primary-container);
 }
 
 .mer-toolbar--floating {

@@ -188,7 +188,7 @@ function ClockHand({
   const cy = r;
   const x2 = cx + Math.cos(angle - Math.PI / 2) * length;
   const y2 = cy + Math.sin(angle - Math.PI / 2) * length;
-  const stroke = selected ? 'var(--mer-tp-primary)' : 'rgba(0,0,0,0.2)';
+  const stroke = selected ? 'var(--mer-tp-primary)' : 'var(--mer-tp-outline)';
   return (
     <svg className="mer-tp__hand" viewBox="0 0 256 256" aria-hidden="true">
       <line x1={cx} y1={cy} x2={x2} y2={y2} stroke={stroke} strokeWidth={2} />

@@ -1,10 +1,21 @@
 .mer-menu-surface {
   --mer-menu-radius: 28px;
-  --mer-menu-shadow: 0 18px 40px rgba(0, 0, 0, 0.22), 0 6px 14px rgba(0, 0, 0, 0.12);
+  --mer-menu-shadow: 0 18px 40px
+      color-mix(
+        in srgb,
+        var(--md-sys-color-shadow, var(--md-sys-color-on-surface)) 22%,
+        transparent
+      ),
+    0 6px 14px
+      color-mix(
+        in srgb,
+        var(--md-sys-color-shadow, var(--md-sys-color-on-surface)) 12%,
+        transparent
+      );
 
-  --mer-menu-bg: var(--md-sys-color-surface-container, #f3eef8);
-  --mer-menu-fg: var(--md-sys-color-on-surface, #1c1b1f);
-  --mer-menu-muted: var(--md-sys-color-on-surface-variant, #49454f);
+  --mer-menu-bg: var(--md-sys-color-surface-container);
+  --mer-menu-fg: var(--md-sys-color-on-surface);
+  --mer-menu-muted: var(--md-sys-color-on-surface-variant);
 
   --mer-menu-item-radius: 9999px;
   --mer-menu-item-height: 52px;
@@ -19,10 +30,10 @@
   --mer-menu-item-leading-icon-size: 18px;
   --mer-menu-item-trailing-icon-size: 22px;
 
-  --mer-menu-item-hover: rgba(0, 0, 0, 0.06);
-  --mer-menu-item-pressed: rgba(0, 0, 0, 0.10);
-  --mer-menu-item-selected-bg: rgba(103, 80, 164, 0.16);
-  --mer-menu-item-selected-fg: var(--md-sys-color-on-surface, #1c1b1f);
+  --mer-menu-item-hover: color-mix(in srgb, var(--md-sys-color-on-surface) 6%, transparent);
+  --mer-menu-item-pressed: color-mix(in srgb, var(--md-sys-color-on-surface) 10%, transparent);
+  --mer-menu-item-selected-bg: color-mix(in srgb, var(--md-sys-color-primary) 16%, transparent);
+  --mer-menu-item-selected-fg: var(--md-sys-color-on-surface);
 
   background: var(--mer-menu-bg);
   border-radius: var(--mer-menu-radius);
@@ -91,10 +102,18 @@
 }
 
 .mer-menu-surface--vibrant {
-  --mer-menu-bg: #ffe1ea;
-  --mer-menu-item-selected-bg: rgba(59, 42, 64, 0.72);
-  --mer-menu-item-selected-fg: #ffffff;
-  --mer-menu-muted: rgba(59, 42, 64, 0.74);
+  --mer-menu-bg: var(--md-sys-color-tertiary-container);
+  --mer-menu-item-selected-bg: color-mix(
+    in srgb,
+    var(--md-sys-color-on-tertiary-container) 72%,
+    transparent
+  );
+  --mer-menu-item-selected-fg: var(--md-sys-color-on-tertiary);
+  --mer-menu-muted: color-mix(
+    in srgb,
+    var(--md-sys-color-on-tertiary-container) 74%,
+    transparent
+  );
 }
 
 .mer-menu-surface__scroll {
@@ -106,7 +125,7 @@
 
 .mer-menu-divider {
   height: 1px;
-  background: rgba(0, 0, 0, 0.14);
+  background: color-mix(in srgb, var(--md-sys-color-on-surface) 14%, transparent);
   border-radius: 9999px;
 }
 
@@ -133,7 +152,7 @@
 }
 
 .mer-menu-item:focus-visible {
-  outline: 2px solid var(--md-sys-color-primary, #6750a4);
+  outline: 2px solid var(--md-sys-color-primary);
   outline-offset: 2px;
 }
 

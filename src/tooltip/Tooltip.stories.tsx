@@ -21,21 +21,21 @@ function SectionLabel({children}: {children: React.ReactNode}) {
   return (
     <div
       style={{
-        display: 'inline-flex',
-        alignItems: 'center',
-        gap: 10,
-        color: 'var(--md-sys-color-primary, #6750a4)',
-        fontSize: 18,
-        fontWeight: 560,
-        letterSpacing: '0.2px',
-      }}
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: 10,
+          color: 'var(--md-sys-color-primary)',
+          fontSize: 18,
+          fontWeight: 560,
+          letterSpacing: '0.2px',
+        }}
     >
       <span
         aria-hidden="true"
         style={{
           width: 12,
           height: 12,
-          background: 'var(--md-sys-color-primary, #6750a4)',
+          background: 'var(--md-sys-color-primary)',
           transform: 'rotate(45deg)',
           borderRadius: 3,
           display: 'inline-block',
@@ -86,11 +86,12 @@ export const Variants = {
       }, [pinned]);
 
       const trigger: React.CSSProperties = {
-        color: 'var(--md-sys-color-on-background, #1c1b1f)',
+        color: 'var(--md-sys-color-on-background)',
         fontSize: 16,
         letterSpacing: '0.2px',
         lineHeight: '22px',
-        borderBottom: '2px dotted color-mix(in srgb, var(--md-sys-color-on-background, #1c1b1f) 45%, transparent)',
+        borderBottom:
+          '2px dotted color-mix(in srgb, var(--md-sys-color-on-background) 45%, transparent)',
         paddingBottom: 2,
         cursor: 'default',
         outline: 'none',
@@ -154,7 +155,7 @@ export const Variants = {
       justifyItems: 'center',
       alignContent: 'start',
       gap: 80,
-      background: 'var(--md-sys-color-background, #fffbfe)',
+      background: 'var(--md-sys-color-background)',
     };
 
     const heading: React.CSSProperties = {
@@ -162,7 +163,7 @@ export const Variants = {
       fontSize: 40,
       fontWeight: 600,
       letterSpacing: '0.2px',
-      color: 'var(--md-sys-color-on-background, #1c1b1f)',
+      color: 'var(--md-sys-color-on-background)',
       textAlign: 'center',
     };
 
@@ -260,7 +261,7 @@ export const Default = {
         height: '100vh',
         display: 'grid',
         placeItems: 'center',
-        background: 'var(--md-sys-color-background, #fffbfe)',
+        background: 'var(--md-sys-color-background)',
       }}
     >
       <PlainTooltip width={args.width}>
@@ -283,7 +284,7 @@ export const RichTooltipWithActions = {
         height: '100vh',
         display: 'grid',
         placeItems: 'center',
-        background: 'var(--md-sys-color-background, #fffbfe)',
+        background: 'var(--md-sys-color-background)',
       }}
     >
       <RichTooltip width={args.width}>

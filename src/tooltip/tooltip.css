@@ -9,16 +9,15 @@
 }
 
 .mer-plain-tooltip {
-  --mer-plain-tooltip-container-color: var(
-    --md-sys-color-inverse-surface,
-    #322f35
-  );
-  --mer-plain-tooltip-text-color: var(
-    --md-sys-color-inverse-on-surface,
-    #f5eff7
-  );
+  --mer-plain-tooltip-container-color: var(--md-sys-color-inverse-surface);
+  --mer-plain-tooltip-text-color: var(--md-sys-color-inverse-on-surface);
   --mer-plain-tooltip-shape: 8px;
-  --mer-plain-tooltip-elevation: 0 6px 18px rgba(0, 0, 0, 0.18);
+  --mer-plain-tooltip-elevation: 0 6px 18px
+    color-mix(
+      in srgb,
+      var(--md-sys-color-shadow, var(--md-sys-color-on-surface)) 18%,
+      transparent
+    );
 
   align-items: center;
   background: var(--mer-plain-tooltip-container-color);
@@ -41,21 +40,17 @@
 }
 
 .mer-rich-tooltip {
-  --mer-rich-tooltip-container-color: var(
-    --md-sys-color-secondary-container,
-    #e8def8
-  );
-  --mer-rich-tooltip-fg: var(
-    --md-sys-color-on-secondary-container,
-    #1d192b
-  );
-  --mer-rich-tooltip-title-color: var(
-    --md-sys-color-on-surface-variant,
-    #49454f
-  );
-  --mer-rich-tooltip-action-color: var(--md-sys-color-primary, #6750a4);
+  --mer-rich-tooltip-container-color: var(--md-sys-color-secondary-container);
+  --mer-rich-tooltip-fg: var(--md-sys-color-on-secondary-container);
+  --mer-rich-tooltip-title-color: var(--md-sys-color-on-surface-variant);
+  --mer-rich-tooltip-action-color: var(--md-sys-color-primary);
   --mer-rich-tooltip-shape: 20px;
-  --mer-rich-tooltip-elevation: 0 10px 24px rgba(0, 0, 0, 0.18);
+  --mer-rich-tooltip-elevation: 0 10px 24px
+    color-mix(
+      in srgb,
+      var(--md-sys-color-shadow, var(--md-sys-color-on-surface)) 18%,
+      transparent
+    );
 
   background: var(--mer-rich-tooltip-container-color);
   border-radius: var(--mer-rich-tooltip-shape);

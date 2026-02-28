@@ -1,9 +1,9 @@
 .mer-fabmenu {
   --mer-fabmenu-gap: 14px;
-  --mer-fabmenu-item-bg: var(--md-sys-color-secondary-container, #e8def8);
-  --mer-fabmenu-item-fg: var(--md-sys-color-on-secondary-container, #1d192b);
-  --mer-fabmenu-fab-bg: var(--md-sys-color-primary, #6750a4);
-  --mer-fabmenu-fab-fg: var(--md-sys-color-on-primary, #ffffff);
+  --mer-fabmenu-item-bg: var(--md-sys-color-secondary-container);
+  --mer-fabmenu-item-fg: var(--md-sys-color-on-secondary-container);
+  --mer-fabmenu-fab-bg: var(--md-sys-color-primary);
+  --mer-fabmenu-fab-fg: var(--md-sys-color-on-primary);
 
   position: relative;
   display: inline-grid;
@@ -31,11 +31,16 @@
   gap: 12px;
   height: 56px;
   padding: 0 22px;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 6px 16px
+    color-mix(
+      in srgb,
+      var(--md-sys-color-shadow, var(--md-sys-color-on-surface)) 12%,
+      transparent
+    );
 }
 
 .mer-fabmenu__item:focus-visible {
-  outline: 2px solid var(--md-sys-color-primary, #6750a4);
+  outline: 2px solid var(--md-sys-color-primary);
   outline-offset: 2px;
 }
 
@@ -64,11 +69,16 @@
   height: 72px;
   justify-content: center;
   width: 72px;
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 14px 28px
+    color-mix(
+      in srgb,
+      var(--md-sys-color-shadow, var(--md-sys-color-on-surface)) 25%,
+      transparent
+    );
 }
 
 .mer-fabmenu__fab:focus-visible {
-  outline: 2px solid var(--md-sys-color-primary, #6750a4);
+  outline: 2px solid var(--md-sys-color-primary);
   outline-offset: 3px;
 }
 

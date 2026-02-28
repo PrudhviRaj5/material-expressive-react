@@ -95,7 +95,7 @@ function getVariantStyle(variant: ToggleButtonVariant, isSelected: boolean) {
             boxShadow: elevatedShadow,
           }
         : {
-            background: 'var(--md-sys-color-surface, #fffbfe)',
+            background: 'var(--md-sys-color-surface)',
             color: 'var(--md-sys-color-on-surface)',
             borderColor: 'color-mix(in srgb, var(--md-sys-color-outline) 45%, transparent)',
             boxShadow: elevatedShadow,

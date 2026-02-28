@@ -161,7 +161,12 @@
 }
 
 .mer-nav-drawer--modal {
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+  box-shadow: 0 12px 32px
+    color-mix(
+      in srgb,
+      var(--md-sys-color-shadow, var(--md-sys-color-on-surface)) 28%,
+      transparent
+    );
 }
 
 .mer-nav-drawer__header {
@@ -175,7 +180,11 @@
 }
 
 .mer-nav-drawer-scrim {
-  background: rgba(0, 0, 0, 0.38);
+  background: color-mix(
+    in srgb,
+    var(--md-sys-color-scrim, var(--md-sys-color-on-surface)) 38%,
+    transparent
+  );
   inset: 0;
   position: fixed;
 }

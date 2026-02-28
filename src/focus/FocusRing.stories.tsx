@@ -43,7 +43,8 @@ export const Default = {
           style={{
             appearance: 'none',
             background: 'var(--md-sys-color-surface)',
-            border: '1px solid var(--md-sys-color-outline-variant, rgba(0,0,0,0.12))',
+            border:
+              '1px solid var(--md-sys-color-outline-variant, color-mix(in srgb, var(--md-sys-color-on-surface) 12%, transparent))',
             borderRadius: 16,
             height: 64,
             outline: 'none',
