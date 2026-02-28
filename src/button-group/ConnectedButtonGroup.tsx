@@ -3,7 +3,7 @@ import * as React from 'react';
 import type {ButtonSize} from '../button/buttonSizes';
 import {Icon} from '../icon';
 
-import type {ConnectedButtonProps} from './ConnectedButton';
+import {ConnectedButton, type ConnectedButtonProps} from './ConnectedButton';
 
 export type ConnectedButtonGroupVariant = 'standard' | 'connected';
 export type ConnectedButtonGroupSelectType = 'single' | 'multi';
@@ -158,8 +158,12 @@ function stylePalette(style: ConnectedButtonGroupStyle, selected: boolean) {
 
 function getChildProps(node: React.ReactNode): ConnectedButtonProps | null {
   if (!React.isValidElement(node)) return null;
+  // Prefer referential identity (works in prod/minified builds).
+  if (node.type === ConnectedButton) return node.props as ConnectedButtonProps;
+
+  // Fallback for cases where React wraps the type.
   const t: any = node.type;
-  const name = t?.name ?? t?.displayName;
+  const name = t?.displayName ?? t?.name;
   if (name !== 'ConnectedButton') return null;
   return node.props as ConnectedButtonProps;
 }
