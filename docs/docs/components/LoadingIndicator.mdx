@@ -1,0 +1,45 @@
+---
+title: LoadingIndicator
+---
+
+<!-- AUTO-GENERATED FILE. DO NOT EDIT DIRECTLY. -->
+<!-- Source: src/progress/LoadingIndicator.tsx -->
+
+# LoadingIndicator
+
+## Imports
+
+```ts
+import {LoadingIndicator} from 'material-expressive-react';
+import {LoadingIndicator} from 'material-expressive-react/progress';
+```
+
+## Props
+
+| Prop | Type | Default | Required | Description |
+| --- | --- | --- | --- | --- |
+| containerColor | string |  | No | Optional container/background color (contained only). |
+| containerHeight | string \| number |  | No | Container height (CSS length). Default: 48px |
+| containerWidth | string \| number |  | No | Container width (CSS length). Default: 48px |
+| defaultVisible | boolean | true | No |  |
+| indicatorColor | string |  | No | CSS color for the morphing indicator. |
+| indicatorSize | string \| number |  | No | Size of the animated shape (CSS length). Default: 38px |
+| minHideDelay | number | 0 | No | Minimum time (ms) to stay visible once shown. |
+| onVisibleChange | ((visible: boolean) =&gt; void) |  | No |  |
+| showDelay | number | 0 | No | Delay (ms) before showing when `visible` becomes true. |
+| variant | enum | uncontained | No | Contained draws a pill container behind the shape. |
+| visible | boolean |  | No | Control visibility (useful for showDelay/minHideDelay). |
+
+## Events
+
+_This component does not explicitly re-emit DOM events via wrapper props._
+
+## Slots
+
+Material Web components frequently use named slots. In React, you can pass `slot="..."` on children (e.g. `<Icon slot="icon" />`).
+
+If you need to slot a child component that does not accept a `slot` prop, use the `Slotted` utility (see **Utilities → Slotted**).
+
+## Examples
+
+See Storybook for live examples and variants.

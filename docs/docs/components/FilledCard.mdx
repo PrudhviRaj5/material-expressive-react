@@ -1,0 +1,45 @@
+---
+title: FilledCard
+---
+
+<!-- AUTO-GENERATED FILE. DO NOT EDIT DIRECTLY. -->
+<!-- Source: src/labs/FilledCard.tsx -->
+
+# FilledCard
+
+## Imports
+
+```ts
+import {FilledCard} from 'material-expressive-react';
+import {FilledCard} from 'material-expressive-react/labs';
+```
+
+## Props
+
+| Prop | Type | Default | Required | Description |
+| --- | --- | --- | --- | --- |
+| addController | ((controller: ReactiveController) =&gt; void) |  | No | Registers a `ReactiveController` to participate in the element's reactive<br/>update cycle. The element automatically calls into any registered<br/>controllers during its lifecycle callbacks.<br/><br/>If the element is connected when `addController()` is called, the<br/>controller's `hostConnected()` callback will be immediately called.<br/>@category controllers |
+| attributeChangedCallback | ((name: string, _old: string \| null, value: string \| null) =&gt; void) |  | No | Synchronizes property values when attributes change.<br/><br/>Specifically, when an attribute is set, the corresponding property is set.<br/>You should rarely need to implement this callback. If this method is<br/>overridden, `super.attributeChangedCallback(name, _old, value)` must be<br/>called.<br/><br/>See [responding to attribute changes](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements#responding_to_attribute_changes)<br/>on MDN for more information about the `attributeChangedCallback`.<br/>@category attributes |
+| connectedCallback | (() =&gt; void) |  | No | Invoked when the component is added to the document's DOM.<br/><br/>In `connectedCallback()` you should setup tasks that should only occur when<br/>the element is connected to the document. The most common of these is<br/>adding event listeners to nodes external to the element, like a keydown<br/>event handler added to the window.<br/><br/>```ts<br/>connectedCallback() &#123;<br/>  super.connectedCallback();<br/>  addEventListener('keydown', this._handleKeydown);<br/>&#125;<br/>```<br/><br/>Typically, anything done in `connectedCallback()` should be undone when the<br/>element is disconnected, in `disconnectedCallback()`.<br/>@category lifecycle |
+| disconnectedCallback | (() =&gt; void) |  | No | Invoked when the component is removed from the document's DOM.<br/><br/>This callback is the main signal to the element that it may no longer be<br/>used. `disconnectedCallback()` should ensure that nothing is holding a<br/>reference to the element (such as event listeners added to nodes external<br/>to the element), so that it is free to be garbage collected.<br/><br/>```ts<br/>disconnectedCallback() &#123;<br/>  super.disconnectedCallback();<br/>  window.removeEventListener('keydown', this._handleKeydown);<br/>&#125;<br/>```<br/><br/>An element may be re-connected after being disconnected.<br/>@category lifecycle |
+| hasUpdated | boolean |  | No | Is set to `true` after the first update. The element code cannot assume<br/>that `renderRoot` exists before the element `hasUpdated`.<br/>@category updates |
+| isUpdatePending | boolean |  | No | True if there is a pending update as a result of calling `requestUpdate()`.<br/>Should only be read.<br/>@category updates |
+| removeController | ((controller: ReactiveController) =&gt; void) |  | No | Removes a `ReactiveController` from the element.<br/>@category controllers |
+| renderOptions | RenderOptions |  | No | @category rendering |
+| renderRoot | HTMLElement \| DocumentFragment |  | No | Node or ShadowRoot into which element DOM should be rendered. Defaults<br/>to an open shadowRoot.<br/>@category rendering |
+| requestUpdate | ((name?: PropertyKey, oldValue?: unknown, options?: PropertyDeclaration&lt;unknown, unknown&gt;, useNewValue?: boolean \| undefined, newValue?: unknown) =&gt; void) \| undefined |  | No | Requests an update which is processed asynchronously. This should be called<br/>when an element should update based on some state not triggered by setting<br/>a reactive property. In this case, pass no arguments. It should also be<br/>called when manually implementing a property setter. In this case, pass the<br/>property `name` and `oldValue` to ensure that any configured property<br/>options are honored.<br/>@param name name of requesting property<br/>@param oldValue old value of requesting property<br/>@param options property options to use instead of the previously<br/>configured options<br/>@param useNewValue if true, the newValue argument is used instead of<br/>reading the property value. This is important to use if the reactive<br/>property is a standard private accessor, as opposed to a plain<br/>property, since private members can't be dynamically read by name.<br/>@param newValue the new value of the property. This is only used if<br/>`useNewValue` is true.<br/>@category updates |
+| updateComplete | Promise&lt;boolean&gt; |  | No | Returns a Promise that resolves when the element has completed updating.<br/>The Promise value is a boolean that is `true` if the element completed the<br/>update without triggering another update. The Promise result is `false` if<br/>a property was set inside `updated()`. If the Promise is rejected, an<br/>exception was thrown during the update.<br/><br/>To await additional asynchronous work, override the `getUpdateComplete`<br/>method. For example, it is sometimes useful to await a rendered element<br/>before fulfilling this Promise. To do this, first await<br/>`super.getUpdateComplete()`, then any subsequent state.<br/>@return A promise of a boolean that resolves to true if the update completed<br/>without triggering another update.<br/>@category updates |
+
+## Events
+
+_This component does not explicitly re-emit DOM events via wrapper props._
+
+## Slots
+
+Material Web components frequently use named slots. In React, you can pass `slot="..."` on children (e.g. `<Icon slot="icon" />`).
+
+If you need to slot a child component that does not accept a `slot` prop, use the `Slotted` utility (see **Utilities → Slotted**).
+
+## Examples
+
+See Storybook for live examples and variants.

@@ -1,0 +1,59 @@
+---
+title: TimeRangePicker
+---
+
+<!-- AUTO-GENERATED FILE. DO NOT EDIT DIRECTLY. -->
+<!-- Source: src/datetime/TimeRangePicker.tsx -->
+
+# TimeRangePicker
+
+## Imports
+
+```ts
+import {TimeRangePicker} from 'material-expressive-react';
+import {TimeRangePicker} from 'material-expressive-react/datetime';
+```
+
+## Props
+
+| Prop | Type | Default | Required | Description |
+| --- | --- | --- | --- | --- |
+| cancelText | string |  | No |  |
+| clearText | string |  | No |  |
+| confirmText | string |  | No |  |
+| constraints | TimePickerConstraints |  | No |  |
+| defaultInputMode | enum |  | No |  |
+| defaultOpen | boolean |  | No |  |
+| defaultValue | TimeRange |  | No |  |
+| format | enum |  | No |  |
+| inputMode | enum |  | No |  |
+| locale | string |  | No |  |
+| maxTime | TimeValue |  | No |  |
+| minTime | TimeValue |  | No | Allowed min/max time (minute-of-day). Accepts minutes, &#123;hour,minute&#125;, or 'HH:MM'. |
+| minuteStep | enum |  | No | Minute increments for clock dial selection. |
+| onCancel | (() =&gt; void) |  | No |  |
+| onConfirm | ((value: number \| TimeRange \| null) =&gt; void) |  | No |  |
+| onDismiss | (() =&gt; void) |  | No |  |
+| onOpenChange | ((open: boolean) =&gt; void) |  | No |  |
+| onValueChange | ((value: TimeRange) =&gt; void) |  | No |  |
+| onValueReselect | ((value: TimeRange) =&gt; void) |  | No |  |
+| open | boolean |  | No |  |
+| showClear | boolean |  | No |  |
+| supportingText | string |  | No |  |
+| title | string | Select times | No |  |
+| value | TimeRange |  | No |  |
+| variant | enum |  | No |  |
+
+## Events
+
+_This component does not explicitly re-emit DOM events via wrapper props._
+
+## Slots
+
+Material Web components frequently use named slots. In React, you can pass `slot="..."` on children (e.g. `<Icon slot="icon" />`).
+
+If you need to slot a child component that does not accept a `slot` prop, use the `Slotted` utility (see **Utilities → Slotted**).
+
+## Examples
+
+See Storybook for live examples and variants.

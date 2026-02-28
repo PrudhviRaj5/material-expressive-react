@@ -1,0 +1,59 @@
+---
+title: DatePicker
+---
+
+<!-- AUTO-GENERATED FILE. DO NOT EDIT DIRECTLY. -->
+<!-- Source: src/datetime/DatePicker.tsx -->
+
+# DatePicker
+
+## Imports
+
+```ts
+import {DatePicker} from 'material-expressive-react';
+import {DatePicker} from 'material-expressive-react/datetime';
+```
+
+## Props
+
+| Prop | Type | Default | Required | Description |
+| --- | --- | --- | --- | --- |
+| cancelText | string | Cancel | No |  |
+| clearText | string | Clear | No |  |
+| confirmText | string | OK | No |  |
+| constraints | DatePickerConstraints |  | No |  |
+| defaultInputMode | enum | calendar | No |  |
+| defaultOpen | boolean | false | No |  |
+| defaultValue | number \| DateRange \| null |  | No | Uncontrolled selection. |
+| inputMode | enum |  | No |  |
+| locale | string |  | No |  |
+| maxDate | number \| Date |  | No |  |
+| minDate | number \| Date |  | No | Allowed range of selectable days (UTC ms). Overrides `constraints.min/max`. |
+| onCancel | (() =&gt; void) |  | No |  |
+| onConfirm | ((value: number \| DateRange \| null) =&gt; void) |  | No |  |
+| onDismiss | (() =&gt; void) |  | No |  |
+| onOpenChange | ((open: boolean) =&gt; void) |  | No |  |
+| onValueChange | ((value: number \| DateRange \| null) =&gt; void) |  | No | Fired on confirm or (for docked) when user presses OK. |
+| onValueReselect | ((value: number \| DateRange \| null) =&gt; void) |  | No | Fired when the already-selected value is selected again. |
+| open | boolean |  | No | For modal pickers. |
+| selectionMode | enum | single | No |  |
+| showClear | boolean | true | No |  |
+| supportingText | string |  | No |  |
+| timeZone | string | UTC | No |  |
+| title | string |  | No |  |
+| value | number \| DateRange \| null |  | No | Controlled selection (UTC ms at midnight recommended). |
+| variant | enum | modal | No |  |
+
+## Events
+
+_This component does not explicitly re-emit DOM events via wrapper props._
+
+## Slots
+
+Material Web components frequently use named slots. In React, you can pass `slot="..."` on children (e.g. `<Icon slot="icon" />`).
+
+If you need to slot a child component that does not accept a `slot` prop, use the `Slotted` utility (see **Utilities → Slotted**).
+
+## Examples
+
+See Storybook for live examples and variants.

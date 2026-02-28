@@ -1,0 +1,58 @@
+---
+title: DateRangePicker
+---
+
+<!-- AUTO-GENERATED FILE. DO NOT EDIT DIRECTLY. -->
+<!-- Source: src/datetime/DateRangePicker.tsx -->
+
+# DateRangePicker
+
+## Imports
+
+```ts
+import {DateRangePicker} from 'material-expressive-react';
+import {DateRangePicker} from 'material-expressive-react/datetime';
+```
+
+## Props
+
+| Prop | Type | Default | Required | Description |
+| --- | --- | --- | --- | --- |
+| cancelText | string |  | No |  |
+| clearText | string |  | No |  |
+| confirmText | string |  | No |  |
+| constraints | DatePickerConstraints |  | No |  |
+| defaultInputMode | enum |  | No |  |
+| defaultOpen | boolean |  | No |  |
+| defaultValue | DateRange |  | No | Uncontrolled selected range. |
+| inputMode | enum |  | No |  |
+| locale | string |  | No |  |
+| maxDate | number \| Date |  | No |  |
+| minDate | number \| Date |  | No | Allowed range of selectable days (UTC ms). Overrides `constraints.min/max`. |
+| onCancel | (() =&gt; void) |  | No |  |
+| onConfirm | ((value: number \| DateRange \| null) =&gt; void) |  | No |  |
+| onDismiss | (() =&gt; void) |  | No |  |
+| onOpenChange | ((open: boolean) =&gt; void) |  | No |  |
+| onValueChange | ((value: DateRange) =&gt; void) |  | No |  |
+| onValueReselect | ((value: DateRange) =&gt; void) |  | No |  |
+| open | boolean |  | No | For modal pickers. |
+| showClear | boolean |  | No |  |
+| supportingText | string |  | No |  |
+| timeZone | string |  | No |  |
+| title | string | Select dates | No |  |
+| value | DateRange |  | No | Controlled selected range (UTC ms). |
+| variant | enum |  | No |  |
+
+## Events
+
+_This component does not explicitly re-emit DOM events via wrapper props._
+
+## Slots
+
+Material Web components frequently use named slots. In React, you can pass `slot="..."` on children (e.g. `<Icon slot="icon" />`).
+
+If you need to slot a child component that does not accept a `slot` prop, use the `Slotted` utility (see **Utilities → Slotted**).
+
+## Examples
+
+See Storybook for live examples and variants.

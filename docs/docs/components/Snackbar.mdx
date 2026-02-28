@@ -1,0 +1,43 @@
+---
+title: Snackbar
+---
+
+<!-- AUTO-GENERATED FILE. DO NOT EDIT DIRECTLY. -->
+<!-- Source: src/snackbar/Snackbar.tsx -->
+
+# Snackbar
+
+## Imports
+
+```ts
+import {Snackbar} from 'material-expressive-react';
+import {Snackbar} from 'material-expressive-react/snackbar';
+```
+
+## Props
+
+| Prop | Type | Default | Required | Description |
+| --- | --- | --- | --- | --- |
+| action | string |  | No | Optional action button label.<br/>When provided, an action button is rendered. |
+| closeButton | boolean | false | No | Whether to show the close (dismiss) icon button. |
+| duration | number | 4000 | No | How long the snackbar stays visible (in ms) before auto‑dismissing.<br/>Use `SnackbarDuration.INDEFINITE` to disable auto‑dismiss. |
+| multiLine | boolean | false | No | When `true`, the snackbar uses a taller multi‑line layout<br/>with action buttons aligned to the bottom‑end. |
+| onAction | (() =&gt; void) |  | No | Callback fired when the action button is clicked. |
+| onClose | (() =&gt; void) |  | No | Callback fired when the close button is clicked. |
+| onDismiss | (() =&gt; void) |  | No | Callback fired when the snackbar is dismissed (by timeout, action, or close). |
+| open | boolean | false | No | Whether the snackbar is visible.<br/>Controls the mount/unmount lifecycle. |
+| supportingText | string |  | Yes | The supporting text displayed in the snackbar. |
+
+## Events
+
+_This component does not explicitly re-emit DOM events via wrapper props._
+
+## Slots
+
+Material Web components frequently use named slots. In React, you can pass `slot="..."` on children (e.g. `<Icon slot="icon" />`).
+
+If you need to slot a child component that does not accept a `slot` prop, use the `Slotted` utility (see **Utilities → Slotted**).
+
+## Examples
+
+See Storybook for live examples and variants.

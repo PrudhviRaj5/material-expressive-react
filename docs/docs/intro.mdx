@@ -1,0 +1,42 @@
+---
+sidebar_position: 1
+title: Introduction
+---
+
+# material-expressive-react
+
+React wrappers for Material 3 web components, built on top of `@material/web`.
+
+## Links
+
+- Storybook (live examples): **/storybook/**
+- GitHub repository: https://github.com/prudhviraj5/material-expressive-react
+
+## Install
+
+```bash
+npm i material-expressive-react @material/web
+```
+
+## Quick start
+
+```tsx
+import {Button, Icon} from 'material-expressive-react';
+
+export function App() {
+  return (
+    <Button onClick={() => console.log('clicked')}>
+      <Icon slot="icon">upload</Icon>
+      Upload
+    </Button>
+  );
+}
+```
+
+## SSR note
+
+These components wrap Custom Elements.
+
+- In SSR frameworks, render them from client components (or behind a client-only boundary).
+- Custom element registration happens in the browser via dynamic import.
+
