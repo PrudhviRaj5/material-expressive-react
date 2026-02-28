@@ -1,13 +1,19 @@
 .mer-list {
   --mer-list-width: 300px;
   --mer-list-gap: 5px;
-  --mer-list-radius: 5px;
-
+  --mer-list-radius: 15px;
   --mer-list-item-radius: 5px;
-  --mer-list-item-bg: color-mix(in srgb, var(--md-sys-color-surface) 92%, var(--md-sys-color-primary));
+
+  --mer-list-padding: 5px;
+
+  --mer-list-bg: var(--md-sys-color-surface-container);
+  --mer-list-fg: var(--md-sys-color-on-surface);
+  --mer-list-muted: var(--md-sys-color-on-surface-variant);
+
+  --mer-list-item-bg: transparent;
   --mer-list-item-hover: color-mix(in srgb, var(--md-sys-color-on-surface) 6%, transparent);
   --mer-list-item-pressed: color-mix(in srgb, var(--md-sys-color-on-surface) 10%, transparent);
-  --mer-list-item-selected-bg: color-mix(in srgb, var(--md-sys-color-primary) 14%, transparent);
+  --mer-list-item-selected-bg: color-mix(in srgb, var(--md-sys-color-primary) 16%, transparent);
   --mer-list-item-selected-fg: var(--md-sys-color-on-surface);
 
   --mer-list-item-height: 56px;
@@ -126,9 +132,19 @@
 }
 
 .mer-list--vibrant {
-  --mer-list-item-bg: color-mix(in srgb, var(--md-sys-color-surface) 88%, var(--md-sys-color-tertiary-container));
-  --mer-list-item-selected-bg: color-mix(in srgb, var(--md-sys-color-on-tertiary-container) 14%, transparent);
-  --mer-list-item-selected-fg: var(--md-sys-color-on-tertiary-container);
+  --mer-list-bg: var(--md-sys-color-tertiary-container);
+  --mer-list-fg: var(--md-sys-color-on-tertiary-container);
+  --mer-list-muted: color-mix(
+    in srgb,
+    var(--md-sys-color-on-tertiary-container) 74%,
+    transparent
+  );
+  --mer-list-item-selected-bg: color-mix(
+    in srgb,
+    var(--md-sys-color-on-tertiary-container) 72%,
+    transparent
+  );
+  --mer-list-item-selected-fg: var(--md-sys-color-on-tertiary);
 }
 
 .mer-list-item {
@@ -157,11 +173,11 @@
 }
 
 .mer-list-item[data-mer-interactive='true']:hover {
-  background: color-mix(in srgb, var(--mer-list-item-bg) 86%, var(--mer-list-item-hover));
+  background: var(--mer-list-item-hover);
 }
 
 .mer-list-item[data-mer-interactive='true']:active {
-  background: color-mix(in srgb, var(--mer-list-item-bg) 78%, var(--mer-list-item-pressed));
+  background: var(--mer-list-item-pressed);
 }
 
 .mer-list-item:focus-visible {
@@ -179,6 +195,7 @@
   place-items: center;
   width: var(--mer-list-item-leading-size);
   height: var(--mer-list-item-leading-size);
+  color: var(--mer-list-muted);
 }
 
 .mer-list-item__leadingPlaceholder {
@@ -201,8 +218,12 @@
   place-items: center;
   width: var(--mer-list-item-leading-size);
   height: var(--mer-list-item-leading-size);
-  color: var(--md-sys-color-primary);
-  background: color-mix(in srgb, var(--md-sys-color-primary) 18%, transparent);
+  border: 2px solid currentColor;
+  background: transparent;
+}
+
+.mer-list-item[aria-selected='true'] .mer-list-item__leading {
+  color: currentColor;
 }
 
 .mer-list-item__leadingIconWrap--circle {
@@ -247,7 +268,7 @@
 .mer-list-item__support {
   font-size: var(--mer-list-item-support-size);
   line-height: var(--mer-list-item-support-line-height);
-  color: var(--md-sys-color-on-surface-variant);
+  color: var(--mer-list-muted);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -269,7 +290,7 @@
   font-size: var(--mer-list-item-trailing-text-size);
   line-height: 1;
   font-weight: 560;
-  color: var(--md-sys-color-on-surface-variant);
+  color: var(--mer-list-muted);
 }
 
 .mer-list-item[aria-selected='true'] .mer-list-item__trailingText {

@@ -33,10 +33,10 @@ export const List = React.forwardRef<HTMLDivElement, ListProps>(function List(
   const sizeClass = `mer-list--size-${size.toLowerCase()}`;
 
   const mergedStyle = {
-    ...(style ?? {}),
     width: `${width}px`,
     ['--mer-list-gap' as never]: `${gap}px`,
     ['--mer-list-width' as never]: `${width}px`,
+    ...(style ?? {}),
   } as React.CSSProperties;
 
   return (
