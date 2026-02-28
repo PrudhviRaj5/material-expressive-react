@@ -31,6 +31,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Install docs dependencies
+        run: cd docs && npm ci
+
       - name: Compute Storybook base path (user pages vs project pages)
         id: base
         shell: bash
@@ -41,15 +44,21 @@ jobs:
           # User/org pages are served from the root at https://<owner>.github.io/
           # Project pages are served under https://<owner>.github.io/<repo>/
           if [[ "$REPO_NAME" == "$OWNER.github.io" ]]; then
-            echo "base=/" >> "$GITHUB_OUTPUT"
+            echo "storybook_base=/storybook/" >> "$GITHUB_OUTPUT"
+            echo "docs_base=/docs/" >> "$GITHUB_OUTPUT"
+            echo "storybook_url=https://$OWNER.github.io/storybook/" >> "$GITHUB_OUTPUT"
           else
-            echo "base=/$REPO_NAME/" >> "$GITHUB_OUTPUT"
+            echo "storybook_base=/$REPO_NAME/storybook/" >> "$GITHUB_OUTPUT"
+            echo "docs_base=/$REPO_NAME/docs/" >> "$GITHUB_OUTPUT"
+            echo "storybook_url=https://$OWNER.github.io/$REPO_NAME/storybook/" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Build Storybook
+      - name: Build combined Pages artifact (landing + storybook + docs)
         env:
-          STORYBOOK_BASE_PATH: ${{ steps.base.outputs.base }}
-        run: npm run build-storybook
+          STORYBOOK_BASE_PATH: ${{ steps.base.outputs.storybook_base }}
+          DOCUSAURUS_BASE_URL: ${{ steps.base.outputs.docs_base }}
+          STORYBOOK_URL: ${{ steps.base.outputs.storybook_url }}
+        run: npm run pages:build
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -57,7 +66,7 @@ jobs:
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: storybook-static
+          path: pages-dist
 
   deploy:
     needs: build
