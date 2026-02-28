@@ -3,7 +3,7 @@ import * as React from 'react';
 import type {ButtonSize} from '../button/buttonSizes';
 import {Icon} from '../icon';
 
-import type {OutlinedSegmentedButtonProps} from './OutlinedSegmentedButton';
+import {OutlinedSegmentedButton, type OutlinedSegmentedButtonProps} from './OutlinedSegmentedButton';
 
 export type OutlinedSegmentedButtonSelectType = 'single' | 'multi';
 
@@ -55,9 +55,12 @@ function renderIcon(icon: React.ReactNode | string | undefined, size: number) {
 
 function getChildProps(node: React.ReactNode): OutlinedSegmentedButtonProps | null {
   if (!React.isValidElement(node)) return null;
+  // Prefer referential identity (works in prod/minified builds).
+  if (node.type === OutlinedSegmentedButton) return node.props as OutlinedSegmentedButtonProps;
+
   const type = node.type as any;
-  // Identify our marker component by name (supports dev/prod builds).
-  const name = type?.name ?? type?.displayName;
+  // Fallback for cases where React wraps the type.
+  const name = type?.displayName ?? type?.name;
   if (name !== 'OutlinedSegmentedButton') return null;
   return node.props as OutlinedSegmentedButtonProps;
 }
