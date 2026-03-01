@@ -4,7 +4,7 @@ import {PlainTooltip} from './PlainTooltip';
 import {RichTooltip} from './RichTooltip';
 
 const meta = {
-  title: 'Tooltip/Tooltip',
+  title: 'misc/Tooltip',
   component: PlainTooltip,
   tags: ['autodocs'],
   parameters: {
