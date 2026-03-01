@@ -25,6 +25,7 @@ import {Card} from 'material-expressive-react/card';
 | containerElevation | number |  | No | Overrides the variant's elevation level (number, e.g. 0, 1, 2). |
 | containerShadowColor | string |  | No | Overrides the elevation shadow color. |
 | containerShape | string |  | No | Overrides the variant's corner shape (CSS border-radius value). |
+| disableRipple | boolean |  | No | Disables the pressed/hover ripple overlay. |
 | disconnectedCallback | (() =&gt; void) |  | No | Invoked when the component is removed from the document's DOM.<br/><br/>This callback is the main signal to the element that it may no longer be<br/>used. `disconnectedCallback()` should ensure that nothing is holding a<br/>reference to the element (such as event listeners added to nodes external<br/>to the element), so that it is free to be garbage collected.<br/><br/>```ts<br/>disconnectedCallback() &#123;<br/>  super.disconnectedCallback();<br/>  window.removeEventListener('keydown', this._handleKeydown);<br/>&#125;<br/>```<br/><br/>An element may be re-connected after being disconnected.<br/>@category lifecycle |
 | hasUpdated | boolean |  | No | Is set to `true` after the first update. The element code cannot assume<br/>that `renderRoot` exists before the element `hasUpdated`.<br/>@category updates |
 | isUpdatePending | boolean |  | No | True if there is a pending update as a result of calling `requestUpdate()`.<br/>Should only be read.<br/>@category updates |
