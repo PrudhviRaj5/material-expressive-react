@@ -18,11 +18,11 @@ import {OutlinedSelect} from 'material-expressive-react/select';
 
 | Prop | Type | Default | Required | Description |
 | --- | --- | --- | --- | --- |
-| __@createValidator@40289 | (() =&gt; SelectValidator) |  | No |  |
-| __@getFormValue@40293 | (() =&gt; string) |  | No |  |
-| __@getValidityAnchor@40291 | (() =&gt; Field) |  | No |  |
-| __@onReportValidity@40287 | ((invalidEvent: Event \| null) =&gt; void) |  | No |  |
-| __@VALUE@40307 | string |  | No |  |
+| __@createValidator@35005 | (() =&gt; SelectValidator) |  | No |  |
+| __@getFormValue@35009 | (() =&gt; string) |  | No |  |
+| __@getValidityAnchor@35007 | (() =&gt; Field) |  | No |  |
+| __@onReportValidity@35003 | ((invalidEvent: Event \| null) =&gt; void) |  | No |  |
+| __@VALUE@35023 | string |  | No |  |
 | addController | ((controller: ReactiveController) =&gt; void) |  | No | Registers a `ReactiveController` to participate in the element's reactive<br/>update cycle. The element automatically calls into any registered<br/>controllers during its lifecycle callbacks.<br/><br/>If the element is connected when `addController()` is called, the<br/>controller's `hostConnected()` callback will be immediately called.<br/>@category controllers |
 | attributeChangedCallback | ((name: string, _old: string \| null, value: string \| null) =&gt; void) |  | No | Synchronizes property values when attributes change.<br/><br/>Specifically, when an attribute is set, the corresponding property is set.<br/>You should rarely need to implement this callback. If this method is<br/>overridden, `super.attributeChangedCallback(name, _old, value)` must be<br/>called.<br/><br/>See [responding to attribute changes](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements#responding_to_attribute_changes)<br/>on MDN for more information about the `attributeChangedCallback`.<br/>@category attributes |
 | clampMenuWidth | boolean |  | No | Clamps the menu-width to the width of the select. |
