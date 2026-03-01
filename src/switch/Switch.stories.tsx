@@ -4,7 +4,7 @@ import {action} from '@storybook/addon-actions';
 import {Switch} from './Switch';
 
 const meta = {
-  title: 'switch/Switch',
+  title: 'misc/Switch',
   component: Switch,
   tags: ['autodocs'],
   parameters: {layout: 'centered'},
