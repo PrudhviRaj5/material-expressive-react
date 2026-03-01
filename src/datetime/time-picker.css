@@ -1,11 +1,17 @@
 .mer-tp {
-  --mer-tp-surface: var(--md-sys-color-surface-container-high);
+  --mer-tp-surface: var(
+    --md-sys-color-surface-container-high,
+    var(--md-sys-color-surface, #fff)
+  );
   --mer-tp-on-surface: var(--md-sys-color-on-surface);
   --mer-tp-on-surface-variant: var(--md-sys-color-on-surface-variant);
   --mer-tp-primary: var(--md-sys-color-primary);
   --mer-tp-on-primary: var(--md-sys-color-on-primary);
   --mer-tp-outline: var(--md-sys-color-outline);
-  --mer-tp-face: var(--md-sys-color-surface-container-highest);
+  --mer-tp-face: var(
+    --md-sys-color-surface-container-highest,
+    var(--md-sys-color-surface-container-high, var(--md-sys-color-surface, #fff))
+  );
   --mer-tp-radius: 24px;
 
   box-sizing: border-box;

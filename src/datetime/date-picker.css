@@ -1,5 +1,8 @@
 .mer-dtp {
-  --mer-dtp-surface: var(--md-sys-color-surface-container-high);
+  --mer-dtp-surface: var(
+    --md-sys-color-surface-container-high,
+    var(--md-sys-color-surface, #fff)
+  );
   --mer-dtp-on-surface: var(--md-sys-color-on-surface);
   --mer-dtp-on-surface-variant: var(--md-sys-color-on-surface-variant);
   --mer-dtp-primary: var(--md-sys-color-primary);
