@@ -30,7 +30,7 @@ export default defineConfig({
         'tabs/index': './src/tabs/index.ts',
         'textfield/index': './src/textfield/index.ts',
         'navigation/index': './src/navigation/index.ts',
-        'labs/index': './src/labs/index.ts',
+        'badge/index': './src/badge/index.ts',
         'theme/index': './src/theme/index.ts'
       },
       formats: ['es']

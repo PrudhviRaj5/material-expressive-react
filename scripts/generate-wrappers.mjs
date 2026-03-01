@@ -357,72 +357,15 @@ const COMPONENTS = [
     events: {change: 'onChange', input: 'onInput'},
   },
 
-  // Labs
+  // Badge
   {
-    group: 'labs',
+    group: 'badge',
     component: 'Badge',
     tag: 'md-badge',
     importPath: '@material/web/labs/badge/badge.js',
     typeName: 'MdBadge',
     hasChildren: true,
     label: '1',
-  },
-  {
-    group: 'labs',
-    component: 'ElevatedCard',
-    tag: 'md-elevated-card',
-    importPath: '@material/web/labs/card/elevated-card.js',
-    typeName: 'MdElevatedCard',
-    hasChildren: true,
-    label: 'Card',
-  },
-  {
-    group: 'labs',
-    component: 'FilledCard',
-    tag: 'md-filled-card',
-    importPath: '@material/web/labs/card/filled-card.js',
-    typeName: 'MdFilledCard',
-    hasChildren: true,
-    label: 'Card',
-  },
-  {
-    group: 'labs',
-    component: 'OutlinedCard',
-    tag: 'md-outlined-card',
-    importPath: '@material/web/labs/card/outlined-card.js',
-    typeName: 'MdOutlinedCard',
-    hasChildren: true,
-    label: 'Card',
-  },
-  {
-    group: 'labs',
-    component: 'Item',
-    tag: 'md-item',
-    importPath: '@material/web/labs/item/item.js',
-    typeName: 'MdItem',
-    hasChildren: true,
-    label: 'Item',
-  },
-  {
-    group: 'labs',
-    component: 'OutlinedSegmentedButton',
-    tag: 'md-outlined-segmented-button',
-    importPath: '@material/web/labs/segmentedbutton/outlined-segmented-button.js',
-    typeName: 'MdOutlinedSegmentedButton',
-    hasChildren: true,
-    label: 'Option',
-  },
-  {
-    group: 'labs',
-    component: 'OutlinedSegmentedButtonSet',
-    tag: 'md-outlined-segmented-button-set',
-    importPath:
-      '@material/web/labs/segmentedbuttonset/outlined-segmented-button-set.js',
-    typeName: 'MdOutlinedSegmentedButtonSet',
-    events: {
-      'segmented-button-set-selection': 'onSelection',
-    },
-    hasChildren: true,
   },
 ];
 
@@ -1734,7 +1677,7 @@ export const Default = {
       <SuggestionChip>Suggest</SuggestionChip>
     </ChipSet>
   )`;
-  } else if (group === 'labs' && component === 'Badge') {
+  } else if (group === 'badge' && component === 'Badge') {
     renderBody = `(
     <div style={{position: 'relative', width: 48, height: 48}}>
       <div style={{width: 48, height: 48, borderRadius: 12, background: 'var(--md-sys-color-secondary-container)', outline: '1px solid var(--md-sys-color-outline)'}} />
@@ -1872,10 +1815,10 @@ export const Default = {
     extraImports.push("import {ChipSet, AssistChip, FilterChip, InputChip, SuggestionChip} from '../chips';");
   }
   if (renderBody.includes('<OutlinedSegmentedButtonSet') || renderBody.includes('<OutlinedSegmentedButton')) {
-    extraImports.push("import {OutlinedSegmentedButtonSet, OutlinedSegmentedButton} from '../labs';");
+    extraImports.push("import {OutlinedSegmentedButtonSet, OutlinedSegmentedButton} from '../button-group';");
   }
-  if (renderBody.includes('<Badge') || renderBody.includes('<Item')) {
-    extraImports.push("import {Badge, Item} from '../labs';");
+  if (renderBody.includes('<Badge')) {
+    extraImports.push("import {Badge} from '../badge';");
   }
   if (
     renderBody.includes('<NavigationBar') ||

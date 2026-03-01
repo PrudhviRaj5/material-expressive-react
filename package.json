@@ -126,9 +126,9 @@
       "types": "./dist/tooltip/index.d.ts",
       "default": "./dist/tooltip/index.js"
     },
-    "./labs": {
-      "types": "./dist/labs/index.d.ts",
-      "default": "./dist/labs/index.js"
+    "./badge": {
+      "types": "./dist/badge/index.d.ts",
+      "default": "./dist/badge/index.js"
     },
     "./theme": {
       "types": "./dist/theme/index.d.ts",
@@ -165,7 +165,7 @@
       "textfield": ["dist/textfield/index.d.ts"],
       "toolbar": ["dist/toolbar/index.d.ts"],
       "tooltip": ["dist/tooltip/index.d.ts"],
-      "labs": ["dist/labs/index.d.ts"],
+      "badge": ["dist/badge/index.d.ts"],
       "theme": ["dist/theme/index.d.ts"],
       "*": ["dist/*"]
     }
