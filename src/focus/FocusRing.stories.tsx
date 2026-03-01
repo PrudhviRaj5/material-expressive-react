@@ -3,7 +3,7 @@ import React from 'react';
 import {FocusRing} from './FocusRing';
 
 const meta = {
-  title: 'focus/FocusRing',
+  title: 'labs/FocusRing',
   component: FocusRing,
   tags: ['autodocs'],
   parameters: {layout: 'centered'},
