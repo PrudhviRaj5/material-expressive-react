@@ -4,7 +4,7 @@ import {action} from '@storybook/addon-actions';
 import {Ripple} from './Ripple';
 
 const meta = {
-  title: 'ripple/Ripple',
+  title: 'labs/Ripple',
   component: Ripple,
   tags: ['autodocs'],
   parameters: {
