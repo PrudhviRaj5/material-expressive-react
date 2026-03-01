@@ -54,10 +54,6 @@
       "types": "./dist/fab/index.d.ts",
       "default": "./dist/fab/index.js"
     },
-    "./field": {
-      "types": "./dist/field/index.d.ts",
-      "default": "./dist/field/index.js"
-    },
     "./focus": {
       "types": "./dist/focus/index.d.ts",
       "default": "./dist/focus/index.js"
@@ -164,9 +160,6 @@
       ],
       "fab": [
         "dist/fab/index.d.ts"
-      ],
-      "field": [
-        "dist/field/index.d.ts"
       ],
       "focus": [
         "dist/focus/index.d.ts"

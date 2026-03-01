@@ -15,7 +15,6 @@ export default defineConfig({
         'divider/index': './src/divider/index.ts',
         'elevation/index': './src/elevation/index.ts',
         'fab/index': './src/fab/index.ts',
-        'field/index': './src/field/index.ts',
         'focus/index': './src/focus/index.ts',
         'icon/index': './src/icon/index.ts',
         'icon-button/index': './src/icon-button/index.ts',

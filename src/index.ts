@@ -7,7 +7,6 @@ export * from './divider/index.js';
 export * from './datetime/index.js';
 export * from './elevation/index.js';
 export * from './fab/index.js';
-export * from './field/index.js';
 export * from './focus/index.js';
 export * from './icon/index.js';
 export * from './icon-button/index.js';
