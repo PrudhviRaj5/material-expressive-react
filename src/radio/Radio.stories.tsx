@@ -4,7 +4,7 @@ import {action} from '@storybook/addon-actions';
 import {Radio} from './Radio';
 
 const meta = {
-  title: 'radio/Radio',
+  title: 'selection/Radio',
   component: Radio,
   tags: ['autodocs'],
   parameters: {layout: 'centered'},
