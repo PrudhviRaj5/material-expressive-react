@@ -18,6 +18,9 @@ export type CardRef = MdElevatedCard | MdFilledCard | MdOutlinedCard;
 export interface CardProps extends WebComponentProps<CardRef> {
   variant?: CardVariant;
 
+  /** Disables the pressed/hover ripple overlay. */
+  disableRipple?: boolean;
+
   /** Overrides the variant's container color via Material Web CSS custom properties. */
   containerColor?: string;
   /** Overrides the variant's elevation level (number, e.g. 0, 1, 2). */
@@ -35,6 +38,7 @@ export interface CardProps extends WebComponentProps<CardRef> {
 export const Card = forwardRef<CardRef, CardProps>(function Card(
   {
     variant = 'elevated',
+    disableRipple,
     containerColor,
     containerElevation,
     containerShape,
@@ -81,6 +85,7 @@ export const Card = forwardRef<CardRef, CardProps>(function Card(
   const props = {
     ...rest,
     style: resolvedStyle,
+    disableRipple,
   };
 
   switch (variant) {
