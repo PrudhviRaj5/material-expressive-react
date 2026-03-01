@@ -4,7 +4,7 @@ import {action} from '@storybook/addon-actions';
 import {Checkbox} from './Checkbox';
 
 const meta = {
-  title: 'checkbox/Checkbox',
+  title: 'selection/Checkbox',
   component: Checkbox,
   tags: ['autodocs'],
   parameters: {layout: 'centered'},
