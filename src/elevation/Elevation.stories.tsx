@@ -8,7 +8,7 @@ import {action} from '@storybook/addon-actions';
 import {Elevation} from './Elevation';
 
 const meta = {
-  title: 'elevation/Elevation',
+  title: 'labs/Elevation',
   component: Elevation,
   tags: ['autodocs'],
   parameters: {layout: 'centered'},
