@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {Badge} from '../labs/Badge';
+import {Badge} from '../badge/Badge';
 import {
   NavigationBarItem,
   type NavigationBarItemProps,
