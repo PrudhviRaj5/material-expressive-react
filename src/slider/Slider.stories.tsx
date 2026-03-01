@@ -4,7 +4,7 @@ import {action} from '@storybook/addon-actions';
 import {Slider} from './Slider';
 
 const meta = {
-  title: 'slider/Slider',
+  title: 'misc/Slider',
   component: Slider,
   tags: ['autodocs'],
   parameters: {layout: 'centered'},
